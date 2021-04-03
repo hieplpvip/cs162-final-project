@@ -1,10 +1,7 @@
 cmake_minimum_required(VERSION 3.9)
 project(crs)
 
-# include
 include_directories( ./src )
 
-# target
-
-# target
-add_executable( crs ./src/main.cpp )
+file(GLOB cpp_files src/*.cpp src/libs/*.cpp)
+add_executable( crs ${cpp_files} )
