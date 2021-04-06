@@ -15,6 +15,7 @@ class Course;
 class Student {
 public:
   int student_id;
+  float gpa;
   Vector<Course*> enrolled_courses;
 };
 
