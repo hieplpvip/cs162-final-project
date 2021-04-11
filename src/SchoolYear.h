@@ -1,12 +1,15 @@
 #ifndef SCHOOLYEAR_H
 #define SCHOOLYEAR_H
 
-#include "Semester.h"
 #include "libs/Vector.h"
+
+class Semester;
 
 class SchoolYear {
 public:
-  Vector<Semester*> semesters;
+  Vector<Semester*> pSemesters;
+
+  static SchoolYear* createSchoolYear();
 };
 
 #endif
