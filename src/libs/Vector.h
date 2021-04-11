@@ -28,6 +28,9 @@ public:
   T& operator [](size_t index);
   void clear();
 
+  T* begin();
+  T* end();
+
 private:
   size_t _size;
   size_t _capacity;
@@ -148,6 +151,16 @@ T& Vector<T>::operator [](size_t index) {
 template<class T>
 void Vector<T>::clear() {
   _size = 0;
+}
+
+template<class T>
+T* Vector<T>::begin() {
+  return _elements;
+}
+
+template<class T>
+T* Vector<T>::end() {
+  return _elements + _size;
 }
 
 #endif
