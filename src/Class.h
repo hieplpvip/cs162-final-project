@@ -2,15 +2,19 @@
 #define CLASS_H
 
 #include <string>
+#include "libs/Vector.h"
+
 using std::string;
 
-#include "Student.h"
-#include "libs/Vector.h"
+class Student;
 
 class Class {
 public:
   string class_id;
-  Vector<Student*> students;
+  string class_name;
+  Vector<Student*> pStudents;
+
+  static Class* createClass();
 };
 
 #endif

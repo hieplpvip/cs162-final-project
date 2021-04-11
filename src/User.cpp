@@ -1,6 +1,7 @@
 #include "User.h"
+#include "Global.h"
 
-User User::createAccount(const string &username, const string &password) {
+User* User::createUser(const string &username, const string &password, const User::UserRole role) {
   throw "Not implemented yet!";
 }
 

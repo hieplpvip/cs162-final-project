@@ -2,15 +2,12 @@
 #define COURSE_H
 
 #include <string>
+#include "libs/Vector.h"
+
 using std::string;
 
-#ifdef STUDENT_H
 class Student;
-#else
-#include "Student.h"
-#endif
-
-#include "libs/Vector.h"
+class Semester;
 
 class Course {
 public:
@@ -19,7 +16,10 @@ public:
   string lecturer;
   string start_date;
   string end_date; // TODO: create dedicated struct for date
-  Vector<Student*> students;
+  Semester* pSemester;
+  Vector<Student*> pStudents;
+
+  static Course* createCourse();
 };
 
 #endif
