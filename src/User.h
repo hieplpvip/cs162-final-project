@@ -19,10 +19,9 @@ public:
   UserRole role;
   Student* pStudent;
 
-  static User* createUser(const string &username, const string &password, const UserRole role);
-
-  bool logIn(const string &username, const string &password);
-  bool logOut();
+  static void createUser();
+  static bool logIn();
+  static void logOut();
 };
 
 #endif

@@ -1,6 +1,6 @@
 #include "Student.h"
 #include "Global.h"
 
-Student* Student::createStudent(const int &student_id) {
+void Student::createStudent() {
   throw "Not implemented yet!";
 }

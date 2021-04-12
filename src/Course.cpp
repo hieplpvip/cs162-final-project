@@ -1,6 +1,6 @@
 #include "Course.h"
 #include "Global.h"
 
-Course* Course::createCourse() {
+void Course::createCourse() {
   throw "Not implemented yet!";
 }

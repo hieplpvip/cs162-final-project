@@ -14,7 +14,7 @@ public:
   string class_name;
   Vector<Student*> pStudents;
 
-  static Class* createClass();
+  static void createClass();
 };
 
 #endif

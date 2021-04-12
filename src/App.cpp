@@ -58,67 +58,52 @@ bool App::authenticate() {
   return true;
 }
 
-void App::showStaffMenu() {
-  clearScreen();
-  cout << "--- School Year ---\n";
-  cout << "1. New school year\n";
-  cout << "2. Edit school year\n";
-  cout << "3. List school years\n";
-  cout << "\n";
+void App::showMenu(const FunctionRecord menu[], int num) {
+  while (true) {
+    clearScreen();
 
-  cout << "--- Class ---\n";
-  cout << "4. New class\n";
-  cout << "5. Edit class\n";
-  cout << "6. List classes\n";
-  cout << "\n";
+    int cnt_options = 0;
 
-  cout << "--- Semester ---\n";
-  cout << "7. New semester\n";
-  cout << "8. Edit semester\n";
-  cout << "9. List semesters\n";
-  cout << "\n";
+    for (int i = 0; i < num; ++i) {
+      if (menu[i].is_section_header) {
+        if (i != 0) {
+          cout << "\n";
+        }
+        cout << "--- " << menu[i].title << " ---\n";
+      } else {
+        cout << ++cnt_options << ". " << menu[i].title << "\n";
+      }
+    }
 
-  cout << "--- Student ---\n";
-  cout << "10. New student\n";
-  cout << "11. Edit student\n";
-  cout << "12. List student\n";
-  cout << "\n";
+    cout << "\n";
+    cout << "0. Quit\n\n";
 
-  cout << "--- Course ---\n";
-  cout << "13. New course\n";
-  cout << "14. Edit course\n";
-  cout << "15. List course\n";
-  cout << "\n";
+    cout << "Please choose an option: ";
+    int option; cin >> option;
+    if (option < 0 || option > cnt_options) {
+      cout << "Invalid option!\n";
+      continue;
+    }
 
-  milliSleep(5000);
-}
+    if (option == 0) {
+      // quit
+      break;
+    }
 
-void App::showStudentMenu() {
-  clearScreen();
-  cout << "--- School Year ---\n";
-  cout << "1. List school years\n";
-  cout << "\n";
-
-  cout << "--- Class ---\n";
-  cout << "2. List classes\n";
-  cout << "\n";
-
-  cout << "--- Semester ---\n";
-  cout << "3. List semesters\n";
-  cout << "\n";
-
-  cout << "--- Course ---\n";
-  cout << "4. List all courses\n";
-  cout << "5. List enrolled courses\n";
-  cout << "6. Enroll in a course\n";
-  cout << "7. Un-enroll from a course\n";
-  cout << "\n";
-
-  milliSleep(5000);
+    for (int i = 0; i < num; ++i) {
+      if (menu[i].is_section_header) {
+        continue;
+      }
+      if (--option == 0) {
+        menu[i].function();
+      }
+    }
+  }
 }
 
 void App::run() {
   loadData();
+
   if (!authenticate()) {
     cout << "Could not authenticate!\n";
     goto exit;
@@ -126,9 +111,9 @@ void App::run() {
   assert(Global::current_user != nullptr);
 
   if (Global::current_user->role == User::UserRole::STAFF) {
-    showStaffMenu();
+    showMenu(STAFF_MENU, NUM_STAFF_MENU);
   } else {
-    showStudentMenu();
+    showMenu(STUDENT_MENU, NUM_STUDENT_MENU);
   }
 
   delete Global::current_user;

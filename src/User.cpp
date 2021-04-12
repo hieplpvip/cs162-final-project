@@ -1,14 +1,14 @@
 #include "User.h"
 #include "Global.h"
 
-User* User::createUser(const string &username, const string &password, const User::UserRole role) {
+void User::createUser() {
   throw "Not implemented yet!";
 }
 
-bool User::logIn(const string &username, const string &password) {
+bool User::logIn() {
   throw "Not implemented yet!";
 }
 
-bool User::logOut() {
+void User::logOut() {
   throw "Not implemented yet!";
 }
