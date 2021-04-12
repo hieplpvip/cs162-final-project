@@ -6,7 +6,7 @@ App::App() {
   clearScreen();
   cout << "Starting...\n";
 
-  user = nullptr;
+  Global::current_user = nullptr;
   Global::all_school_year.clear();
   Global::all_semester.clear();
   Global::all_course.clear();
@@ -53,8 +53,8 @@ void App::saveData() {
 }
 
 bool App::authenticate() {
-  user = new User();
-  user->role = User::UserRole::STAFF;
+  Global::current_user = new User();
+  Global::current_user->role = User::UserRole::STAFF;
   return true;
 }
 
@@ -111,7 +111,7 @@ void App::showStudentMenu() {
   cout << "4. List all courses\n";
   cout << "5. List enrolled courses\n";
   cout << "6. Enroll in a course\n";
-  cout << "7. Unenroll from a course\n";
+  cout << "7. Un-enroll from a course\n";
   cout << "\n";
 
   milliSleep(5000);
@@ -123,15 +123,15 @@ void App::run() {
     cout << "Could not authenticate!\n";
     goto exit;
   }
-  assert(user != nullptr);
+  assert(Global::current_user != nullptr);
 
-  if (user->role == User::UserRole::STAFF) {
+  if (Global::current_user->role == User::UserRole::STAFF) {
     showStaffMenu();
   } else {
     showStudentMenu();
   }
 
-  delete user;
+  delete Global::current_user;
 
 exit:
   saveData();
