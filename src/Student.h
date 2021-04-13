@@ -18,7 +18,7 @@ public:
   Class* pClass;
   Vector<Course*> pEnrolledCourses;
 
-  static Student* createStudent(const int &student_id);
+  static void createStudent();
 };
 
 #endif

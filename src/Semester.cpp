@@ -1,6 +1,6 @@
 #include "Semester.h"
 #include "Global.h"
 
-Semester* Semester::createSemester(const SchoolYear* &school_year) {
+void Semester::createSemester() {
   throw "Not implemented yet!";
 }

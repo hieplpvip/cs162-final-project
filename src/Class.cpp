@@ -1,6 +1,6 @@
 #include "Class.h"
 #include "Global.h"
 
-Class* Class::createClass() {
+void Class::createClass() {
   throw "Not implemented yet!";
 }

@@ -9,7 +9,7 @@ class SchoolYear {
 public:
   Vector<Semester*> pSemesters;
 
-  static SchoolYear* createSchoolYear();
+  static void createSchoolYear();
 };
 
 #endif

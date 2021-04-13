@@ -11,7 +11,7 @@ public:
   SchoolYear* pSchoolYear;
   Vector<Course*> pCourses;
 
-  static Semester* createSemester(const SchoolYear* &school_year);
+  static void createSemester();
 };
 
 #endif

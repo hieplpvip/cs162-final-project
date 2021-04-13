@@ -19,7 +19,7 @@ public:
   Semester* pSemester;
   Vector<Student*> pStudents;
 
-  static Course* createCourse();
+  static void createCourse();
 };
 
 #endif
