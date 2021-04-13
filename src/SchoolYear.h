@@ -8,7 +8,7 @@ class Semester;
 class SchoolYear {
 public:
   Vector<Semester*> pSemesters;
-
+  string schoolYear;
   static void createSchoolYear();
 };
 

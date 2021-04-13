@@ -13,7 +13,7 @@ public:
   string class_id;
   string class_name;
   Vector<Student*> pStudents;
-
+  int numberOfStudent;
   static void createClass();
 };
 
