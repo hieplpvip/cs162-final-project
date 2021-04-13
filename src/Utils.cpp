@@ -15,7 +15,7 @@ void milliSleep(int milliseconds) {
 }
 
 void clearScreen() {
-#ifdef WINDOWS
+#ifdef _WIN32
   HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
   COORD topLeft = {0, 0};
   DWORD dwCount, dwSize;
