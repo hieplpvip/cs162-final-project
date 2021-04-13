@@ -2,5 +2,5 @@
 #include "Global.h"
 
 void Course::createCourse() {
-  throw "Not implemented yet!";
+  
 }
