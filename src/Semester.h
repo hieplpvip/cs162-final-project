@@ -10,8 +10,10 @@ class Semester {
 public:
   SchoolYear* pSchoolYear;
   Vector<Course*> pCourses;
-  int semester;
   static void createSemester();
+  static void deleteSemester();
+  static void editSemester();
+  int numberOfCourse;
 };
 
 #endif
