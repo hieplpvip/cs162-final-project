@@ -16,19 +16,11 @@ void SchoolYear::createSchoolYear()
         schYear->pSemesters.push_back(Global::all_semester.back());
     }
 }
-void SchoolYear::deleteSchoolYear()
+void SchoolYear::showSchoolYear()
 {
-    string delSchoolYear;
-    cout << "Input school year to delete:";
-    cin >> delSchoolYear;
-    for (int i = 0; i < Global::all_school_year.size(); i++)
-        if (Global::all_school_year[i]->name == delSchoolYear)
-        {
-            delete Global::all_school_year[i];
-            for (int j = i; j < Global::all_school_year.size() - 1; j++)
-                Global::all_school_year[j] = Global::all_school_year[j + 1];
-            break;
-        }
+    cout << "List of sschool year:\n";
+    for (int i = 0; i < Global::all_school_year.size();i++)
+        cout << Global::all_school_year[i]->name << '\n';
 }
 void SchoolYear::editSchoolYear()
 {
