@@ -30,3 +30,7 @@ void SchoolYear::deleteSchoolYear()
             break;
         }
 }
+void SchoolYear::editSchoolYear()
+{
+    throw "Not implemented yet!";
+}
