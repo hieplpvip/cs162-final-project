@@ -10,7 +10,7 @@ public:
   Vector<Semester*> pSemesters;
   string name;
   static void createSchoolYear();
-  static void deleteSchoolYear();
+  static void showSchoolYear();
   static void editSchoolYear();
 };
 
