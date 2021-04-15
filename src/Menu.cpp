@@ -1,5 +1,6 @@
 #include "Menu.h"
 #include "Global.h"
+#include"SchoolYear.h"
 
 const FunctionRecord STAFF_MENU[] = {
   {"School Year", nullptr, true},
