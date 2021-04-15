@@ -10,13 +10,14 @@ class User;
 class Class;
 class Course;
 
-class Student {
+class Student
+{
 public:
   int student_id;
-  string firstName,lastName,gender,dateOfBirth,socialID;
-  User* pUser;
-  Class* pClass;
-  Vector<Course*> pEnrolledCourses;
+  string firstName, lastName, gender, dateOfBirth, socialID;
+  User *pUser;
+  Class *pClass;
+  Vector<Course *> pEnrolledCourses;
   int numberOfEnrolledCourse;
   static void createStudent();
   static void showStudent();

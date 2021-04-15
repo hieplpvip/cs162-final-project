@@ -11,6 +11,7 @@ class Semester;
 
 class Course {
 public:
+  int semester;
   string course_id;
   string course_name;
   string lecturer;

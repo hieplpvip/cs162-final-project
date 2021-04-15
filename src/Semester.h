@@ -11,7 +11,7 @@ public:
   SchoolYear* pSchoolYear;
   Vector<Course*> pCourses;
   static void createSemester();
-  static void deleteSemester();
+  static void showSemester();
   static void editSemester();
   int numberOfCourse;
 };
