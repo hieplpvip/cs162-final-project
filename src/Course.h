@@ -19,7 +19,10 @@ public:
   Semester* pSemester;
   Vector<Student*> pStudents;
   int numberOfStudent;
+  int maxNumberOfStudent;
+  string timeOfCourse[2];
   static void createCourse();
+  static bool checkConflict(Course *crs,Vector<Course*> allEnrolledCourse);
 };
 
 #endif

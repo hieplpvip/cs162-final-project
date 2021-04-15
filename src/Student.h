@@ -13,12 +13,13 @@ class Course;
 class Student {
 public:
   int student_id;
-  float gpa;
+  string firstName,lastName,gender,dateOfBirth,socialID;
   User* pUser;
   Class* pClass;
   Vector<Course*> pEnrolledCourses;
-
+  int numberOfEnrolledCourse;
   static void createStudent();
+  static void showStudent();
 };
 
 #endif
