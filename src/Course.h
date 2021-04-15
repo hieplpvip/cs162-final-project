@@ -23,6 +23,7 @@ public:
   string timeOfCourse[2];
   static void createCourse();
   static bool checkConflict(Course *crs,Vector<Course*> allEnrolledCourse);
+  static void showCourse();
 };
 
 #endif
