@@ -25,6 +25,7 @@ void Student::createStudent()
     {
       Global::all_class[i]->pStudents.push_back(student);
       student->pClass = Global::all_class[i];
+      Global::all_class[i]->numberOfStudent++;
       break;
     }
   cout << "How many course that student enrolled:";
@@ -55,5 +56,5 @@ void Student::createStudent()
 }
 void Student::showStudent()
 {
-
+  throw "Not implemented yet!";
 }
