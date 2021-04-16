@@ -18,7 +18,7 @@ void SchoolYear::createSchoolYear()
 }
 void SchoolYear::showSchoolYear()
 {
-    cout << "List of sschool year:\n";
+    cout << "List of school year:\n";
     for (int i = 0; i < Global::all_school_year.size();i++)
         cout << Global::all_school_year[i]->name << '\n';
 }
