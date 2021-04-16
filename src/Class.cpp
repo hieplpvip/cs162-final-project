@@ -1,9 +1,8 @@
 #include "Global.h"
-#include <iostream>
 using namespace std;
-void Class::createClass()
-{
-  Class *cls=new Class;
+
+void Class::createClass() {
+  Class *cls = new Class();
   cout << "Input class id:";
   cin >> cls->class_id;
   cout << "Input class name:";
@@ -17,11 +16,11 @@ void Class::showClass() {
     cout << i << ":" << Global::all_class[i]->class_id << "-" << Global::all_class[i]->class_name << "-" << Global::all_class[i]->numberOfStudent << " students"<<'\n';
   }
 }
-void Class::showScoreboard()
-{
-  cout<<"Here is the score board of the class:\n";
+
+void Class::showScoreboard() {
+  cout << "Here is the score board of the class:\n";
 }
-void Class::findClass(string classID)
-{
-  
+
+void Class::findClass(string classID) {
+
 }

@@ -1,8 +1,11 @@
 #ifndef SCHOOLYEAR_H
 #define SCHOOLYEAR_H
-#include <iostream>
+
+#include <string>
 #include "libs/Vector.h"
-using namespace std;
+
+using std::string;
+
 class Semester;
 
 class SchoolYear {

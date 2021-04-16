@@ -26,6 +26,7 @@ public:
   static void showCourse();
   static void viewScoreboard();
   static void showStudentInCourse();
+
 private:
   static Course* findCourse(Semester *sms,string crsID);
 };
