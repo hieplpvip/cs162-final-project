@@ -13,6 +13,7 @@ class Course;
 class Student {
 public:
   int student_id;
+  float totalMark, finalMark, midMark, otherMark;
   string firstName, lastName, gender, dateOfBirth, socialID;
   User *pUser;
   Class *pClass;
