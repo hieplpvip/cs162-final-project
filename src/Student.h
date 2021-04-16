@@ -14,7 +14,7 @@ class Course;
 struct scorePerCourse
 {
   Course *crs;
-  float gpa;
+  float overallGPA,midtermGMark,finalMark,otherMark;
 };
 struct scorePerSemester
 {

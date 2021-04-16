@@ -1,6 +1,4 @@
-#include "SchoolYear.h"
 #include "Global.h"
-#include "Semester.h"
 #include <iostream>
 using namespace std;
 void SchoolYear::createSchoolYear()
@@ -16,13 +14,14 @@ void SchoolYear::createSchoolYear()
     }
     Global::all_school_year.push_back(schYear);
 }
-void SchoolYear::showSchoolYear()
-{
-    cout << "List of school year:\n";
-    for (int i = 0; i < Global::all_school_year.size(); i++)
-        cout << Global::all_school_year[i]->name << '\n';
+
+void SchoolYear::showSchoolYear() {
+  cout << "List of school year:\n";
+  for (int i = 0; i < Global::all_school_year.size(); i++) {
+    cout << Global::all_school_year[i]->name << '\n';
+  }
 }
-void SchoolYear::editSchoolYear()
-{
-    throw "Not implemented yet!";
+
+void SchoolYear::editSchoolYear() {
+  throw "Not implemented yet!";
 }
