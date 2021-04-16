@@ -34,7 +34,7 @@ void Course::createCourse()
         crs->pStudents.push_back(Global::all_student.back());
     }
 }
-bool Course::checkConflict(Course *crs,Vector<Course*> allEnrolledCourse)
+bool Course::checkConflict(Course *crs, Vector<Course *> allEnrolledCourse)
 {
     for (int i = 0; i < allEnrolledCourse.size(); i++)
         if (!(crs->course_id == allEnrolledCourse[i]->course_id))
@@ -45,4 +45,20 @@ bool Course::checkConflict(Course *crs,Vector<Course*> allEnrolledCourse)
                 return true;
         }
     return false;
+}
+void Course::showCourse()
+{
+    cout << "Here is a list of course:";
+    for (int i = 0; i < Global::all_course.size(); i++)
+    {
+        cout << "Course "
+             << " #" << i << ':';
+        cout << Global::all_course[i]->course_id << "-" << Global::all_course[i]->course_name << '-' << Global::all_course[i]->numberOfStudent << '/' << Global::all_course[i]->maxNumberOfStudent << " students";
+        cout << "Lecturer:" << Global::all_course[i]->lecturer << '\n';
+        cout << "Start date:" << Global::all_course[i]->start_date << '\n';
+        cout << "End date:" << Global::all_course[i]->end_date << '\n';
+        cout << "Time:" << '\n'
+             << Global::all_course[i]->timeOfCourse[0] << '\n'
+             << Global::all_course[i]->timeOfCourse[1];
+    }
 }
