@@ -11,7 +11,7 @@ const FunctionRecord STAFF_MENU[] = {
   {"Class", nullptr, true},
   {"New Class", &Class::createClass, false},
   {"Edit Class", nullptr, false},
-  {"List Classes", nullptr, false},
+  {"List Classes", &Class::showClass, false},
 
   {"Semester", nullptr, true},
   {"New Semester", &Semester::createSemester, false},
@@ -26,7 +26,7 @@ const FunctionRecord STAFF_MENU[] = {
   {"Course", nullptr, true},
   {"New Course", &Course::createCourse, false},
   {"Edit Course", nullptr, false},
-  {"List Courses", nullptr, false},
+  {"List Courses", &Course::showCourse, false},
 };
 
 const FunctionRecord STUDENT_MENU[] = {

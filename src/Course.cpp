@@ -28,11 +28,16 @@ void Course::createCourse()
     getline(cin, crs->timeOfCourse[0]);
     cout << "Second time in week";
     getline(cin, crs->timeOfCourse[1]);
-    for (int i = 0; i < crs->numberOfStudent; i++)
-    {
-        Student::createStudent();
-        crs->pStudents.push_back(Global::all_student.back());
-    }
+    cout << "What school year:";
+    string schoolYear;
+    cin >> schoolYear;
+    cout << "What semester of school year " << schoolYear << ':';
+    int semester;
+    cin >> semester;
+    int i = 0;
+    while (Global::all_semester[i++]->pSchoolYear->name != schoolYear);
+    Global::all_semester[i + semester - 1]->pCourses.push_back(crs);
+    Global::all_course.push_back(crs);
 }
 bool Course::checkConflict(Course *crs, Vector<Course *> allEnrolledCourse)
 {
