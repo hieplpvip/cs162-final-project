@@ -14,6 +14,8 @@ public:
   static void showSemester();
   static void editSemester();
   int numberOfCourse;
+  int ordinalOfSemester;
+  static Semester *getSemester(string schYear, int sms);
 };
 
 #endif
