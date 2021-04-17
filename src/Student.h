@@ -10,8 +10,7 @@ class User;
 class Class;
 class Course;
 
-class Student
-{
+class Student {
 public:
   int student_id;
   string firstName, lastName, gender, dateOfBirth, socialID;
