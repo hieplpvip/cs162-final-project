@@ -3,26 +3,25 @@
 
 #include <string>
 #include "libs/Vector.h"
-#include"Course.h"
-#include"Semester.h"
 
 using std::string;
 
 class User;
 class Class;
 class Course;
-struct scorePerCourse
-{
+class Semester;
+
+struct scorePerCourse {
   Course *crs;
-  float overallGPA,midtermGMark,finalMark,otherMark;
+  float overallGPA, midtermGMark, finalMark, otherMark;
 };
-struct scorePerSemester
-{
+
+struct scorePerSemester {
   Semester *sms;
   float gpa;
 };
-class Student
-{
+
+class Student {
 public:
   int student_id;
   Vector<scorePerCourse*> gpa_courses;

@@ -17,6 +17,7 @@ public:
   static void createClass();
   static void showClass();
   static void showScoreboard();
+
 private:
   static void findClass(string classID);
 };

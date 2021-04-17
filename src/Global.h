@@ -15,8 +15,7 @@
 #include "User.h"
 #include "Utils.h"
 
-namespace Global
-{
+namespace Global {
   extern User *current_user;
   extern Vector<SchoolYear *> all_school_year;
   extern Vector<Semester *> all_semester;
