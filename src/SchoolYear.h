@@ -5,8 +5,7 @@
 using namespace std;
 class Semester;
 
-class SchoolYear
-{
+class SchoolYear {
 public:
   Vector<Semester *> pSemesters;
   string name;

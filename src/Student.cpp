@@ -1,9 +1,8 @@
-#include "Student.h"
 #include "Global.h"
 #include <iostream>
 using namespace std;
-void Student::createStudent()
-{
+
+void Student::createStudent() {
   Student *student = new Student;
   cout << "Input student ID:";
   cin >> student->student_id;
@@ -20,9 +19,8 @@ void Student::createStudent()
   cout << "Input student class ID";
   string stuClass;
   cin >> stuClass;
-  for (int i = 0; i < Global::all_class.size(); i++)
-    if (Global::all_class[i]->class_id == stuClass)
-    {
+  for (int i = 0; i < Global::all_class.size(); i++) {
+    if (Global::all_class[i]->class_id == stuClass) {
       Global::all_class[i]->pStudents.push_back(student);
       student->pClass = Global::all_class[i];
       Global::all_class[i]->numberOfStudent++;
