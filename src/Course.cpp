@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
+<<<<<<< Updated upstream
 
 void Course::createCourse() {
   Course *crs = new Course;
@@ -35,6 +36,36 @@ void Course::createCourse() {
   while (Global::all_semester[i++]->pSchoolYear->name != schoolYear);
   Global::all_semester[i + semester - 1]->pCourses.push_back(crs);
   Global::all_course.push_back(crs);
+=======
+void Course::createCourse()
+{
+    Course *crs = new Course;
+    Global::all_course.push_back(crs);
+    cout << "Input course ID:";
+    cin >> crs->course_id;
+    cout << "Input course name:";
+    cin >> crs->course_name;
+    cout << "Input name of the lecturer:";
+    cin >> crs->lecturer;
+    cout << "Input start date:";
+    cin >> crs->start_date;
+    cout << "Input end date:";
+    cin >> crs->end_date;
+    cout << "Max student in course:";
+    cin >> crs->maxNumberOfStudent;
+    cout << "Time of the course";
+    cout << "\nFirst time in week";
+    getline(cin, crs->timeOfCourse[0]);
+    cout << "Second time in week";
+    getline(cin, crs->timeOfCourse[1]);
+    cout << "What school year:";
+    string schoolYear;
+    cin >> schoolYear;
+    cout << "What semester of school year " << schoolYear << ':';
+    int semester;
+    cin >> semester;
+    crs->pSemester =Semester::getSemester(schoolYear, semester);
+>>>>>>> Stashed changes
 }
 
 bool Course::checkConflict(Course *crs, Vector<Course *> allEnrolledCourse) {
