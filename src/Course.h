@@ -11,7 +11,6 @@ class Semester;
 
 class Course {
 public:
-  int semester;
   string course_id;
   string course_name;
   string lecturer;
@@ -25,6 +24,10 @@ public:
   static void createCourse();
   static bool checkConflict(Course *crs,Vector<Course*> allEnrolledCourse);
   static void showCourse();
+  static void viewScoreboard();
+  static void showStudentInCourse();
+private:
+  static Course* findCourse(Semester *sms,string crsID);
 };
 
 #endif

@@ -1,6 +1,7 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
+#include <iomanip>
 #include <iostream>
 #include <string>
 #include <cassert>
@@ -14,14 +15,15 @@
 #include "User.h"
 #include "Utils.h"
 
-namespace Global {
-  extern User* current_user;
-  extern Vector<SchoolYear*> all_school_year;
-  extern Vector<Semester*> all_semester;
-  extern Vector<Course*> all_course;
-  extern Vector<Student*> all_student;
-  extern Vector<Class*> all_class;
-  extern Vector<User**> all_user;
+namespace Global
+{
+  extern User *current_user;
+  extern Vector<SchoolYear *> all_school_year;
+  extern Vector<Semester *> all_semester;
+  extern Vector<Course *> all_course;
+  extern Vector<Student *> all_student;
+  extern Vector<Class *> all_class;
+  extern Vector<User **> all_user;
 };
 
 #endif

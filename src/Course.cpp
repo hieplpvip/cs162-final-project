@@ -1,9 +1,4 @@
-#include "Course.h"
 #include "Global.h"
-#include "Semester.h"
-#include <iostream>
-#include "Student.h"
-#include <string>
 using namespace std;
 void Course::createCourse()
 {
@@ -19,8 +14,6 @@ void Course::createCourse()
     cin >> crs->start_date;
     cout << "Input end date:";
     cin >> crs->end_date;
-    cout << "How many student:";
-    cin >> crs->numberOfStudent;
     cout << "Max student in course:";
     cin >> crs->maxNumberOfStudent;
     cout << "Time of the course";
@@ -34,10 +27,7 @@ void Course::createCourse()
     cout << "What semester of school year " << schoolYear << ':';
     int semester;
     cin >> semester;
-    int i = 0;
-    while (Global::all_semester[i++]->pSchoolYear->name != schoolYear);
-    Global::all_semester[i + semester - 1]->pCourses.push_back(crs);
-    Global::all_course.push_back(crs);
+    crs->pSemester =Semester::getSemester(schoolYear, semester);
 }
 bool Course::checkConflict(Course *crs, Vector<Course *> allEnrolledCourse)
 {
@@ -66,4 +56,75 @@ void Course::showCourse()
              << Global::all_course[i]->timeOfCourse[0] << '\n'
              << Global::all_course[i]->timeOfCourse[1];
     }
+}
+void Course::viewScoreboard()
+{
+    cout << "Input the school year:";
+    string schoolYear;
+    cin >> schoolYear;
+    cout << "Input semester:";
+    int sms;
+    cin >> sms;
+    cout << "Input course ID:";
+    string courseID;
+    cin >> courseID;
+    Course *course;
+    for (int i = 0; i < Global::all_course.size(); i++)
+        if (Global::all_course[i]->pSemester->pSchoolYear->name == schoolYear && Global::all_course[i]->pSemester->ordinalOfSemester)
+        {
+            course = Global::all_course[i];
+            break;
+        }
+    cout << "List of student in course sccoreboard:\n";
+    cout << setw(10) << left << "ID";
+    cout << setw(60) << left << "Name";
+    cout << setw(5) << right << "GPA";
+    cout << endl;
+    cout << setfill('-');
+    cout << setw(75) << '-' << endl;
+    cout<<setfill(' ');
+    for (int i = 0; i < course->numberOfStudent; i++)
+    {
+        cout << setw(10) << left << course->pStudents[i]->student_id;
+        cout << setw(60) << left << course->pStudents[i]->firstName + ' ' + course->pStudents[i]->lastName;
+        for (int j = 0; j < course->pStudents[i]->gpa_courses.size(); j++)
+            if (course->pStudents[i]->gpa_courses[j]->crs == course)
+            {
+                cout << setw(5) << right << course->pStudents[i]->gpa_courses[j]->gpa << endl;
+                break;
+            }
+    }
+}
+
+void Course::showStudentInCourse()
+{
+    cout << "Input course ID:";
+    string crsID;
+    cin >> crsID;
+    cout << "Input school year:";
+    string schYear;
+    cin >> schYear;
+    cout << "Input semester:";
+    int sms;
+    cin >> sms;
+    Course *course = findCourse(Semester::getSemester(schYear, sms), crsID);
+    cout << "Here is the list of student in class:\n";
+    cout << setw(12) << left << "ID";
+    cout << setw(60) << left << "Name";
+    cout << endl;
+    cout << setfill('-');
+    cout << setw(72) << "-" << endl;
+    cout<<setw(' ');
+    for (int i = 0; i < course->pStudents.size(); i++)
+    {
+        cout << setw(12) << left << course->pStudents[i]->student_id;
+        cout << setw(60) << left << course->pStudents[i]->firstName << " " << course->pStudents[i]->lastName;
+        cout << endl;
+    }
+}
+Course *Course::findCourse(Semester *sms, string crsID)
+{
+    for (int i = 0; i < sms->pCourses.size(); i++)
+        if (crsID == sms->pCourses[i]->course_id)
+            return sms->pCourses[i];
 }

@@ -12,6 +12,7 @@ void SchoolYear::createSchoolYear()
     {
         Semester::createSemester();
         Global::all_semester.back()->pSchoolYear = schYear;
+        Global::all_semester.back()->ordinalOfSemester = i + 1;
     }
     Global::all_school_year.push_back(schYear);
 }
