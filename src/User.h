@@ -14,7 +14,7 @@ public:
     STUDENT
   };
 
-  int user_id;
+  string user_id;
   string username;
   string password;
   UserRole role;

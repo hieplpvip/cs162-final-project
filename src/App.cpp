@@ -46,6 +46,20 @@ App::~App() {
 }
 
 void App::loadData() {
+  ifstream fIn;
+  ofstream fOut;
+
+  // Load ids
+  {
+    fIn.open("data/class/list.txt");
+    string class_id;
+    while (fIn >> class_id) {
+      Class* cls = new Class();
+      cls->class_id = class_id;
+      Global::all_class.push_back(cls);
+    }
+    fIn.close();
+  }
 }
 
 void App::saveData() {

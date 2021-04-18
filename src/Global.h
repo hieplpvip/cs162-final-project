@@ -2,8 +2,8 @@
 #define GLOBAL_H
 
 #include <cassert>
+#include <fstream>
 #include <iomanip>
-#include <iostream>
 #include <string>
 #include "Class.h"
 #include "Course.h"

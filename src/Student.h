@@ -1,7 +1,6 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 
-#include <iostream>
 #include <string>
 #include "libs/Vector.h"
 
@@ -14,7 +13,7 @@ class Semester;
 
 struct scorePerCourse {
   Course *crs;
-  float overallGPA, midtermGMark, finalMark, otherMark;
+  float midtermGMark, finalMark, otherMark, overallMark;
 };
 
 struct scorePerSemester {

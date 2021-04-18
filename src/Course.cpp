@@ -72,7 +72,7 @@ void Course::viewScoreboard() {
     cout << setw(60) << left << course->pStudents[i]->firstName + ' ' + course->pStudents[i]->lastName;
     for (int j = 0; j < course->pStudents[i]->gpa_courses.size(); j++) {
       if (course->pStudents[i]->gpa_courses[j]->crs == course) {
-        cout << setw(5) << right << course->pStudents[i]->gpa_courses[j]->overallGPA << endl;
+        cout << setw(5) << right << course->pStudents[i]->gpa_courses[j]->overallMark << endl;
         break;
       }
     }
