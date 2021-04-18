@@ -2,12 +2,10 @@
 #define VECTOR_H
 
 #include <stddef.h>
-#include<vector>
 
 // TODO: unit test
 template <class T>
-class Vector
-{
+class Vector {
 public:
   Vector();
   Vector(size_t size);
@@ -41,114 +39,94 @@ private:
 };
 
 template <class T>
-Vector<T>::Vector()
-{
+Vector<T>::Vector() {
   _size = 0;
   _capacity = 0;
   _elements = nullptr;
 }
 
 template <class T>
-Vector<T>::Vector(size_t size)
-{
+Vector<T>::Vector(size_t size) {
   _size = size;
   _capacity = size;
   _elements = new T[size];
 }
 
 template <class T>
-Vector<T>::Vector(size_t size, const T &initial)
-{
+Vector<T>::Vector(size_t size, const T &initial) {
   _size = size;
   _capacity = size;
   _elements = new T[size];
-  for (size_t i = 0; i < size; ++i)
-  {
+  for (size_t i = 0; i < size; ++i) {
     _elements[i] = initial;
   }
 }
 
 template <class T>
-Vector<T>::Vector(const Vector<T> &v)
-{
+Vector<T>::Vector(const Vector<T> &v) {
   _size = v._size;
   _capacity = v._capacity;
   _elements = new T[_capacity];
-  for (size_t i = 0; i < _size; ++i)
-  {
+  for (size_t i = 0; i < _size; ++i) {
     _elements[i] = v._elements[i];
   }
 }
 
 template <class T>
-Vector<T>::~Vector()
-{
-  if (_elements)
-  {
+Vector<T>::~Vector() {
+  if (_elements) {
     delete[] _elements;
   }
 }
 
 template <class T>
-size_t Vector<T>::size() const
-{
+size_t Vector<T>::size() const {
   return _size;
 }
 
 template <class T>
-size_t Vector<T>::capacity() const
-{
+size_t Vector<T>::capacity() const {
   return _capacity;
 }
 
 template <class T>
-bool Vector<T>::empty() const
-{
+bool Vector<T>::empty() const {
   return _size == 0;
 }
 
 template <class T>
-T &Vector<T>::front()
-{
+T &Vector<T>::front() {
   return _elements[0];
 }
 
 template <class T>
-T &Vector<T>::back()
-{
+T &Vector<T>::back() {
   return _elements[_size - 1];
 }
 
 template <class T>
-void Vector<T>::push_back(const T &v)
-{
-  if (_capacity == 0)
-  {
+void Vector<T>::push_back(const T &v) {
+  if (_capacity == 0) {
     reserve(8);
-  }
-  else if (_size = _capacity)
-  {
+  } else if (_size = _capacity) {
     reserve(_capacity * 2);
   }
   _elements[_size++] = v;
 }
 
 template <class T>
-void Vector<T>::pop_back()
-{
+void Vector<T>::pop_back() {
   //_elements[_size]->~T();
   _size--;
 }
 
 template <class T>
-void Vector<T>::reserve(size_t new_capacity)
-{
+void Vector<T>::reserve(size_t new_capacity) {
   if (new_capacity <= _capacity)
     return;
 
   T *p = new T[new_capacity];
-  for (size_t i = 0; i < _size; ++i)
-  {
+  for (size_t i = 0; i < _size; ++i) {
     p[i] = _elements[i];
   }
   delete[] _elements;
@@ -157,12 +135,10 @@ void Vector<T>::reserve(size_t new_capacity)
 }
 
 template <class T>
-void Vector<T>::resize(size_t new_size, T val)
-{
+void Vector<T>::resize(size_t new_size, T val) {
   reserve(new_size);
 
-  for (int i = _size; i < new_size; ++i)
-  {
+  for (int i = _size; i < new_size; ++i) {
     _elements[i] = val;
   }
 
@@ -170,19 +146,16 @@ void Vector<T>::resize(size_t new_size, T val)
 }
 
 template <class T>
-T &Vector<T>::operator[](size_t index)
-{
+T &Vector<T>::operator[](size_t index) {
   return _elements[index];
 }
 
 template <class T>
-void Vector<T>::erase(size_t index)
-{
+void Vector<T>::erase(size_t index) {
   if (index >= _size)
     return;
 
-  for (size_t i = index; i + 1 < _size; ++i)
-  {
+  for (size_t i = index; i + 1 < _size; ++i) {
     _elements[i] = _elements[i + 1];
   }
 
@@ -190,20 +163,17 @@ void Vector<T>::erase(size_t index)
 }
 
 template <class T>
-void Vector<T>::clear()
-{
+void Vector<T>::clear() {
   _size = 0;
 }
 
 template <class T>
-T *Vector<T>::begin()
-{
+T *Vector<T>::begin() {
   return _elements;
 }
 
 template <class T>
-T *Vector<T>::end()
-{
+T *Vector<T>::end() {
   return _elements + _size;
 }
 

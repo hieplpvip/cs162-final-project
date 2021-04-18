@@ -1,6 +1,13 @@
 #include "Global.h"
 using namespace std;
 
+Semester::Semester() {}
+Semester::Semester(string id) : semester_id(id) {}
+
+string Semester::getID() {
+  return semester_id;
+}
+
 void Semester::createSemester() {
   Semester *semester = new Semester();
   semester->pSchoolYear = Global::all_school_year.back();
@@ -18,17 +25,28 @@ void Semester::showSemester() {
     }
   }
 }
-Semester *Semester::getSemester(string schYear, int sms)
-{
-    int i = 0;
-    SchoolYear *pSchYear;
-    for (i = 0; i < Global::all_school_year.size(); i++)
-        if (Global::all_school_year[i]->name == schYear)
-        {
-            pSchYear = Global::all_school_year[i];
-            break;
-        }
-    for (i = 0; i < Global::all_school_year[i]->numberOfSemester; i++)
-        if (pSchYear->pSemesters[i]->ordinalOfSemester == sms)
-            return Global::all_semester[i];
+
+Semester *Semester::getSemester(string schYear, int sms) {
+  int i = 0;
+  SchoolYear *pSchYear;
+  for (i = 0; i < Global::all_school_year.size(); i++) {
+    if (Global::all_school_year[i]->name == schYear) {
+      pSchYear = Global::all_school_year[i];
+      break;
+    }
+  }
+  for (i = 0; i < Global::all_school_year[i]->numberOfSemester; i++) {
+    if (pSchYear->pSemesters[i]->ordinalOfSemester == sms) {
+      return Global::all_semester[i];
+    }
+  }
+  return nullptr;
+}
+
+void Semester::loadFromStream(std::istream &f) {
+  throw "Not implemented yet!";
+}
+
+void Semester::writeToStream(std::ostream &f) {
+  throw "Not implemented yet!";
 }
