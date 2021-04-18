@@ -54,4 +54,5 @@ Class *Class::findClass(string classID) {
     for (int i = 0; i < Global::all_class.size(); i++)
         if (Global::all_class[i]->class_id == classID) return Global::all_class[i];
     return nullptr;
+    cout << "Here is the score board of the class:\n";
 }
