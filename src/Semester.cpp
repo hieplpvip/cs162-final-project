@@ -18,17 +18,19 @@ void Semester::showSemester() {
     }
   }
 }
-Semester *Semester::getSemester(string schYear, int sms)
-{
-    int i = 0;
-    SchoolYear *pSchYear;
-    for (i = 0; i < Global::all_school_year.size(); i++)
-        if (Global::all_school_year[i]->name == schYear)
-        {
-            pSchYear = Global::all_school_year[i];
-            break;
-        }
-    for (i = 0; i < Global::all_school_year[i]->numberOfSemester; i++)
-        if (pSchYear->pSemesters[i]->ordinalOfSemester == sms)
-            return Global::all_semester[i];
+
+Semester *Semester::getSemester(string schYear, int sms) {
+  int i = 0;
+  SchoolYear *pSchYear;
+  for (i = 0; i < Global::all_school_year.size(); i++) {
+    if (Global::all_school_year[i]->name == schYear) {
+      pSchYear = Global::all_school_year[i];
+      break;
+    }
+  }
+  for (i = 0; i < Global::all_school_year[i]->numberOfSemester; i++) {
+    if (pSchYear->pSemesters[i]->ordinalOfSemester == sms) {
+      return Global::all_semester[i];
+    }
+  }
 }

@@ -27,7 +27,7 @@ void Course::createCourse() {
   cout << "What semester of school year " << schoolYear << ':';
   int semester;
   cin >> semester;
-  crs->pSemester =Semester::getSemester(schoolYear, semester);
+  crs->pSemester = Semester::getSemester(schoolYear, semester);
 }
 
 bool Course::checkConflict(Course *crs, Vector<Course *> allEnrolledCourse) {
@@ -95,11 +95,11 @@ void Course::showStudentInCourse() {
   cout << endl;
   cout << setfill('-');
   cout << setw(72) << "-" << endl;
-  cout<<setw(' ');
+  cout << setw(' ');
   for (int i = 0; i < course->pStudents.size(); i++) {
-      cout << setw(12) << left << course->pStudents[i]->student_id;
-      cout << setw(60) << left << course->pStudents[i]->firstName << " " << course->pStudents[i]->lastName;
-      cout << endl;
+    cout << setw(12) << left << course->pStudents[i]->student_id;
+    cout << setw(60) << left << course->pStudents[i]->firstName << " " << course->pStudents[i]->lastName;
+    cout << endl;
   }
 }
 

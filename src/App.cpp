@@ -1,5 +1,6 @@
 #include "App.h"
 #include "Global.h"
+
 using namespace std;
 
 App::App() {
@@ -22,22 +23,22 @@ App::~App() {
   cout << "Exiting...\n";
 
   // free memory
-  for (auto p: Global::all_school_year) {
+  for (auto p : Global::all_school_year) {
     delete p;
   }
-  for (auto p: Global::all_semester) {
+  for (auto p : Global::all_semester) {
     delete p;
   }
-  for (auto p: Global::all_course) {
+  for (auto p : Global::all_course) {
     delete p;
   }
-  for (auto p: Global::all_student) {
+  for (auto p : Global::all_student) {
     delete p;
   }
-  for (auto p: Global::all_class) {
+  for (auto p : Global::all_class) {
     delete p;
   }
-  for (auto p: Global::all_user) {
+  for (auto p : Global::all_user) {
     delete p;
   }
 
@@ -45,11 +46,9 @@ App::~App() {
 }
 
 void App::loadData() {
-
 }
 
 void App::saveData() {
-
 }
 
 bool App::authenticate() {
@@ -79,7 +78,8 @@ void App::showMenu(const FunctionRecord menu[], int num) {
     cout << "0. Quit\n\n";
 
     cout << "Please choose an option: ";
-    int option; cin >> option;
+    int option;
+    cin >> option;
     if (option < 0 || option > cnt_options) {
       cout << "Invalid option!\n";
       continue;

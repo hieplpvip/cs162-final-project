@@ -1,4 +1,3 @@
-#include "User.h"
 #include "Global.h"
 
 void User::createUser() {
