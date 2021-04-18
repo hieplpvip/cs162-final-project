@@ -5,9 +5,7 @@
 Only tested on Linux. You need CMake to build this project:
 
 ```shell
-mkdir build
-cd build
-cmake ..
+cmake .
 make
 ```
 

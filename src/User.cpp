@@ -20,9 +20,42 @@ void User::logOut() {
 }
 
 void User::loadFromStream(std::istream &f) {
-  throw "Not implemented yet!";
+  string _user_id;
+  f >> _user_id;
+  f >> username;
+  f >> password;
+  f >> role;
+  assert(_user_id == user_id);
+
+  if (role == UserRole::STUDENT) {
+    string student_id;
+    f >> student_id;
+    pStudent = nullptr;
+    for (auto p : Global::all_student) {
+      if (p->student_id == student_id) {
+        pStudent = p;
+      }
+    }
+    if (pStudent == nullptr) {
+      std::cerr << "[ERROR][User::loadFromStream]: Could not find matching pStudent\n";
+    }
+  }
 }
 
 void User::writeToStream(std::ostream &f) {
-  throw "Not implemented yet!";
+  f << user_id << '\n';
+  f << username << '\n';
+  f << password << '\n';
+  f << role << '\n';
+
+  if (role == UserRole::STUDENT) {
+    f << role << '\n';
+  }
+}
+
+istream &operator>>(istream &f, User::UserRole &role) {
+  int _role;
+  f >> _role;
+  role = static_cast<User::UserRole>(_role);
+  return f;
 }

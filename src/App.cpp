@@ -88,7 +88,7 @@ void App::saveData() {
   auto saveIDs = [&]<typename T>(const string file, Vector<T*>& v) {
     fOut.open(file + "list.txt");
     for (auto p : v) {
-      fOut << p->getID() << "\n";
+      fOut << p->getID() << '\n';
     }
     fOut.close();
   };
@@ -117,9 +117,27 @@ void App::saveData() {
 }
 
 bool App::authenticate() {
-  Global::current_user = new User();
-  Global::current_user->role = User::UserRole::STAFF;
-  return true;
+  for (int attempt = 1; attempt <= 5; ++attempt) {
+    clearScreen();
+
+    string username, password;
+    cout << "Enter username: ";
+    cin >> username;
+    cout << "Enter password: ";
+    cin >> password;
+
+    for (auto p : Global::all_user) {
+      if (p->username == username && p->password == password) {
+        Global::current_user = p;
+        return true;
+      }
+    }
+
+    cout << "Invalid credential!\n";
+    milliSleep(2000);
+  }
+
+  return false;
 }
 
 void App::showMenu(const FunctionRecord menu[], int num) {
@@ -131,15 +149,15 @@ void App::showMenu(const FunctionRecord menu[], int num) {
     for (int i = 0; i < num; ++i) {
       if (menu[i].is_section_header) {
         if (i != 0) {
-          cout << "\n";
+          cout << '\n';
         }
         cout << "--- " << menu[i].title << " ---\n";
       } else {
-        cout << ++cnt_options << ". " << menu[i].title << "\n";
+        cout << ++cnt_options << ". " << menu[i].title << '\n';
       }
     }
 
-    cout << "\n";
+    cout << '\n';
     cout << "0. Quit\n\n";
 
     cout << "Please choose an option: ";
@@ -171,7 +189,7 @@ void App::run() {
 
   if (!authenticate()) {
     cout << "Could not authenticate!\n";
-    goto exit;
+    return;
   }
   assert(Global::current_user != nullptr);
 
@@ -181,8 +199,5 @@ void App::run() {
     showMenu(STUDENT_MENU, NUM_STUDENT_MENU);
   }
 
-  delete Global::current_user;
-
-exit:
   saveData();
 }
