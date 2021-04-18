@@ -33,4 +33,13 @@ Semester *Semester::getSemester(string schYear, int sms) {
       return Global::all_semester[i];
     }
   }
+  return nullptr;
+}
+
+Semester *Semester::loadFromStream(std::istream &f) {
+  throw "Not implemented yet!";
+}
+
+void Semester::writeToStream(std::ostream &f) {
+  throw "Not implemented yet!";
 }

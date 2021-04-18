@@ -1,6 +1,7 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 
+#include <iostream>
 #include <string>
 #include "libs/Vector.h"
 
@@ -32,8 +33,12 @@ public:
   Class *pClass;
   Vector<Course *> pEnrolledCourses;
   int numberOfEnrolledCourse;
+
   static void createStudent();
   static void showStudent();
+
+  static Student *loadFromStream(std::istream &f);
+  void writeToStream(std::ostream &f);
 };
 
 #endif

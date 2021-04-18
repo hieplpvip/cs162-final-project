@@ -11,3 +11,11 @@ bool User::logIn() {
 void User::logOut() {
   throw "Not implemented yet!";
 }
+
+User *User::loadFromStream(std::istream &f) {
+  throw "Not implemented yet!";
+}
+
+void User::writeToStream(std::ostream &f) {
+  throw "Not implemented yet!";
+}

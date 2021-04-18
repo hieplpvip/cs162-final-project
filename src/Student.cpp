@@ -39,3 +39,11 @@ void Student::showStudent() {
     cout << "SocialID:  " << Global::all_student[i]->socialID << endl;
   }
 }
+
+Student *Student::loadFromStream(std::istream &f) {
+  throw "Not implemented yet!";
+}
+
+void Student::writeToStream(std::ostream &f) {
+  throw "Not implemented yet!";
+}

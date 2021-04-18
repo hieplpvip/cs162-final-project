@@ -1,6 +1,7 @@
 #ifndef SEMESTER_H
 #define SEMESTER_H
 
+#include <iostream>
 #include "libs/Vector.h"
 
 class SchoolYear;
@@ -15,7 +16,11 @@ public:
   static void editSemester();
   int numberOfCourse;
   int ordinalOfSemester;
+
   static Semester* getSemester(string schYear, int sms);
+
+  static Semester* loadFromStream(std::istream& f);
+  void writeToStream(std::ostream& f);
 };
 
 #endif

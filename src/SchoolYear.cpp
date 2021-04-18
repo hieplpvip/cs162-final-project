@@ -23,3 +23,11 @@ void SchoolYear::showSchoolYear() {
 void SchoolYear::editSchoolYear() {
   throw "Not implemented yet!";
 }
+
+SchoolYear *SchoolYear::loadFromStream(std::istream &f) {
+  throw "Not implemented yet!";
+}
+
+void SchoolYear::writeToStream(std::ostream &f) {
+  throw "Not implemented yet!";
+}

@@ -1,8 +1,7 @@
 #ifndef CLASS_H
 #define CLASS_H
 
-#include <istream>
-#include <ostream>
+#include <iostream>
 #include <string>
 #include "libs/Vector.h"
 
@@ -16,11 +15,13 @@ public:
   string class_name;
   Vector<Student*> pStudents;
   int numberOfStudent;
+
   static void createClass();
   static void showClass();
   static void showScoreboard();
-  static Student* loadFromStream(std::istream& f);
-  static Student* writeToStream(std::ostream& f);
+
+  static Class* loadFromStream(std::istream& f);
+  void writeToStream(std::ostream& f);
 
 private:
   static void findClass(string classID);

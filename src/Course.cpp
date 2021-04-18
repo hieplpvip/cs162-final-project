@@ -39,6 +39,7 @@ bool Course::checkConflict(Course *crs, Vector<Course *> allEnrolledCourse) {
         return true;
     }
   }
+  return false;
 }
 
 void Course::viewScoreboard() {
@@ -125,4 +126,12 @@ void Course::showCourse() {
     cout << Global::all_course[i]->timeOfCourse[0] << '\n';
     cout << Global::all_course[i]->timeOfCourse[1];
   }
+}
+
+Course *Course::loadFromStream(std::istream &f) {
+  throw "Not implemented yet!";
+}
+
+void Course::writeToStream(std::ostream &f) {
+  throw "Not implemented yet!";
 }

@@ -1,6 +1,7 @@
 #ifndef COURSE_H
 #define COURSE_H
 
+#include <iostream>
 #include <string>
 #include "libs/Vector.h"
 
@@ -21,11 +22,15 @@ public:
   int numberOfStudent;
   int maxNumberOfStudent;
   string timeOfCourse[2];
+
   static void createCourse();
   static bool checkConflict(Course* crs, Vector<Course*> allEnrolledCourse);
   static void showCourse();
   static void viewScoreboard();
   static void showStudentInCourse();
+
+  static Course* loadFromStream(std::istream& f);
+  void writeToStream(std::ostream& f);
 
 private:
   static Course* findCourse(Semester* sms, string crsID);

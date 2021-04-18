@@ -22,4 +22,13 @@ void Class::showScoreboard() {
 }
 
 void Class::findClass(string classID) {
+  throw "Not implemented yet!";
+}
+
+Class *Class::loadFromStream(std::istream &f) {
+  throw "Not implemented yet!";
+}
+
+void Class::writeToStream(std::ostream &f) {
+  throw "Not implemented yet!";
 }
