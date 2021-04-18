@@ -40,6 +40,7 @@ void Class::showScoreboard() {
         }
         cout << setw(12) << left << "Semester";
         cout << setw(5) << left << "GPA";
+        cout << endl;
         for (int j = 0; j < cls->pStudents[i]->gpa_semester.size(); i++) {
             cout << setw(12) << left << cls->pStudents[i]->gpa_semester[j]->sms->ordinalOfSemester;
             cout << setw(5) << left << cls->pStudents[i]->gpa_semester[j]->gpa;
