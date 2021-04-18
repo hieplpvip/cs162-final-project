@@ -9,6 +9,7 @@ class Course;
 
 class Semester {
 public:
+  string semester_id;
   SchoolYear* pSchoolYear;
   Vector<Course*> pCourses;
   static void createSemester();

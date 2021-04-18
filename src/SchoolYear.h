@@ -14,6 +14,7 @@ public:
   static const int numberOfSemester = 3;
 
   Vector<Semester*> pSemesters;
+  string school_year_id;
   string name;
 
   static void createSchoolYear();
