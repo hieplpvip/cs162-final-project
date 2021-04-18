@@ -29,7 +29,7 @@ public:
   void writeToStream(std::ostream& f);
 
 private:
-  static void findClass(string classID);
+  static Class* findClass(string classID);
 };
 
 #endif
