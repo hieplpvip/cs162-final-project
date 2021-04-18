@@ -18,7 +18,22 @@ void Class::showClass() {
 }
 
 void Class::showScoreboard() {
+    cout << "Input class ID:";
+    string classID;
+    cin >> classID;
+    Class *cls = findClass(classID);
     cout << "Here is the score board of the class:\n";
+    cout << setfill('*');
+    cout << setw(17) << '*' < < < endl;
+    for (int i = 0; i < cls->pStudents.size(); i++) {
+        cout << "No." << i << endl;
+        cout << "ID:" << cls->pStudents[i]->student_id << endl;
+        cout << setw(12) << left << "Course ID:";
+        cout << setw(5) << left << "GPA:";
+        cout << endl;
+        for (int j = 0; j < cls->pStudents[i]->pEnrolledCourses.size(); j++) {
+        }
+    }
 }
 
 Class *Class::findClass(string classID) {
