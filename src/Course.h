@@ -23,6 +23,9 @@ public:
   int maxNumberOfStudent;
   string timeOfCourse[2];
 
+  Course();
+  Course(string id);
+
   static void createCourse();
   static bool checkConflict(Course* crs, Vector<Course*> allEnrolledCourse);
   static void showCourse();

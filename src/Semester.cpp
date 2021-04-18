@@ -1,6 +1,9 @@
 #include "Global.h"
 using namespace std;
 
+Semester::Semester() {}
+Semester::Semester(string id) : semester_id(id) {}
+
 void Semester::createSemester() {
   Semester *semester = new Semester();
   semester->pSchoolYear = Global::all_school_year.back();

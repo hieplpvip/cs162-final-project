@@ -1,6 +1,9 @@
 #include "Global.h"
 using namespace std;
 
+SchoolYear::SchoolYear() {}
+SchoolYear::SchoolYear(string id) : school_year_id(id) {}
+
 void SchoolYear::createSchoolYear() {
   SchoolYear *schYear = new SchoolYear();
   cout << "School year:";

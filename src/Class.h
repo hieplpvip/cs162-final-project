@@ -16,6 +16,9 @@ public:
   Vector<Student*> pStudents;
   int numberOfStudent;
 
+  Class();
+  Class(string id);
+
   static void createClass();
   static void showClass();
   static void showScoreboard();

@@ -33,6 +33,9 @@ public:
   Vector<Course *> pEnrolledCourses;
   int numberOfEnrolledCourse;
 
+  Student();
+  Student(string id);
+
   static void createStudent();
   static void showStudent();
 

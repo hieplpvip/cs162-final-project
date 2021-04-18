@@ -20,6 +20,9 @@ public:
   UserRole role;
   Student *pStudent;
 
+  User();
+  User(string id);
+
   static void createUser();
   static bool logIn();
   static void logOut();

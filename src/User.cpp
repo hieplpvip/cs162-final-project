@@ -1,5 +1,8 @@
 #include "Global.h"
 
+User::User() {}
+User::User(string id) : user_id(id) {}
+
 void User::createUser() {
   throw "Not implemented yet!";
 }

@@ -49,17 +49,22 @@ void App::loadData() {
   ifstream fIn;
   ofstream fOut;
 
-  // Load ids
-  {
-    fIn.open("data/class/list.txt");
-    string class_id;
-    while (fIn >> class_id) {
-      Class* cls = new Class();
-      cls->class_id = class_id;
-      Global::all_class.push_back(cls);
+  auto loadIDs = [&]<typename T>(const string file, Vector<T*>& v) {
+    fIn.open(file);
+    string id;
+    while (fIn >> id) {
+      T* t = new T(id);
+      v.push_back(t);
     }
     fIn.close();
-  }
+  };
+
+  loadIDs("data/class/list.txt", Global::all_class);
+  loadIDs("data/course/list.txt", Global::all_course);
+  loadIDs("data/schoolyear/list.txt", Global::all_school_year);
+  loadIDs("data/semester/list.txt", Global::all_semester);
+  loadIDs("data/semester/student.txt", Global::all_student);
+  loadIDs("data/semester/user.txt", Global::all_user);
 }
 
 void App::saveData() {

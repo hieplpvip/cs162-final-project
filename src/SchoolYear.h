@@ -17,6 +17,9 @@ public:
   string school_year_id;
   string name;
 
+  SchoolYear();
+  SchoolYear(string id);
+
   static void createSchoolYear();
   static void showSchoolYear();
   static void editSchoolYear();

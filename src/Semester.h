@@ -18,6 +18,9 @@ public:
   int numberOfCourse;
   int ordinalOfSemester;
 
+  Semester();
+  Semester(string id);
+
   static Semester* getSemester(string schYear, int sms);
 
   static Semester* loadFromStream(std::istream& f);

@@ -21,7 +21,7 @@ namespace Global {
   extern Vector<Course *> all_course;
   extern Vector<Student *> all_student;
   extern Vector<Class *> all_class;
-  extern Vector<User **> all_user;
+  extern Vector<User *> all_user;
 };
 
 #endif

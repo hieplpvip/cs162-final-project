@@ -1,6 +1,9 @@
 #include "Global.h"
 using namespace std;
 
+Course::Course() {}
+Course::Course(string id) : course_id(id) {}
+
 void Course::createCourse() {
   Course *crs = new Course();
   Global::all_course.push_back(crs);

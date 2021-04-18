@@ -1,6 +1,9 @@
 #include "Global.h"
 using namespace std;
 
+Student::Student() {}
+Student::Student(string id) : student_id(id) {}
+
 void Student::createStudent() {
   Student *student = new Student();
   cout << "Input student ID:";

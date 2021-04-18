@@ -1,6 +1,9 @@
 #include "Global.h"
 using namespace std;
 
+Class::Class() {}
+Class::Class(string id) : class_id(id) {}
+
 void Class::createClass() {
   Class *cls = new Class();
   cout << "Input class id:";
