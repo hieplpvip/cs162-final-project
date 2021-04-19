@@ -1,6 +1,13 @@
 #include "Global.h"
 using namespace std;
 
+Course::Course() {}
+Course::Course(string id) : course_id(id) {}
+
+string Course::getID() {
+  return course_id;
+}
+
 void Course::createCourse() {
   Course *crs = new Course();
   Global::all_course.push_back(crs);
@@ -27,7 +34,7 @@ void Course::createCourse() {
   cout << "What semester of school year " << schoolYear << ':';
   int semester;
   cin >> semester;
-  crs->pSemester =Semester::getSemester(schoolYear, semester);
+  crs->pSemester = Semester::getSemester(schoolYear, semester);
 }
 
 bool Course::checkConflict(Course *crs, Vector<Course *> allEnrolledCourse) {
@@ -39,6 +46,7 @@ bool Course::checkConflict(Course *crs, Vector<Course *> allEnrolledCourse) {
         return true;
     }
   }
+  return false;
 }
 
 void Course::viewScoreboard() {
@@ -71,7 +79,7 @@ void Course::viewScoreboard() {
     cout << setw(60) << left << course->pStudents[i]->firstName + ' ' + course->pStudents[i]->lastName;
     for (int j = 0; j < course->pStudents[i]->gpa_courses.size(); j++) {
       if (course->pStudents[i]->gpa_courses[j]->crs == course) {
-        cout << setw(5) << right << course->pStudents[i]->gpa_courses[j]->overallGPA << endl;
+        cout << setw(5) << right << course->pStudents[i]->gpa_courses[j]->overallMark << endl;
         break;
       }
     }
@@ -95,11 +103,11 @@ void Course::showStudentInCourse() {
   cout << endl;
   cout << setfill('-');
   cout << setw(72) << "-" << endl;
-  cout<<setw(' ');
+  cout << setw(' ');
   for (int i = 0; i < course->pStudents.size(); i++) {
-      cout << setw(12) << left << course->pStudents[i]->student_id;
-      cout << setw(60) << left << course->pStudents[i]->firstName << " " << course->pStudents[i]->lastName;
-      cout << endl;
+    cout << setw(12) << left << course->pStudents[i]->student_id;
+    cout << setw(60) << left << course->pStudents[i]->firstName << " " << course->pStudents[i]->lastName;
+    cout << endl;
   }
 }
 
@@ -125,4 +133,12 @@ void Course::showCourse() {
     cout << Global::all_course[i]->timeOfCourse[0] << '\n';
     cout << Global::all_course[i]->timeOfCourse[1];
   }
+}
+
+void Course::loadFromStream(std::istream &f) {
+  throw "Not implemented yet!";
+}
+
+void Course::writeToStream(std::ostream &f) {
+  throw "Not implemented yet!";
 }
