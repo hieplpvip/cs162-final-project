@@ -2,9 +2,12 @@
 #include <Windows.h>
 #else
 #include <unistd.h>
-#include <iostream>
 #endif
+#include <iostream>
+#include "Global.h"
 #include "Utils.h"
+
+using namespace std;
 
 void milliSleep(int milliseconds) {
 #ifdef _WIN32
@@ -26,7 +29,11 @@ void clearScreen() {
   FillConsoleOutputAttribute(hOutput, 0x07, dwSize, topLeft, &dwCount);
   SetConsoleCursorPosition(hOutput, topLeft);
 #else
-  std::cout << "\033[2J";
-  std::cout << "\033[H";
+  cout << "\033[2J";
+  cout << "\033[H";
 #endif
+}
+void printHeader() {
+  cout << "Logged in as " << Global::current_user->username << "\n";
+  cout << "\n";
 }

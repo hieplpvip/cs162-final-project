@@ -144,6 +144,7 @@ bool App::authenticate() {
 void App::showMenu(const FunctionRecord menu[], int num) {
   while (true) {
     clearScreen();
+    printHeader();
 
     int cnt_options = 0;
 

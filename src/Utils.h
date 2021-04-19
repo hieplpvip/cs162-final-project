@@ -3,5 +3,6 @@
 
 void milliSleep(int seconds);
 void clearScreen();
+void printHeader();
 
 #endif
