@@ -48,10 +48,9 @@ App::~App() {
 
 void App::loadData() {
   ifstream fIn;
-  ofstream fOut;
 
   auto loadIDs = [&]<typename T>(const string file, Vector<T*>& v) {
-    fIn.open(file);
+    fIn.open(file + "list.txt");
     string id;
     while (fIn >> id) {
       T* t = new T(id);
@@ -62,18 +61,18 @@ void App::loadData() {
 
   auto loadContent = [&]<typename T>(const string dir, Vector<T*>& v) {
     for (auto p : v) {
-      fIn.open(dir + p->getID());
+      fIn.open(dir + p->getID() + ".txt");
       p->loadFromStream(fIn);
       fIn.close();
     }
   };
 
-  loadIDs(Constants::CLASS_DIR + "list.txt", Global::all_class);
-  loadIDs(Constants::COURSE_DIR + "list.txt", Global::all_course);
-  loadIDs(Constants::SCHOOL_YEAR_DIR + "list.txt", Global::all_school_year);
-  loadIDs(Constants::SEMESTER_DIR + "list.txt", Global::all_semester);
-  loadIDs(Constants::STUDENT_DIR + "list.txt", Global::all_student);
-  loadIDs(Constants::USER_DIR + "list.txt", Global::all_user);
+  loadIDs(Constants::CLASS_DIR, Global::all_class);
+  loadIDs(Constants::COURSE_DIR, Global::all_course);
+  loadIDs(Constants::SCHOOL_YEAR_DIR, Global::all_school_year);
+  loadIDs(Constants::SEMESTER_DIR, Global::all_semester);
+  loadIDs(Constants::STUDENT_DIR, Global::all_student);
+  loadIDs(Constants::USER_DIR, Global::all_user);
 
   loadContent(Constants::CLASS_DIR, Global::all_class);
   loadContent(Constants::COURSE_DIR, Global::all_course);
@@ -84,6 +83,37 @@ void App::loadData() {
 }
 
 void App::saveData() {
+  ofstream fOut;
+
+  auto saveIDs = [&]<typename T>(const string file, Vector<T*>& v) {
+    fOut.open(file + "list.txt");
+    for (auto p : v) {
+      fOut << p->getID() << "\n";
+    }
+    fOut.close();
+  };
+
+  auto saveContent = [&]<typename T>(const string dir, Vector<T*>& v) {
+    for (auto p : v) {
+      fOut.open(dir + p->getID() + ".txt");
+      p->writeToStream(fOut);
+      fOut.close();
+    }
+  };
+
+  saveIDs(Constants::CLASS_DIR, Global::all_class);
+  saveIDs(Constants::COURSE_DIR, Global::all_course);
+  saveIDs(Constants::SCHOOL_YEAR_DIR, Global::all_school_year);
+  saveIDs(Constants::SEMESTER_DIR, Global::all_semester);
+  saveIDs(Constants::STUDENT_DIR, Global::all_student);
+  saveIDs(Constants::USER_DIR, Global::all_user);
+
+  saveContent(Constants::CLASS_DIR, Global::all_class);
+  saveContent(Constants::COURSE_DIR, Global::all_course);
+  saveContent(Constants::SCHOOL_YEAR_DIR, Global::all_school_year);
+  saveContent(Constants::SEMESTER_DIR, Global::all_semester);
+  saveContent(Constants::STUDENT_DIR, Global::all_student);
+  saveContent(Constants::USER_DIR, Global::all_user);
 }
 
 bool App::authenticate() {
