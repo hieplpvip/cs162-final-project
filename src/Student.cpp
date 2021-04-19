@@ -1,6 +1,13 @@
 #include "Global.h"
 using namespace std;
 
+Student::Student() {}
+Student::Student(string id) : student_id(id) {}
+
+string Student::getID() {
+  return student_id;
+}
+
 void Student::createStudent() {
   Student *student = new Student();
   cout << "Input student ID:";
@@ -38,4 +45,12 @@ void Student::showStudent() {
     cout << "Date of birth:  " << Global::all_student[i]->dateOfBirth << endl;
     cout << "SocialID:  " << Global::all_student[i]->socialID << endl;
   }
+}
+
+void Student::loadFromStream(std::istream &f) {
+  throw "Not implemented yet!";
+}
+
+void Student::writeToStream(std::ostream &f) {
+  throw "Not implemented yet!";
 }
