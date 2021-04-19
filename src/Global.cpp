@@ -7,5 +7,5 @@ namespace Global {
   Vector<Course*> all_course;
   Vector<Student*> all_student;
   Vector<Class*> all_class;
-  Vector<User**> all_user;
+  Vector<User*> all_user;
 };

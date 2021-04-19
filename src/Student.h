@@ -24,17 +24,26 @@ struct scorePerSemester {
 
 class Student {
    public:
-    int student_id;
+    string student_id;
     Vector<scorePerCourse *> gpa_courses;
-    Vector<scorePerSemester *> gpa_semester;
+    Vector<scorePerSemester *> sms_courses;
     float overallGPA;
     string firstName, lastName, gender, dateOfBirth, socialID;
     User *pUser;
     Class *pClass;
     Vector<Course *> pEnrolledCourses;
     int numberOfEnrolledCourse;
+
+    Student();
+    Student(string id);
+
+    string getID();
+
     static void createStudent();
     static void showStudent();
+
+    void loadFromStream(std::istream &f);
+    void writeToStream(std::ostream &f);
 };
 
 #endif

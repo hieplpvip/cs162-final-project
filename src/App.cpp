@@ -1,5 +1,7 @@
 #include "App.h"
+#include "Constants.h"
 #include "Global.h"
+
 using namespace std;
 
 App::App() {
@@ -22,22 +24,22 @@ App::~App() {
   cout << "Exiting...\n";
 
   // free memory
-  for (auto p: Global::all_school_year) {
+  for (auto p : Global::all_school_year) {
     delete p;
   }
-  for (auto p: Global::all_semester) {
+  for (auto p : Global::all_semester) {
     delete p;
   }
-  for (auto p: Global::all_course) {
+  for (auto p : Global::all_course) {
     delete p;
   }
-  for (auto p: Global::all_student) {
+  for (auto p : Global::all_student) {
     delete p;
   }
-  for (auto p: Global::all_class) {
+  for (auto p : Global::all_class) {
     delete p;
   }
-  for (auto p: Global::all_user) {
+  for (auto p : Global::all_user) {
     delete p;
   }
 
@@ -45,11 +47,73 @@ App::~App() {
 }
 
 void App::loadData() {
+  ifstream fIn;
 
+  auto loadIDs = [&]<typename T>(const string file, Vector<T*>& v) {
+    fIn.open(file + "list.txt");
+    string id;
+    while (fIn >> id) {
+      T* t = new T(id);
+      v.push_back(t);
+    }
+    fIn.close();
+  };
+
+  auto loadContent = [&]<typename T>(const string dir, Vector<T*>& v) {
+    for (auto p : v) {
+      fIn.open(dir + p->getID() + ".txt");
+      p->loadFromStream(fIn);
+      fIn.close();
+    }
+  };
+
+  loadIDs(Constants::CLASS_DIR, Global::all_class);
+  loadIDs(Constants::COURSE_DIR, Global::all_course);
+  loadIDs(Constants::SCHOOL_YEAR_DIR, Global::all_school_year);
+  loadIDs(Constants::SEMESTER_DIR, Global::all_semester);
+  loadIDs(Constants::STUDENT_DIR, Global::all_student);
+  loadIDs(Constants::USER_DIR, Global::all_user);
+
+  loadContent(Constants::CLASS_DIR, Global::all_class);
+  loadContent(Constants::COURSE_DIR, Global::all_course);
+  loadContent(Constants::SCHOOL_YEAR_DIR, Global::all_school_year);
+  loadContent(Constants::SEMESTER_DIR, Global::all_semester);
+  loadContent(Constants::STUDENT_DIR, Global::all_student);
+  loadContent(Constants::USER_DIR, Global::all_user);
 }
 
 void App::saveData() {
+  ofstream fOut;
 
+  auto saveIDs = [&]<typename T>(const string file, Vector<T*>& v) {
+    fOut.open(file + "list.txt");
+    for (auto p : v) {
+      fOut << p->getID() << "\n";
+    }
+    fOut.close();
+  };
+
+  auto saveContent = [&]<typename T>(const string dir, Vector<T*>& v) {
+    for (auto p : v) {
+      fOut.open(dir + p->getID() + ".txt");
+      p->writeToStream(fOut);
+      fOut.close();
+    }
+  };
+
+  saveIDs(Constants::CLASS_DIR, Global::all_class);
+  saveIDs(Constants::COURSE_DIR, Global::all_course);
+  saveIDs(Constants::SCHOOL_YEAR_DIR, Global::all_school_year);
+  saveIDs(Constants::SEMESTER_DIR, Global::all_semester);
+  saveIDs(Constants::STUDENT_DIR, Global::all_student);
+  saveIDs(Constants::USER_DIR, Global::all_user);
+
+  saveContent(Constants::CLASS_DIR, Global::all_class);
+  saveContent(Constants::COURSE_DIR, Global::all_course);
+  saveContent(Constants::SCHOOL_YEAR_DIR, Global::all_school_year);
+  saveContent(Constants::SEMESTER_DIR, Global::all_semester);
+  saveContent(Constants::STUDENT_DIR, Global::all_student);
+  saveContent(Constants::USER_DIR, Global::all_user);
 }
 
 bool App::authenticate() {
@@ -79,7 +143,8 @@ void App::showMenu(const FunctionRecord menu[], int num) {
     cout << "0. Quit\n\n";
 
     cout << "Please choose an option: ";
-    int option; cin >> option;
+    int option;
+    cin >> option;
     if (option < 0 || option > cnt_options) {
       cout << "Invalid option!\n";
       continue;
