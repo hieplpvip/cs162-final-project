@@ -1,4 +1,5 @@
 #include "App.h"
+#include "Constants.h"
 #include "Global.h"
 
 using namespace std;
@@ -61,25 +62,25 @@ void App::loadData() {
 
   auto loadContent = [&]<typename T>(const string dir, Vector<T*>& v) {
     for (auto p : v) {
-      fIn.open(dir + "/" + p->getID());
+      fIn.open(dir + p->getID());
       p->loadFromStream(fIn);
       fIn.close();
     }
   };
 
-  loadIDs("data/class/list.txt", Global::all_class);
-  loadIDs("data/course/list.txt", Global::all_course);
-  loadIDs("data/schoolyear/list.txt", Global::all_school_year);
-  loadIDs("data/semester/list.txt", Global::all_semester);
-  loadIDs("data/student/list.txt", Global::all_student);
-  loadIDs("data/user/list.txt", Global::all_user);
+  loadIDs(Constants::CLASS_DIR + "list.txt", Global::all_class);
+  loadIDs(Constants::COURSE_DIR + "list.txt", Global::all_course);
+  loadIDs(Constants::SCHOOL_YEAR_DIR + "list.txt", Global::all_school_year);
+  loadIDs(Constants::SEMESTER_DIR + "list.txt", Global::all_semester);
+  loadIDs(Constants::STUDENT_DIR + "list.txt", Global::all_student);
+  loadIDs(Constants::USER_DIR + "list.txt", Global::all_user);
 
-  loadContent("data/class", Global::all_class);
-  loadContent("data/course", Global::all_course);
-  loadContent("data/schoolyear", Global::all_school_year);
-  loadContent("data/semester", Global::all_semester);
-  loadContent("data/student", Global::all_student);
-  loadContent("data/user", Global::all_user);
+  loadContent(Constants::CLASS_DIR, Global::all_class);
+  loadContent(Constants::COURSE_DIR, Global::all_course);
+  loadContent(Constants::SCHOOL_YEAR_DIR, Global::all_school_year);
+  loadContent(Constants::SEMESTER_DIR, Global::all_semester);
+  loadContent(Constants::STUDENT_DIR, Global::all_student);
+  loadContent(Constants::USER_DIR, Global::all_user);
 }
 
 void App::saveData() {
