@@ -19,7 +19,6 @@ public:
   string end_date;  // TODO: create dedicated struct for date
   Semester* pSemester;
   Vector<Student*> pStudents;
-  int numberOfStudent;
   int maxNumberOfStudent;
   string timeOfCourse[2];
 

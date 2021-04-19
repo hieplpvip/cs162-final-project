@@ -74,7 +74,7 @@ void Course::viewScoreboard() {
   cout << setfill('-');
   cout << setw(75) << '-' << endl;
   cout << setfill(' ');
-  for (int i = 0; i < course->numberOfStudent; i++) {
+  for (int i = 0; i < course->pStudents.size(); i++) {
     cout << setw(10) << left << course->pStudents[i]->student_id;
     cout << setw(60) << left << course->pStudents[i]->firstName + ' ' + course->pStudents[i]->lastName;
     for (int j = 0; j < course->pStudents[i]->gpa_courses.size(); j++) {
@@ -123,22 +123,69 @@ Course *Course::findCourse(Semester *sms, string crsID) {
 void Course::showCourse() {
   cout << "Here is a list of course:";
   for (int i = 0; i < Global::all_course.size(); i++) {
-    cout << "Course ";
-    cout << " #" << i << ':';
-    cout << Global::all_course[i]->course_id << "-" << Global::all_course[i]->course_name << '-' << Global::all_course[i]->numberOfStudent << '/' << Global::all_course[i]->maxNumberOfStudent << " students";
+    cout << "Course #" << i << ": ";
+    cout << Global::all_course[i]->course_id << " - ";
+    cout << Global::all_course[i]->course_name << "- ";
+    cout << Global::all_course[i]->pStudents.size() << "/";
+    cout << Global::all_course[i]->maxNumberOfStudent << " students\n";
     cout << "Lecturer:" << Global::all_course[i]->lecturer << '\n';
     cout << "Start date:" << Global::all_course[i]->start_date << '\n';
     cout << "End date:" << Global::all_course[i]->end_date << '\n';
     cout << "Time:" << '\n';
     cout << Global::all_course[i]->timeOfCourse[0] << '\n';
-    cout << Global::all_course[i]->timeOfCourse[1];
+    cout << Global::all_course[i]->timeOfCourse[1] << '\n';
   }
 }
 
 void Course::loadFromStream(std::istream &f) {
-  throw "Not implemented yet!";
+  string _course_id;
+  getline(f, _course_id);
+  assert(_course_id == course_id);
+
+  getline(f, course_name);
+  getline(f, lecturer);
+  getline(f, start_date);
+  getline(f, end_date);
+
+  string semester_id;
+  getline(f, semester_id);
+  pSemester = nullptr;
+  for (auto sem : Global::all_semester) {
+    if (sem->semester_id == semester_id) {
+      pSemester = sem;
+      break;
+    }
+  }
+  assert(pSemester != nullptr);
+
+  int sz;
+  f >> sz;
+  for (int i = 0; i < sz; ++i) {
+    string student_id;
+    getline(f, student_id);
+    bool found = false;
+    for (auto st : Global::all_student) {
+      if (st->student_id == student_id) {
+        pStudents.push_back(st);
+        found = true;
+        break;
+      }
+    }
+    assert(found);
+  }
+  f >> maxNumberOfStudent;
 }
 
 void Course::writeToStream(std::ostream &f) {
-  throw "Not implemented yet!";
+  f << course_id << '\n';
+  f << course_name << '\n';
+  f << lecturer << '\n';
+  f << start_date << '\n';
+  f << end_date << '\n';
+  f << pSemester->semester_id << '\n';
+  f << pStudents.size() << '\n';
+  for (auto st : pStudents) {
+    f << st->student_id << '\n';
+  }
+  f << maxNumberOfStudent << '\n';
 }

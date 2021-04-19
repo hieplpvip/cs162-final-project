@@ -15,13 +15,14 @@ void Semester::createSemester() {
 }
 
 void Semester::showSemester() {
-  cout << "Input school year:";
   string schoolYear;
+  cout << "Input school year:";
   cin >> schoolYear;
   int count = 1;
   for (int i = 0; i < Global::all_semester.size(); i++) {
     if (Global::all_semester[i]->pSchoolYear->name == schoolYear) {
-      cout << "Semester " << count++ << "-Number of course:" << Global::all_semester[i]->numberOfCourse;
+      cout << "Semester " << count++ << ":\n";
+      cout << "  Number of course:" << Global::all_semester[i]->pCourses.size() << '\n';
     }
   }
 }
@@ -44,9 +45,43 @@ Semester *Semester::getSemester(string schYear, int sms) {
 }
 
 void Semester::loadFromStream(std::istream &f) {
-  throw "Not implemented yet!";
+  string _semester_id;
+  getline(f, _semester_id);
+  assert(_semester_id == semester_id);
+
+  string school_year_id;
+  getline(f, school_year_id);
+  pSchoolYear = nullptr;
+  for (auto sy : Global::all_school_year) {
+    if (sy->school_year_id == school_year_id) {
+      pSchoolYear = sy;
+      break;
+    }
+  }
+  assert(pSchoolYear != nullptr);
+
+  int sz;
+  f >> sz;
+  for (int i = 0; i < sz; ++i) {
+    string course_id;
+    getline(f, course_id);
+    bool found = false;
+    for (auto c : Global::all_course) {
+      if (c->course_id == course_id) {
+        pCourses.push_back(c);
+        found = true;
+        break;
+      }
+    }
+    assert(found);
+  }
 }
 
 void Semester::writeToStream(std::ostream &f) {
-  throw "Not implemented yet!";
+  f << semester_id << '\n';
+  f << pSchoolYear->school_year_id << '\n';
+  f << pCourses.size() << '\n';
+  for (auto c : pCourses) {
+    f << c->course_id << '\n';
+  }
 }

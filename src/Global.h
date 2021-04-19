@@ -16,6 +16,7 @@
 
 namespace Global {
   extern User *current_user;
+  extern Semester *current_semester;
   extern Vector<SchoolYear *> all_school_year;
   extern Vector<Semester *> all_semester;
   extern Vector<Course *> all_course;

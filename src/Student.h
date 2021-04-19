@@ -24,14 +24,15 @@ struct scorePerSemester {
 class Student {
 public:
   string student_id;
-  Vector<scorePerCourse *> gpa_courses;
-  Vector<scorePerSemester *> sms_courses;
-  float overallGPA;
   string firstName, lastName, gender, dateOfBirth, socialID;
+
   User *pUser;
   Class *pClass;
   Vector<Course *> pEnrolledCourses;
-  int numberOfEnrolledCourse;
+
+  float overallGPA;
+  Vector<scorePerCourse *> gpa_courses;
+  Vector<scorePerSemester *> sms_courses;
 
   Student();
   Student(string id);

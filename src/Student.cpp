@@ -29,7 +29,6 @@ void Student::createStudent() {
     if (Global::all_class[i]->class_id == stuClass) {
       Global::all_class[i]->pStudents.push_back(student);
       student->pClass = Global::all_class[i];
-      Global::all_class[i]->numberOfStudent++;
       break;
     }
   }
@@ -48,9 +47,22 @@ void Student::showStudent() {
 }
 
 void Student::loadFromStream(std::istream &f) {
-  throw "Not implemented yet!";
+  string _student_id;
+  getline(f, _student_id);
+  assert(_student_id == student_id);
+
+  getline(f, firstName);
+  getline(f, lastName);
+  getline(f, gender);
+  getline(f, dateOfBirth);
+  getline(f, socialID);
 }
 
 void Student::writeToStream(std::ostream &f) {
-  throw "Not implemented yet!";
+  f << student_id << '\n';
+  f << firstName << '\n';
+  f << lastName << '\n';
+  f << gender << '\n';
+  f << dateOfBirth << '\n';
+  f << socialID << '\n';
 }

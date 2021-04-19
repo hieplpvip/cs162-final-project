@@ -9,6 +9,7 @@ App::App() {
   cout << "Starting...\n";
 
   Global::current_user = nullptr;
+  Global::current_semester = nullptr;
   Global::all_school_year.clear();
   Global::all_semester.clear();
   Global::all_course.clear();

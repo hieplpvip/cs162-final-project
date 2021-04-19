@@ -10,9 +10,9 @@ string Class::getID() {
 
 void Class::createClass() {
   Class *cls = new Class();
-  cout << "Input class id:";
+  cout << "Input class id: ";
   cin >> cls->class_id;
-  cout << "Input class name:";
+  cout << "Input class name: ";
   cin >> cls->class_name;
   Global::all_class.push_back(cls);
 }
@@ -20,11 +20,10 @@ void Class::createClass() {
 void Class::showClass() {
   cout << "Here is a list of class:\n";
   for (int i = 0; i < Global::all_class.size(); i++) {
-    cout << i << ":" << Global::all_class[i]->class_id << "-" << Global::all_class[i]->class_name << "-" << Global::all_class[i]->numberOfStudent << " students" << '\n';
-  }
-  cout << "Here is a list of class:\n";
-  for (int i = 0; i < Global::all_class.size(); i++) {
-    cout << i << ":" << Global::all_class[i]->class_id << "-" << Global::all_class[i]->class_name << "-" << Global::all_class[i]->numberOfStudent << " students" << '\n';
+    cout << (i + 1) << ": ";
+    cout << Global::all_class[i]->class_id << " - ";
+    cout << Global::all_class[i]->class_name << " - ";
+    cout << Global::all_class[i]->pStudents.size() << " students" << '\n';
   }
 }
 
@@ -61,16 +60,43 @@ void Class::showScoreboard() {
 }
 
 Class *Class::findClass(string classID) {
-  for (int i = 0; i < Global::all_class.size(); i++)
-    if (Global::all_class[i]->class_id == classID) return Global::all_class[i];
+  for (auto cls : Global::all_class) {
+    if (cls->class_id == classID) {
+      return cls;
+    }
+  }
   return nullptr;
-  cout << "Here is the score board of the class:\n";
 }
 
 void Class::loadFromStream(std::istream &f) {
-  throw "Not implemented yet!";
+  string _class_id;
+  getline(f, _class_id);
+  assert(_class_id == class_id);
+
+  getline(f, class_name);
+
+  int sz;
+  f >> sz;
+  for (int i = 0; i < sz; ++i) {
+    string student_id;
+    getline(f, student_id);
+    bool found = false;
+    for (auto st : Global::all_student) {
+      if (st->student_id == student_id) {
+        pStudents.push_back(st);
+        found = true;
+        break;
+      }
+    }
+    assert(found);
+  }
 }
 
 void Class::writeToStream(std::ostream &f) {
-  throw "Not implemented yet!";
+  f << class_id << '\n';
+  f << class_name << '\n';
+  f << pStudents.size() << '\n';
+  for (auto st : pStudents) {
+    f << st->student_id << '\n';
+  }
 }

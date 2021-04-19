@@ -21,24 +21,24 @@ void User::logOut() {
 
 void User::loadFromStream(std::istream &f) {
   string _user_id;
-  f >> _user_id;
-  f >> username;
-  f >> password;
-  f >> role;
+  getline(f, _user_id);
   assert(_user_id == user_id);
+
+  getline(f, username);
+  getline(f, password);
+  f >> role;
 
   if (role == UserRole::STUDENT) {
     string student_id;
-    f >> student_id;
+    getline(f, student_id);
     pStudent = nullptr;
-    for (auto p : Global::all_student) {
-      if (p->student_id == student_id) {
-        pStudent = p;
+    for (auto st : Global::all_student) {
+      if (st->student_id == student_id) {
+        pStudent = st;
+        break;
       }
     }
-    if (pStudent == nullptr) {
-      std::cerr << "[ERROR][User::loadFromStream]: Could not find matching pStudent\n";
-    }
+    assert(pStudent != nullptr);
   }
 }
 
@@ -49,7 +49,7 @@ void User::writeToStream(std::ostream &f) {
   f << role << '\n';
 
   if (role == UserRole::STUDENT) {
-    f << role << '\n';
+    f << pStudent->student_id << '\n';
   }
 }
 

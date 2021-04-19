@@ -12,11 +12,12 @@ public:
   string semester_id;
   SchoolYear* pSchoolYear;
   Vector<Course*> pCourses;
+
+  int ordinalOfSemester;
+
   static void createSemester();
   static void showSemester();
   static void editSemester();
-  int numberOfCourse;
-  int ordinalOfSemester;
 
   Semester();
   Semester(string id);
