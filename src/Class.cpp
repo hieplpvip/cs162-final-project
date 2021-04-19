@@ -51,9 +51,16 @@ void Class::showScoreboard() {
         }
         cout << setw(12) << left << "Semester";
         cout << setw(5) << left << "GPA";
+<<<<<<< Updated upstream
         for (int j = 0; j < cls->pStudents[i]->gpa_courses.size(); i++) {
             cout << setw(12) << left << cls->pStudents[i]->sms_courses[j]->sms->ordinalOfSemester;
             cout << setw(5) << left << cls->pStudents[i]->sms_courses[j]->gpa;
+=======
+        cout << endl;
+        for (int j = 0; j < cls->pStudents[i]->gpa_semester.size(); i++) {
+            cout << setw(12) << left << cls->pStudents[i]->gpa_semester[j]->sms->ordinalOfSemester;
+            cout << setw(5) << left << cls->pStudents[i]->gpa_semester[j]->gpa;
+>>>>>>> Stashed changes
             cout << endl;
         }
         cout << endl;
@@ -64,6 +71,7 @@ Class *Class::findClass(string classID) {
     for (int i = 0; i < Global::all_class.size(); i++)
         if (Global::all_class[i]->class_id == classID) return Global::all_class[i];
     return nullptr;
+    cout << "Here is the score board of the class:\n";
 }
 
 void Class::loadFromStream(std::istream &f) {
