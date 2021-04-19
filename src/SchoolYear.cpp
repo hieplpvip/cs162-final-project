@@ -4,6 +4,10 @@ using namespace std;
 SchoolYear::SchoolYear() {}
 SchoolYear::SchoolYear(string id) : school_year_id(id) {}
 
+string SchoolYear::getID() {
+  return school_year_id;
+}
+
 void SchoolYear::createSchoolYear() {
   SchoolYear *schYear = new SchoolYear();
   cout << "School year:";
@@ -27,7 +31,7 @@ void SchoolYear::editSchoolYear() {
   throw "Not implemented yet!";
 }
 
-SchoolYear *SchoolYear::loadFromStream(std::istream &f) {
+void SchoolYear::loadFromStream(std::istream &f) {
   throw "Not implemented yet!";
 }
 

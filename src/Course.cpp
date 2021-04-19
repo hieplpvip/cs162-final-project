@@ -4,6 +4,10 @@ using namespace std;
 Course::Course() {}
 Course::Course(string id) : course_id(id) {}
 
+string Course::getID() {
+  return course_id;
+}
+
 void Course::createCourse() {
   Course *crs = new Course();
   Global::all_course.push_back(crs);
@@ -131,7 +135,7 @@ void Course::showCourse() {
   }
 }
 
-Course *Course::loadFromStream(std::istream &f) {
+void Course::loadFromStream(std::istream &f) {
   throw "Not implemented yet!";
 }
 

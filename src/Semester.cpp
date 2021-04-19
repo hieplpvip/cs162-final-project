@@ -4,6 +4,10 @@ using namespace std;
 Semester::Semester() {}
 Semester::Semester(string id) : semester_id(id) {}
 
+string Semester::getID() {
+  return semester_id;
+}
+
 void Semester::createSemester() {
   Semester *semester = new Semester();
   semester->pSchoolYear = Global::all_school_year.back();
@@ -39,7 +43,7 @@ Semester *Semester::getSemester(string schYear, int sms) {
   return nullptr;
 }
 
-Semester *Semester::loadFromStream(std::istream &f) {
+void Semester::loadFromStream(std::istream &f) {
   throw "Not implemented yet!";
 }
 

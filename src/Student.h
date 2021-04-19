@@ -36,10 +36,12 @@ public:
   Student();
   Student(string id);
 
+  string getID();
+
   static void createStudent();
   static void showStudent();
 
-  static Student *loadFromStream(std::istream &f);
+  void loadFromStream(std::istream &f);
   void writeToStream(std::ostream &f);
 };
 

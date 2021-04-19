@@ -4,6 +4,10 @@ using namespace std;
 Student::Student() {}
 Student::Student(string id) : student_id(id) {}
 
+string Student::getID() {
+  return student_id;
+}
+
 void Student::createStudent() {
   Student *student = new Student();
   cout << "Input student ID:";
@@ -43,7 +47,7 @@ void Student::showStudent() {
   }
 }
 
-Student *Student::loadFromStream(std::istream &f) {
+void Student::loadFromStream(std::istream &f) {
   throw "Not implemented yet!";
 }
 

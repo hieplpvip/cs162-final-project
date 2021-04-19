@@ -19,11 +19,13 @@ public:
   Class();
   Class(string id);
 
+  string getID();
+
   static void createClass();
   static void showClass();
   static void showScoreboard();
 
-  static Class* loadFromStream(std::istream& f);
+  void loadFromStream(std::istream& f);
   void writeToStream(std::ostream& f);
 
 private:

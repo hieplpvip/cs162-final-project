@@ -59,12 +59,27 @@ void App::loadData() {
     fIn.close();
   };
 
+  auto loadContent = [&]<typename T>(const string dir, Vector<T*>& v) {
+    for (auto p : v) {
+      fIn.open(dir + "/" + p->getID());
+      p->loadFromStream(fIn);
+      fIn.close();
+    }
+  };
+
   loadIDs("data/class/list.txt", Global::all_class);
   loadIDs("data/course/list.txt", Global::all_course);
   loadIDs("data/schoolyear/list.txt", Global::all_school_year);
   loadIDs("data/semester/list.txt", Global::all_semester);
-  loadIDs("data/semester/student.txt", Global::all_student);
-  loadIDs("data/semester/user.txt", Global::all_user);
+  loadIDs("data/student/list.txt", Global::all_student);
+  loadIDs("data/user/list.txt", Global::all_user);
+
+  loadContent("data/class", Global::all_class);
+  loadContent("data/course", Global::all_course);
+  loadContent("data/schoolyear", Global::all_school_year);
+  loadContent("data/semester", Global::all_semester);
+  loadContent("data/student", Global::all_student);
+  loadContent("data/user", Global::all_user);
 }
 
 void App::saveData() {

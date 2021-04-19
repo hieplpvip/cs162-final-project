@@ -21,9 +21,11 @@ public:
   Semester();
   Semester(string id);
 
+  string getID();
+
   static Semester* getSemester(string schYear, int sms);
 
-  static Semester* loadFromStream(std::istream& f);
+  void loadFromStream(std::istream& f);
   void writeToStream(std::ostream& f);
 };
 

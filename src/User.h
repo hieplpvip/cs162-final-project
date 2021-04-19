@@ -23,11 +23,13 @@ public:
   User();
   User(string id);
 
+  string getID();
+
   static void createUser();
   static bool logIn();
   static void logOut();
 
-  static User *loadFromStream(std::istream &f);
+  void loadFromStream(std::istream &f);
   void writeToStream(std::ostream &f);
 };
 

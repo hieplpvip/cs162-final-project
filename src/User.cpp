@@ -3,6 +3,10 @@
 User::User() {}
 User::User(string id) : user_id(id) {}
 
+string User::getID() {
+  return user_id;
+}
+
 void User::createUser() {
   throw "Not implemented yet!";
 }
@@ -15,7 +19,7 @@ void User::logOut() {
   throw "Not implemented yet!";
 }
 
-User *User::loadFromStream(std::istream &f) {
+void User::loadFromStream(std::istream &f) {
   throw "Not implemented yet!";
 }
 

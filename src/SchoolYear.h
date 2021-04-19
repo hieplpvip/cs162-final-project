@@ -20,11 +20,13 @@ public:
   SchoolYear();
   SchoolYear(string id);
 
+  string getID();
+
   static void createSchoolYear();
   static void showSchoolYear();
   static void editSchoolYear();
 
-  static SchoolYear* loadFromStream(std::istream& f);
+  void loadFromStream(std::istream& f);
   void writeToStream(std::ostream& f);
 };
 

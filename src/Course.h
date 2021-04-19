@@ -26,13 +26,15 @@ public:
   Course();
   Course(string id);
 
+  string getID();
+
   static void createCourse();
   static bool checkConflict(Course* crs, Vector<Course*> allEnrolledCourse);
   static void showCourse();
   static void viewScoreboard();
   static void showStudentInCourse();
 
-  static Course* loadFromStream(std::istream& f);
+  void loadFromStream(std::istream& f);
   void writeToStream(std::ostream& f);
 
 private:

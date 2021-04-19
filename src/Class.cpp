@@ -4,6 +4,10 @@ using namespace std;
 Class::Class() {}
 Class::Class(string id) : class_id(id) {}
 
+string Class::getID() {
+  return class_id;
+}
+
 void Class::createClass() {
   Class *cls = new Class();
   cout << "Input class id:";
@@ -28,7 +32,7 @@ void Class::findClass(string classID) {
   throw "Not implemented yet!";
 }
 
-Class *Class::loadFromStream(std::istream &f) {
+void Class::loadFromStream(std::istream &f) {
   throw "Not implemented yet!";
 }
 
