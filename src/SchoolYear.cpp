@@ -9,6 +9,8 @@ string SchoolYear::getID() {
 }
 
 void SchoolYear::createSchoolYear() {
+  clearScreen();
+
   SchoolYear *schYear = nullptr;
   string name;
   while (true) {
@@ -26,11 +28,6 @@ void SchoolYear::createSchoolYear() {
     break;
   }
   all_school_year.push_back(schYear);
-  for (int i = 0; i < schYear->numberOfSemester; i++) {
-    Semester::createSemester();
-    all_semester.back()->pSchoolYear = schYear;
-    all_semester.back()->ordinalOfSemester = i + 1;
-  }
 }
 
 void SchoolYear::editSchoolYear() {
