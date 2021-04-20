@@ -106,7 +106,35 @@ void Course::setCourseRegistration() {
 }
 
 void Course::viewEnrolledCourse() {
-  throw "Not implemented yet!";
+  assert(current_user->role == User::UserRole::STUDENT);
+  auto st = current_user->pStudent;
+  auto &enrolledCourses = st->pEnrolledCourses;
+
+  clearScreen();
+
+  if (enrolledCourses.empty()) {
+    cout << "You haven't enrolled in any courses\n";
+    milliSleep(1000);
+    return;
+  }
+
+  cout << "Here is a list of courses you have enrolled:\n\n";
+  for (int i = 0; i < enrolledCourses.size(); i++) {
+    cout << "Course #" << (i + 1) << ": ";
+    cout << enrolledCourses[i]->course_code << " - ";
+    cout << enrolledCourses[i]->course_name << " - ";
+    cout << "Semester " << enrolledCourses[i]->pSemester->semester_ordinal << " - ";
+    cout << "School Year " << enrolledCourses[i]->pSemester->pSchoolYear->name << '\n';
+    cout << "Lecturer: " << enrolledCourses[i]->lecturer << '\n';
+    cout << "Start date: " << enrolledCourses[i]->start_date << '\n';
+    cout << "End date: " << enrolledCourses[i]->end_date << '\n';
+    cout << "Schedule:\n";
+    cout << "  First session: " << enrolledCourses[i]->schedule[0] << '\n';
+    cout << "  Second session: " << enrolledCourses[i]->schedule[1] << '\n';
+    cout << '\n';
+  }
+
+  waitForEnter();
 }
 
 void Course::enrollCourse() {
