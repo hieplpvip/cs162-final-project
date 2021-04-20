@@ -23,6 +23,8 @@ namespace Global {
   extern Vector<Student *> all_student;
   extern Vector<Class *> all_class;
   extern Vector<User *> all_user;
+
+  extern bool courseRegistrationOpen;
 };
 
 using namespace Global;

@@ -31,6 +31,8 @@ public:
   static void editCourse();
   static void viewCourse();
 
+  static void setCourseRegistration();
+
   static void viewEnrolledCourse();
   static void enrollCourse();
   static void unEnrollCourse();

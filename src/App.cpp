@@ -17,6 +17,8 @@ App::App() {
   all_class.clear();
   all_user.clear();
 
+  courseRegistrationOpen = false;
+
   milliSleep(500);
 }
 
@@ -52,6 +54,8 @@ void App::loadData() {
 
   auto loadIDs = [&]<typename T>(const string file, Vector<T*>& v) {
     fIn.open(file + "list.txt");
+    if (!fIn.is_open()) return;
+
     string id;
     while (fIn >> id) {
       T* t = new T(id);
@@ -63,6 +67,8 @@ void App::loadData() {
   auto loadContent = [&]<typename T>(const string dir, Vector<T*>& v) {
     for (auto p : v) {
       fIn.open(dir + p->getID() + ".txt");
+      if (!fIn.is_open()) continue;
+
       p->loadFromStream(fIn);
       fIn.close();
     }
@@ -81,6 +87,22 @@ void App::loadData() {
   loadContent(Constants::SEMESTER_DIR, all_semester);
   loadContent(Constants::STUDENT_DIR, all_student);
   loadContent(Constants::USER_DIR, all_user);
+
+  fIn.open(Constants::DATA_DIR + "app.txt");
+  if (fIn.is_open()) {
+    string current_semester_id;
+    getline(fIn, current_semester_id);
+    current_semester = nullptr;
+    for (auto sem : all_semester) {
+      if (sem->semester_id == current_semester_id) {
+        current_semester = sem;
+        break;
+      }
+    }
+    fIn >> courseRegistrationOpen;
+    fIn.ignore();
+    fIn.close();
+  }
 }
 
 void App::saveData() {
@@ -88,6 +110,8 @@ void App::saveData() {
 
   auto saveIDs = [&]<typename T>(const string file, Vector<T*>& v) {
     fOut.open(file + "list.txt");
+    if (!fOut.is_open()) return;
+
     for (auto p : v) {
       fOut << p->getID() << '\n';
     }
@@ -97,6 +121,8 @@ void App::saveData() {
   auto saveContent = [&]<typename T>(const string dir, Vector<T*>& v) {
     for (auto p : v) {
       fOut.open(dir + p->getID() + ".txt");
+      if (!fOut.is_open()) continue;
+
       p->writeToStream(fOut);
       fOut.close();
     }
@@ -115,6 +141,17 @@ void App::saveData() {
   saveContent(Constants::SEMESTER_DIR, all_semester);
   saveContent(Constants::STUDENT_DIR, all_student);
   saveContent(Constants::USER_DIR, all_user);
+
+  fOut.open(Constants::DATA_DIR + "app.txt");
+  if (fOut.is_open()) {
+    if (current_semester != nullptr) {
+      fOut << current_semester->semester_id << '\n';
+    } else {
+      fOut << "null\n";
+    }
+    fOut << courseRegistrationOpen << '\n';
+    fOut.close();
+  }
 }
 
 bool App::authenticate() {

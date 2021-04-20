@@ -58,6 +58,33 @@ void Course::viewCourse() {
   }
 }
 
+void Course::setCourseRegistration() {
+  clearScreen();
+  if (courseRegistrationOpen) {
+    string cmd;
+    cout << "Course Registration is open. Type 'close' to close it.\n";
+    cin >> cmd;
+    if (cmd == "close") {
+      courseRegistrationOpen = false;
+      cout << "Course Registration is close\n";
+    } else {
+      cout << "Invalid response\n";
+    }
+    milliSleep(1000);
+  } else {
+    string cmd;
+    cout << "Course Registration is close. Type 'open' to open it.\n";
+    cin >> cmd;
+    if (cmd == "open") {
+      courseRegistrationOpen = true;
+      cout << "Course Registration is open\n";
+    } else {
+      cout << "Invalid response\n";
+    }
+    milliSleep(1000);
+  }
+}
+
 void Course::viewEnrolledCourse() {
   throw "Not implemented yet!";
 }

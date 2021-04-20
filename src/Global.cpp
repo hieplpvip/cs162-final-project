@@ -9,4 +9,6 @@ namespace Global {
   Vector<Student*> all_student;
   Vector<Class*> all_class;
   Vector<User*> all_user;
+
+  bool courseRegistrationOpen;
 };
