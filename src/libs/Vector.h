@@ -32,6 +32,8 @@ public:
 
   T *begin();
   T *end();
+  T *begin() const;
+  T *end() const;
 
 private:
   size_t _size;
@@ -185,6 +187,16 @@ T *Vector<T>::begin() {
 
 template <class T>
 T *Vector<T>::end() {
+  return _elements + _size;
+}
+
+template <class T>
+T *Vector<T>::begin() const {
+  return _elements;
+}
+
+template <class T>
+T *Vector<T>::end() const {
   return _elements + _size;
 }
 
