@@ -125,7 +125,7 @@ void Course::viewScoreboard() {
   cin >> courseID;
   Course *course;
   for (int i = 0; i < all_course.size(); i++) {
-    if (all_course[i]->pSemester->pSchoolYear->name == schoolYear && all_course[i]->pSemester->ordinalOfSemester) {
+    if (all_course[i]->pSemester->pSchoolYear->name == schoolYear && all_course[i]->pSemester->semester_ordinal) {
       course = all_course[i];
       break;
     }

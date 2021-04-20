@@ -9,9 +9,56 @@ string Semester::getID() {
 }
 
 void Semester::createSemester() {
-  Semester *semester = new Semester();
-  semester->pSchoolYear = all_school_year.back();
-  all_semester.push_back(semester);
+  clearScreen();
+
+  if (all_school_year.empty()) {
+    cout << "Please create a school year first\n";
+    milliSleep(1000);
+    return;
+  }
+
+  for (int i = 0; i < all_school_year.size(); ++i) {
+    auto sy = all_school_year[i];
+    cout << (i + 1) << ". " << sy->name << '\n';
+  }
+
+  int ind;
+  cout << "\nPlease select school year of new semester: ";
+  cin >> ind;
+  if (ind < 1 || ind > all_school_year.size()) {
+    cout << "Invalid\n";
+    milliSleep(1000);
+    return;
+  }
+  --ind;
+
+  int ord;
+  cout << "\n1 (Fall), 2 (Summer), 3 (Autumn)\n";
+  cout << "Which semester is this: ";
+  cin >> ord;
+  if (ord < 1 || ord > 3) {
+    cout << "Invalid\n";
+    milliSleep(1000);
+    return;
+  }
+
+  auto sy = all_school_year[ind];
+  for (auto sem : sy->pSemesters) {
+    if (sem->semester_ordinal == ord) {
+      cout << "School year " << sy->name << " already has semester " << ord << '\n';
+      milliSleep(1000);
+      return;
+    }
+  }
+
+  auto sem = new Semester();
+  sem->semester_id = sy->school_year_id + '_' + to_string(ord);
+  sem->semester_ordinal = ord;
+  sem->pSchoolYear = sy;
+
+  sy->pSemesters.push_back(sem);
+  all_semester.push_back(sem);
+  current_semester = sem;
 }
 
 void Semester::editSemester() {
@@ -41,7 +88,7 @@ Semester *Semester::getSemester(string schYear, int sms) {
     }
   }
   for (i = 0; i < all_school_year[i]->numberOfSemester; i++) {
-    if (pSchYear->pSemesters[i]->ordinalOfSemester == sms) {
+    if (pSchYear->pSemesters[i]->semester_ordinal == sms) {
       return all_semester[i];
     }
   }
@@ -52,6 +99,9 @@ void Semester::loadFromStream(std::istream &f) {
   string _semester_id;
   getline(f, _semester_id);
   assert(_semester_id == semester_id);
+
+  f >> semester_ordinal;
+  f.ignore();
 
   string school_year_id;
   getline(f, school_year_id);
@@ -84,6 +134,7 @@ void Semester::loadFromStream(std::istream &f) {
 
 void Semester::writeToStream(std::ostream &f) {
   f << semester_id << '\n';
+  f << semester_ordinal << '\n';
   f << pSchoolYear->school_year_id << '\n';
   f << pCourses.size() << '\n';
   for (auto c : pCourses) {

@@ -10,10 +10,9 @@ class Course;
 class Semester {
 public:
   string semester_id;
+  int semester_ordinal;
   SchoolYear* pSchoolYear;
   Vector<Course*> pCourses;
-
-  int ordinalOfSemester;
 
   static void createSemester();
   static void editSemester();
