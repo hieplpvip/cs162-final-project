@@ -5,7 +5,8 @@ Dinh Ba Tien
 Jan 1, 2021
 Dec 31, 2021
 2020_2021_1
-0
+1
+20125005
 50
 MON S1
 FRI S1

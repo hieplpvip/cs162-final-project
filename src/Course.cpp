@@ -110,7 +110,54 @@ void Course::viewEnrolledCourse() {
 }
 
 void Course::enrollCourse() {
-  throw "Not implemented yet!";
+  assert(current_user->role == User::UserRole::STUDENT);
+  auto st = current_user->pStudent;
+
+  if (!courseRegistrationOpen) {
+    cout << "Course Registration is close\n";
+    milliSleep(1000);
+    return;
+  }
+
+  clearScreen();
+
+  for (int i = 0; i < current_semester->pCourses.size(); ++i) {
+    auto crs = current_semester->pCourses[i];
+    cout << (i + 1) << ". " << crs->course_code << " - " << crs->course_name << '\n';
+  }
+
+  int ind;
+  cout << "\nPlease select a course: ";
+  cin >> ind;
+  if (ind < 1 || ind > current_semester->pCourses.size()) {
+    cout << "Invalid\n";
+    milliSleep(1000);
+    return;
+  }
+  --ind;
+
+  auto crs = current_semester->pCourses[ind];
+  for (auto enrolled_crs : st->pEnrolledCourses) {
+    if (enrolled_crs->course_id == crs->course_id) {
+      cout << "You have already enrolled in this course\n";
+      milliSleep(1000);
+      return;
+    }
+
+    for (int i = 0; i < 2; ++i) {
+      for (int j = 0; j < 2; ++j) {
+        if (enrolled_crs->schedule[i] == crs->schedule[j]) {
+          cout << "This course conflicts with course ";
+          cout << enrolled_crs->course_code << " - " << enrolled_crs->course_name << '\n';
+          milliSleep(1000);
+          return;
+        }
+      }
+    }
+  }
+
+  st->pEnrolledCourses.push_back(crs);
+  crs->pStudents.push_back(st);
 }
 
 void Course::unEnrollCourse() {
@@ -119,18 +166,6 @@ void Course::unEnrollCourse() {
 
 void Course::viewScore() {
   throw "Not implemented yet!";
-}
-
-bool Course::checkConflict(Course *crs, Vector<Course *> allEnrolledCourse) {
-  for (int i = 0; i < allEnrolledCourse.size(); i++) {
-    if (!(crs->course_id == allEnrolledCourse[i]->course_id)) {
-      if (crs->schedule[0] == allEnrolledCourse[i]->schedule[0] || crs->schedule[0] == allEnrolledCourse[i]->schedule[1])
-        return true;
-      if (crs->schedule[1] == allEnrolledCourse[i]->schedule[0] || crs->schedule[1] == allEnrolledCourse[i]->schedule[1])
-        return true;
-    }
-  }
-  return false;
 }
 
 void Course::viewScoreboard() {

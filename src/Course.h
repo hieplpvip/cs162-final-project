@@ -39,7 +39,6 @@ public:
   static void unEnrollCourse();
   static void viewScore();
 
-  static bool checkConflict(Course* crs, Vector<Course*> allEnrolledCourse);
   static void viewScoreboard();
   static void viewStudentInCourse();
 

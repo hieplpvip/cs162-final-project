@@ -101,6 +101,23 @@ void Student::loadFromStream(std::istream &f) {
     }
   }
   assert(pClass != nullptr);
+
+  int sz;
+  f >> sz;
+  f.ignore();
+  for (int i = 0; i < sz; ++i) {
+    string course_id;
+    getline(f, course_id);
+    bool found = false;
+    for (auto crs : all_course) {
+      if (crs->course_id == course_id) {
+        pEnrolledCourses.push_back(crs);
+        found = true;
+        break;
+      }
+    }
+    assert(found);
+  }
 }
 
 void Student::writeToStream(std::ostream &f) {
@@ -112,4 +129,8 @@ void Student::writeToStream(std::ostream &f) {
   f << socialID << '\n';
   f << pUser->user_id << '\n';
   f << pClass->class_id << '\n';
+  f << pEnrolledCourses.size() << '\n';
+  for (auto crs : pEnrolledCourses) {
+    f << crs->course_id << '\n';
+  }
 }

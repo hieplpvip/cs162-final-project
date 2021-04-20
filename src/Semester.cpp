@@ -121,9 +121,9 @@ void Semester::loadFromStream(std::istream &f) {
     string course_id;
     getline(f, course_id);
     bool found = false;
-    for (auto c : all_course) {
-      if (c->course_id == course_id) {
-        pCourses.push_back(c);
+    for (auto crs : all_course) {
+      if (crs->course_id == course_id) {
+        pCourses.push_back(crs);
         found = true;
         break;
       }
@@ -137,7 +137,7 @@ void Semester::writeToStream(std::ostream &f) {
   f << semester_ordinal << '\n';
   f << pSchoolYear->school_year_id << '\n';
   f << pCourses.size() << '\n';
-  for (auto c : pCourses) {
-    f << c->course_id << '\n';
+  for (auto crs : pCourses) {
+    f << crs->course_id << '\n';
   }
 }
