@@ -40,7 +40,8 @@ public:
   string getID();
 
   static void createStudent();
-  static void showStudent();
+  static void editStudent();
+  static void viewStudent();
 
   void loadFromStream(std::istream &f);
   void writeToStream(std::ostream &f);

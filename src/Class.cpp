@@ -17,7 +17,11 @@ void Class::createClass() {
   Global::all_class.push_back(cls);
 }
 
-void Class::showClass() {
+void Class::editClass() {
+  throw "Not implemented yet!";
+}
+
+void Class::viewClass() {
   cout << "Here is a list of class:\n";
   for (int i = 0; i < Global::all_class.size(); i++) {
     cout << (i + 1) << ": ";

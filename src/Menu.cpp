@@ -5,44 +5,35 @@ const FunctionRecord STAFF_MENU[] = {
     {"School Year", nullptr, true},
     {"New School Year", &SchoolYear::createSchoolYear, false},
     {"Edit School Year", &SchoolYear::editSchoolYear, false},
-    {"List School Years", &SchoolYear::showSchoolYear, false},
+    {"View School Year", &SchoolYear::viewSchoolYear, false},
 
     {"Class", nullptr, true},
     {"New Class", &Class::createClass, false},
-    {"Edit Class", nullptr, false},
-    {"List Classes", &Class::showClass, false},
+    {"Edit Class", &Class::editClass, false},
+    {"View Class", &Class::viewClass, false},
 
     {"Semester", nullptr, true},
     {"New Semester", &Semester::createSemester, false},
-    {"Edit Semester", nullptr, false},
-    {"List Semesters", nullptr, false},
+    {"Edit Semester", &Semester::editSemester, false},
+    {"View Semester", &Semester::viewSemester, false},
 
     {"Student", nullptr, true},
     {"New Student", &Student::createStudent, false},
-    {"Edit Student", nullptr, false},
-    {"List Students", nullptr, false},
+    {"Edit Student", &Student::editStudent, false},
+    {"View Student", &Student::viewStudent, false},
 
     {"Course", nullptr, true},
     {"New Course", &Course::createCourse, false},
-    {"Edit Course", nullptr, false},
-    {"List Courses", &Course::showCourse, false},
+    {"Edit Course", &Course::editCourse, false},
+    {"View Course", &Course::viewCourse, false},
 };
 
 const FunctionRecord STUDENT_MENU[] = {
-    {"School Year", nullptr, true},
-    {"List School Years", nullptr, false},
-
-    {"Class", nullptr, true},
-    {"List Classes", nullptr, false},
-
-    {"Semester", nullptr, true},
-    {"List Semesters", nullptr, false},
-
     {"Course", nullptr, true},
-    {"List all courses", nullptr, false},
-    {"List enrolled courses", nullptr, false},
-    {"Enroll in a course", nullptr, false},
-    {"Un-enroll from a course", nullptr, false},
+    {"View enrolled courses", &Course::viewEnrolledCourse, false},
+    {"Enroll in a course", &Course::enrollCourse, false},
+    {"Un-enroll from a course", &Course::unEnrollCourse, false},
+    {"View score", &Course::viewScore, false},
 };
 
 const int NUM_STAFF_MENU = (int)(sizeof(STAFF_MENU) / sizeof(FunctionRecord));

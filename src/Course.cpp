@@ -37,6 +37,43 @@ void Course::createCourse() {
   crs->pSemester = Semester::getSemester(schoolYear, semester);
 }
 
+void Course::editCourse() {
+  throw "Not implemented yet!";
+}
+
+void Course::viewCourse() {
+  cout << "Here is a list of course:";
+  for (int i = 0; i < Global::all_course.size(); i++) {
+    cout << "Course #" << i << ": ";
+    cout << Global::all_course[i]->course_id << " - ";
+    cout << Global::all_course[i]->course_name << "- ";
+    cout << Global::all_course[i]->pStudents.size() << "/";
+    cout << Global::all_course[i]->maxNumberOfStudent << " students\n";
+    cout << "Lecturer:" << Global::all_course[i]->lecturer << '\n';
+    cout << "Start date:" << Global::all_course[i]->start_date << '\n';
+    cout << "End date:" << Global::all_course[i]->end_date << '\n';
+    cout << "Time:" << '\n';
+    cout << Global::all_course[i]->timeOfCourse[0] << '\n';
+    cout << Global::all_course[i]->timeOfCourse[1] << '\n';
+  }
+}
+
+void Course::viewEnrolledCourse() {
+  throw "Not implemented yet!";
+}
+
+void Course::enrollCourse() {
+  throw "Not implemented yet!";
+}
+
+void Course::unEnrollCourse() {
+  throw "Not implemented yet!";
+}
+
+void Course::viewScore() {
+  throw "Not implemented yet!";
+}
+
 bool Course::checkConflict(Course *crs, Vector<Course *> allEnrolledCourse) {
   for (int i = 0; i < allEnrolledCourse.size(); i++) {
     if (!(crs->course_id == allEnrolledCourse[i]->course_id)) {
@@ -86,7 +123,7 @@ void Course::viewScoreboard() {
   }
 }
 
-void Course::showStudentInCourse() {
+void Course::viewStudentInCourse() {
   cout << "Input course ID:";
   string crsID;
   cin >> crsID;
@@ -118,23 +155,6 @@ Course *Course::findCourse(Semester *sms, string crsID) {
     }
   }
   return nullptr;
-}
-
-void Course::showCourse() {
-  cout << "Here is a list of course:";
-  for (int i = 0; i < Global::all_course.size(); i++) {
-    cout << "Course #" << i << ": ";
-    cout << Global::all_course[i]->course_id << " - ";
-    cout << Global::all_course[i]->course_name << "- ";
-    cout << Global::all_course[i]->pStudents.size() << "/";
-    cout << Global::all_course[i]->maxNumberOfStudent << " students\n";
-    cout << "Lecturer:" << Global::all_course[i]->lecturer << '\n';
-    cout << "Start date:" << Global::all_course[i]->start_date << '\n';
-    cout << "End date:" << Global::all_course[i]->end_date << '\n';
-    cout << "Time:" << '\n';
-    cout << Global::all_course[i]->timeOfCourse[0] << '\n';
-    cout << Global::all_course[i]->timeOfCourse[1] << '\n';
-  }
 }
 
 void Course::loadFromStream(std::istream &f) {

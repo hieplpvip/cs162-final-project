@@ -21,7 +21,9 @@ public:
   string getID();
 
   static void createClass();
-  static void showClass();
+  static void editClass();
+  static void viewClass();
+
   static void showScoreboard();
 
   void loadFromStream(std::istream& f);

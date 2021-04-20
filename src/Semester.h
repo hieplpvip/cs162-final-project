@@ -16,8 +16,8 @@ public:
   int ordinalOfSemester;
 
   static void createSemester();
-  static void showSemester();
   static void editSemester();
+  static void viewSemester();
 
   Semester();
   Semester(string id);

@@ -14,7 +14,11 @@ void Semester::createSemester() {
   Global::all_semester.push_back(semester);
 }
 
-void Semester::showSemester() {
+void Semester::editSemester() {
+  throw "Not implemented yet!";
+}
+
+void Semester::viewSemester() {
   string schoolYear;
   cout << "Input school year:";
   cin >> schoolYear;

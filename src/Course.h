@@ -28,10 +28,17 @@ public:
   string getID();
 
   static void createCourse();
+  static void editCourse();
+  static void viewCourse();
+
+  static void viewEnrolledCourse();
+  static void enrollCourse();
+  static void unEnrollCourse();
+  static void viewScore();
+
   static bool checkConflict(Course* crs, Vector<Course*> allEnrolledCourse);
-  static void showCourse();
   static void viewScoreboard();
-  static void showStudentInCourse();
+  static void viewStudentInCourse();
 
   void loadFromStream(std::istream& f);
   void writeToStream(std::ostream& f);

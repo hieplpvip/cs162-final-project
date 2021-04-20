@@ -23,8 +23,8 @@ public:
   string getID();
 
   static void createSchoolYear();
-  static void showSchoolYear();
   static void editSchoolYear();
+  static void viewSchoolYear();
 
   void loadFromStream(std::istream& f);
   void writeToStream(std::ostream& f);

@@ -35,7 +35,11 @@ void Student::createStudent() {
   Global::all_student.push_back(student);
 }
 
-void Student::showStudent() {
+void Student::editStudent() {
+  throw "Not implemented yet!";
+}
+
+void Student::viewStudent() {
   for (int i = 0; i < Global::all_student.size(); i++) {
     cout << "Student ID:  " << Global::all_student[i]->student_id << endl;
     cout << "First name:  " << Global::all_student[i]->firstName << endl;
