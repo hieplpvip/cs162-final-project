@@ -25,9 +25,9 @@ public:
 
   string getID();
 
-  static void createUser();
-  static bool logIn();
-  static void logOut();
+  static string genUserID();
+  static void createStaffUser();
+  static User *createStudentUser(const string &username, const string &password, Student *st);
 
   void loadFromStream(std::istream &f);
   void writeToStream(std::ostream &f);

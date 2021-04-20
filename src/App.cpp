@@ -17,7 +17,7 @@ App::App() {
   Global::all_class.clear();
   Global::all_user.clear();
 
-  milliSleep(1000);
+  milliSleep(500);
 }
 
 App::~App() {
@@ -44,7 +44,7 @@ App::~App() {
     delete p;
   }
 
-  milliSleep(1000);
+  milliSleep(500);
 }
 
 void App::loadData() {

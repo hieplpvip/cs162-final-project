@@ -4,5 +4,6 @@
 void milliSleep(int seconds);
 void clearScreen();
 void printHeader();
+void waitForEnter();
 
 #endif

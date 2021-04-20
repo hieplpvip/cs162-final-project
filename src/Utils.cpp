@@ -4,6 +4,7 @@
 #include <unistd.h>
 #endif
 #include <iostream>
+#include <limits>
 #include "Global.h"
 #include "Utils.h"
 
@@ -33,7 +34,14 @@ void clearScreen() {
   cout << "\033[H";
 #endif
 }
+
 void printHeader() {
   cout << "Logged in as " << Global::current_user->username << "\n";
   cout << "\n";
+}
+
+void waitForEnter() {
+  cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+  cout << "Press Enter to continue...";
+  cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
 }

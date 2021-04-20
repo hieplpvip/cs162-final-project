@@ -9,30 +9,49 @@ string Student::getID() {
 }
 
 void Student::createStudent() {
-  Student *student = new Student();
-  cout << "Input student ID:";
-  cin >> student->student_id;
-  cout << "Input student first name:";
-  cin >> student->firstName;
-  cout << "Input student last name:";
-  cin >> student->lastName;
-  cout << "Input student date of birth";
-  cin >> student->dateOfBirth;
-  cout << "Input student gender:";
-  cin >> student->gender;
-  cout << "Input student social ID:";
-  cin >> student->socialID;
-  cout << "Input student class ID";
-  string stuClass;
-  cin >> stuClass;
-  for (int i = 0; i < Global::all_class.size(); i++) {
-    if (Global::all_class[i]->class_id == stuClass) {
-      Global::all_class[i]->pStudents.push_back(student);
-      student->pClass = Global::all_class[i];
+  clearScreen();
+
+  Student *st = new Student();
+
+  cout << "Student ID: ";
+  cin >> st->student_id;
+  cout << "First Name: ";
+  cin >> st->firstName;
+  cout << "Last Name: ";
+  cin >> st->lastName;
+  cout << "Date of Birth: ";
+  cin >> st->dateOfBirth;
+  cout << "Gender (MALE/FEMALE): ";
+  cin >> st->gender;
+  cout << "Social ID: ";
+  cin >> st->socialID;
+
+  cout << "Class ID: ";
+  string class_id;
+  cin >> class_id;
+  st->pClass = nullptr;
+  for (auto cls : Global::all_class) {
+    if (cls->class_id == class_id) {
+      cls->pStudents.push_back(st);
+      st->pClass = cls;
       break;
     }
   }
-  Global::all_student.push_back(student);
+
+  if (st->pClass == nullptr) {
+    cout << "Could not find class with ID " << class_id << '\n';
+    delete st;
+    return;
+  }
+
+  st->pUser = User::createStudentUser(st->student_id, st->dateOfBirth, st);
+  Global::all_student.push_back(st);
+
+  cout << "Login credentials for new student:\n";
+  cout << "Username: " << st->pUser->username << '\n';
+  cout << "Password: " << st->pUser->password << '\n';
+
+  waitForEnter();
 }
 
 void Student::editStudent() {
@@ -60,6 +79,28 @@ void Student::loadFromStream(std::istream &f) {
   getline(f, gender);
   getline(f, dateOfBirth);
   getline(f, socialID);
+
+  string user_id;
+  getline(f, user_id);
+  pUser = nullptr;
+  for (auto u : Global::all_user) {
+    if (u->user_id == user_id) {
+      pUser = u;
+      break;
+    }
+  }
+  assert(pUser != nullptr);
+
+  string class_id;
+  getline(f, class_id);
+  pClass = nullptr;
+  for (auto cls : Global::all_class) {
+    if (cls->class_id == class_id) {
+      pClass = cls;
+      break;
+    }
+  }
+  assert(pClass != nullptr);
 }
 
 void Student::writeToStream(std::ostream &f) {
@@ -69,4 +110,6 @@ void Student::writeToStream(std::ostream &f) {
   f << gender << '\n';
   f << dateOfBirth << '\n';
   f << socialID << '\n';
+  f << pUser->user_id << '\n';
+  f << pClass->class_id << '\n';
 }

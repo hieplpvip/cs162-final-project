@@ -3,8 +3,8 @@
 ### At the beginning of a school year, an academic staff member will:
 
 - [ ] Create a new school year (e.g. `2020-2021`)
-- [ ] Create classes for freshmen (e.g. `20CTT1`, `20CTT2`)
-- [ ] Add freshmen to created classes (Student ID, First name, Last name, Gender, Date of Birth, Social ID)
+- [x] Create classes for freshmen (e.g. `20CTT1`, `20CTT2`)
+- [x] Add freshmen to created classes (Student ID, First name, Last name, Gender, Date of Birth, Social ID)
 - [ ] Import students information from CSV instead of manual input
 
 ### At the beginning of a semester, an academic staff member will:

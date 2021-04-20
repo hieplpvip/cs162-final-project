@@ -180,6 +180,7 @@ void Course::loadFromStream(std::istream &f) {
 
   int sz;
   f >> sz;
+  f.ignore();
   for (int i = 0; i < sz; ++i) {
     string student_id;
     getline(f, student_id);
@@ -194,6 +195,7 @@ void Course::loadFromStream(std::istream &f) {
     assert(found);
   }
   f >> maxNumberOfStudent;
+  f.ignore();
 }
 
 void Course::writeToStream(std::ostream &f) {

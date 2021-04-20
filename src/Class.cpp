@@ -9,11 +9,14 @@ string Class::getID() {
 }
 
 void Class::createClass() {
+  clearScreen();
+
   Class *cls = new Class();
-  cout << "Input class id: ";
+  cout << "Class ID: ";
   cin >> cls->class_id;
-  cout << "Input class name: ";
+  cout << "Class Name: ";
   cin >> cls->class_name;
+
   Global::all_class.push_back(cls);
 }
 
@@ -81,6 +84,7 @@ void Class::loadFromStream(std::istream &f) {
 
   int sz;
   f >> sz;
+  f.ignore();
   for (int i = 0; i < sz; ++i) {
     string student_id;
     getline(f, student_id);

@@ -7,16 +7,25 @@ string User::getID() {
   return user_id;
 }
 
-void User::createUser() {
+string User::genUserID() {
+  std::stringstream ss;
+  ss << std::setw(6) << std::setfill('0') << (Global::all_user.size() + 1);
+  return ss.str();
+}
+
+void User::createStaffUser() {
   throw "Not implemented yet!";
 }
 
-bool User::logIn() {
-  throw "Not implemented yet!";
-}
-
-void User::logOut() {
-  throw "Not implemented yet!";
+User *User::createStudentUser(const string &username, const string &password, Student *st) {
+  User *u = new User();
+  u->user_id = genUserID();
+  u->username = username;
+  u->password = password;
+  u->role = UserRole::STUDENT;
+  u->pStudent = st;
+  Global::all_user.push_back(u);
+  return u;
 }
 
 void User::loadFromStream(std::istream &f) {
@@ -27,6 +36,7 @@ void User::loadFromStream(std::istream &f) {
   getline(f, username);
   getline(f, password);
   f >> role;
+  f.ignore();
 
   if (role == UserRole::STUDENT) {
     string student_id;

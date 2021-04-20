@@ -23,9 +23,7 @@ struct scorePerSemester {
 
 class Student {
 public:
-  string student_id;
-  string firstName, lastName, gender, dateOfBirth, socialID;
-
+  string student_id, firstName, lastName, gender, dateOfBirth, socialID;
   User *pUser;
   Class *pClass;
   Vector<Course *> pEnrolledCourses;

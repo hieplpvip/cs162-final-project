@@ -66,6 +66,7 @@ void Semester::loadFromStream(std::istream &f) {
 
   int sz;
   f >> sz;
+  f.ignore();
   for (int i = 0; i < sz; ++i) {
     string course_id;
     getline(f, course_id);
