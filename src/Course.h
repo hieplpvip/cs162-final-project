@@ -13,14 +13,15 @@ class Semester;
 class Course {
 public:
   string course_id;
+  string course_code;
   string course_name;
   string lecturer;
   string start_date;
   string end_date;  // TODO: create dedicated struct for date
   Semester* pSemester;
   Vector<Student*> pStudents;
-  int maxNumberOfStudent;
-  string timeOfCourse[2];
+  int maxNumberOfStudents;
+  string schedule[2];
 
   Course();
   Course(string id);

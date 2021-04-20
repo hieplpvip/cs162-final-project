@@ -9,32 +9,45 @@ string Course::getID() {
 }
 
 void Course::createCourse() {
+  clearScreen();
+
+  if (current_semester == nullptr) {
+    cout << "Please create a semester first\n";
+    milliSleep(1000);
+    return;
+  }
+
+  cout << "This new course will be taught in ";
+  cout << "Semester " << current_semester->semester_ordinal << " - ";
+  cout << "School Year " << current_semester->pSchoolYear->name << "\n\n";
+
   Course *crs = new Course();
+
+  cin.ignore();
+  cout << "Course Code: ";
+  getline(cin, crs->course_code);
+  cout << "Course Name: ";
+  getline(cin, crs->course_name);
+  cout << "Lecturer: ";
+  getline(cin, crs->lecturer);
+  cout << "Start Date: ";
+  getline(cin, crs->start_date);
+  cout << "End Date: ";
+  getline(cin, crs->end_date);
+  cout << "Max number of students: ";
+  cin >> crs->maxNumberOfStudents;
+  cin.ignore();
+  cout << "Schedule:\n";
+  cout << "  First session ";
+  getline(cin, crs->schedule[0]);
+  cout << "  Second session: ";
+  getline(cin, crs->schedule[1]);
+
+  crs->course_id = current_semester->semester_id + '_' + crs->course_code;
+
+  crs->pSemester = current_semester;
+  current_semester->pCourses.push_back(crs);
   all_course.push_back(crs);
-  cout << "Input course ID:";
-  cin >> crs->course_id;
-  cout << "Input course name:";
-  cin >> crs->course_name;
-  cout << "Input name of the lecturer:";
-  cin >> crs->lecturer;
-  cout << "Input start date:";
-  cin >> crs->start_date;
-  cout << "Input end date:";
-  cin >> crs->end_date;
-  cout << "Max student in course:";
-  cin >> crs->maxNumberOfStudent;
-  cout << "Time of the course";
-  cout << "\nFirst time in week";
-  getline(cin, crs->timeOfCourse[0]);
-  cout << "Second time in week";
-  getline(cin, crs->timeOfCourse[1]);
-  cout << "What school year:";
-  string schoolYear;
-  cin >> schoolYear;
-  cout << "What semester of school year " << schoolYear << ':';
-  int semester;
-  cin >> semester;
-  crs->pSemester = Semester::getSemester(schoolYear, semester);
 }
 
 void Course::editCourse() {
@@ -48,13 +61,13 @@ void Course::viewCourse() {
     cout << all_course[i]->course_id << " - ";
     cout << all_course[i]->course_name << "- ";
     cout << all_course[i]->pStudents.size() << "/";
-    cout << all_course[i]->maxNumberOfStudent << " students\n";
+    cout << all_course[i]->maxNumberOfStudents << " students\n";
     cout << "Lecturer:" << all_course[i]->lecturer << '\n';
     cout << "Start date:" << all_course[i]->start_date << '\n';
     cout << "End date:" << all_course[i]->end_date << '\n';
     cout << "Time:" << '\n';
-    cout << all_course[i]->timeOfCourse[0] << '\n';
-    cout << all_course[i]->timeOfCourse[1] << '\n';
+    cout << all_course[i]->schedule[0] << '\n';
+    cout << all_course[i]->schedule[1] << '\n';
   }
 }
 
@@ -104,9 +117,9 @@ void Course::viewScore() {
 bool Course::checkConflict(Course *crs, Vector<Course *> allEnrolledCourse) {
   for (int i = 0; i < allEnrolledCourse.size(); i++) {
     if (!(crs->course_id == allEnrolledCourse[i]->course_id)) {
-      if (crs->timeOfCourse[0] == allEnrolledCourse[i]->timeOfCourse[0] || crs->timeOfCourse[0] == allEnrolledCourse[i]->timeOfCourse[1])
+      if (crs->schedule[0] == allEnrolledCourse[i]->schedule[0] || crs->schedule[0] == allEnrolledCourse[i]->schedule[1])
         return true;
-      if (crs->timeOfCourse[1] == allEnrolledCourse[i]->timeOfCourse[0] || crs->timeOfCourse[1] == allEnrolledCourse[i]->timeOfCourse[1])
+      if (crs->schedule[1] == allEnrolledCourse[i]->schedule[0] || crs->schedule[1] == allEnrolledCourse[i]->schedule[1])
         return true;
     }
   }
@@ -189,6 +202,7 @@ void Course::loadFromStream(std::istream &f) {
   getline(f, _course_id);
   assert(_course_id == course_id);
 
+  getline(f, course_code);
   getline(f, course_name);
   getline(f, lecturer);
   getline(f, start_date);
@@ -221,12 +235,17 @@ void Course::loadFromStream(std::istream &f) {
     }
     assert(found);
   }
-  f >> maxNumberOfStudent;
+
+  f >> maxNumberOfStudents;
   f.ignore();
+
+  getline(f, schedule[0]);
+  getline(f, schedule[1]);
 }
 
 void Course::writeToStream(std::ostream &f) {
   f << course_id << '\n';
+  f << course_code << '\n';
   f << course_name << '\n';
   f << lecturer << '\n';
   f << start_date << '\n';
@@ -236,5 +255,7 @@ void Course::writeToStream(std::ostream &f) {
   for (auto st : pStudents) {
     f << st->student_id << '\n';
   }
-  f << maxNumberOfStudent << '\n';
+  f << maxNumberOfStudents << '\n';
+  f << schedule[0] << '\n';
+  f << schedule[1] << '\n';
 }
