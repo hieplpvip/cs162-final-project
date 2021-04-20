@@ -25,4 +25,6 @@ namespace Global {
   extern Vector<User *> all_user;
 };
 
+using namespace Global;
+
 #endif

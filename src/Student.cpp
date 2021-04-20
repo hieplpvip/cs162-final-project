@@ -30,7 +30,7 @@ void Student::createStudent() {
   string class_id;
   cin >> class_id;
   st->pClass = nullptr;
-  for (auto cls : Global::all_class) {
+  for (auto cls : all_class) {
     if (cls->class_id == class_id) {
       cls->pStudents.push_back(st);
       st->pClass = cls;
@@ -45,7 +45,7 @@ void Student::createStudent() {
   }
 
   st->pUser = User::createStudentUser(st->student_id, st->dateOfBirth, st);
-  Global::all_student.push_back(st);
+  all_student.push_back(st);
 
   cout << "Login credentials for new student:\n";
   cout << "Username: " << st->pUser->username << '\n';
@@ -59,13 +59,13 @@ void Student::editStudent() {
 }
 
 void Student::viewStudent() {
-  for (int i = 0; i < Global::all_student.size(); i++) {
-    cout << "Student ID:  " << Global::all_student[i]->student_id << endl;
-    cout << "First name:  " << Global::all_student[i]->firstName << endl;
-    cout << "Last name:  " << Global::all_student[i]->lastName << endl;
-    cout << "Gender:  " << Global::all_student[i]->gender << endl;
-    cout << "Date of birth:  " << Global::all_student[i]->dateOfBirth << endl;
-    cout << "SocialID:  " << Global::all_student[i]->socialID << endl;
+  for (int i = 0; i < all_student.size(); i++) {
+    cout << "Student ID:  " << all_student[i]->student_id << endl;
+    cout << "First name:  " << all_student[i]->firstName << endl;
+    cout << "Last name:  " << all_student[i]->lastName << endl;
+    cout << "Gender:  " << all_student[i]->gender << endl;
+    cout << "Date of birth:  " << all_student[i]->dateOfBirth << endl;
+    cout << "SocialID:  " << all_student[i]->socialID << endl;
   }
 }
 
@@ -83,7 +83,7 @@ void Student::loadFromStream(std::istream &f) {
   string user_id;
   getline(f, user_id);
   pUser = nullptr;
-  for (auto u : Global::all_user) {
+  for (auto u : all_user) {
     if (u->user_id == user_id) {
       pUser = u;
       break;
@@ -94,7 +94,7 @@ void Student::loadFromStream(std::istream &f) {
   string class_id;
   getline(f, class_id);
   pClass = nullptr;
-  for (auto cls : Global::all_class) {
+  for (auto cls : all_class) {
     if (cls->class_id == class_id) {
       pClass = cls;
       break;

@@ -10,7 +10,7 @@ string Course::getID() {
 
 void Course::createCourse() {
   Course *crs = new Course();
-  Global::all_course.push_back(crs);
+  all_course.push_back(crs);
   cout << "Input course ID:";
   cin >> crs->course_id;
   cout << "Input course name:";
@@ -43,18 +43,18 @@ void Course::editCourse() {
 
 void Course::viewCourse() {
   cout << "Here is a list of course:";
-  for (int i = 0; i < Global::all_course.size(); i++) {
+  for (int i = 0; i < all_course.size(); i++) {
     cout << "Course #" << i << ": ";
-    cout << Global::all_course[i]->course_id << " - ";
-    cout << Global::all_course[i]->course_name << "- ";
-    cout << Global::all_course[i]->pStudents.size() << "/";
-    cout << Global::all_course[i]->maxNumberOfStudent << " students\n";
-    cout << "Lecturer:" << Global::all_course[i]->lecturer << '\n';
-    cout << "Start date:" << Global::all_course[i]->start_date << '\n';
-    cout << "End date:" << Global::all_course[i]->end_date << '\n';
+    cout << all_course[i]->course_id << " - ";
+    cout << all_course[i]->course_name << "- ";
+    cout << all_course[i]->pStudents.size() << "/";
+    cout << all_course[i]->maxNumberOfStudent << " students\n";
+    cout << "Lecturer:" << all_course[i]->lecturer << '\n';
+    cout << "Start date:" << all_course[i]->start_date << '\n';
+    cout << "End date:" << all_course[i]->end_date << '\n';
     cout << "Time:" << '\n';
-    cout << Global::all_course[i]->timeOfCourse[0] << '\n';
-    cout << Global::all_course[i]->timeOfCourse[1] << '\n';
+    cout << all_course[i]->timeOfCourse[0] << '\n';
+    cout << all_course[i]->timeOfCourse[1] << '\n';
   }
 }
 
@@ -97,9 +97,9 @@ void Course::viewScoreboard() {
   string courseID;
   cin >> courseID;
   Course *course;
-  for (int i = 0; i < Global::all_course.size(); i++) {
-    if (Global::all_course[i]->pSemester->pSchoolYear->name == schoolYear && Global::all_course[i]->pSemester->ordinalOfSemester) {
-      course = Global::all_course[i];
+  for (int i = 0; i < all_course.size(); i++) {
+    if (all_course[i]->pSemester->pSchoolYear->name == schoolYear && all_course[i]->pSemester->ordinalOfSemester) {
+      course = all_course[i];
       break;
     }
   }
@@ -170,7 +170,7 @@ void Course::loadFromStream(std::istream &f) {
   string semester_id;
   getline(f, semester_id);
   pSemester = nullptr;
-  for (auto sem : Global::all_semester) {
+  for (auto sem : all_semester) {
     if (sem->semester_id == semester_id) {
       pSemester = sem;
       break;
@@ -185,7 +185,7 @@ void Course::loadFromStream(std::istream &f) {
     string student_id;
     getline(f, student_id);
     bool found = false;
-    for (auto st : Global::all_student) {
+    for (auto st : all_student) {
       if (st->student_id == student_id) {
         pStudents.push_back(st);
         found = true;

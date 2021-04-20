@@ -17,7 +17,7 @@ void Class::createClass() {
   cout << "Class Name: ";
   cin >> cls->class_name;
 
-  Global::all_class.push_back(cls);
+  all_class.push_back(cls);
 }
 
 void Class::editClass() {
@@ -26,11 +26,11 @@ void Class::editClass() {
 
 void Class::viewClass() {
   cout << "Here is a list of class:\n";
-  for (int i = 0; i < Global::all_class.size(); i++) {
+  for (int i = 0; i < all_class.size(); i++) {
     cout << (i + 1) << ": ";
-    cout << Global::all_class[i]->class_id << " - ";
-    cout << Global::all_class[i]->class_name << " - ";
-    cout << Global::all_class[i]->pStudents.size() << " students" << '\n';
+    cout << all_class[i]->class_id << " - ";
+    cout << all_class[i]->class_name << " - ";
+    cout << all_class[i]->pStudents.size() << " students" << '\n';
   }
 }
 
@@ -67,7 +67,7 @@ void Class::showScoreboard() {
 }
 
 Class *Class::findClass(string classID) {
-  for (auto cls : Global::all_class) {
+  for (auto cls : all_class) {
     if (cls->class_id == classID) {
       return cls;
     }
@@ -89,7 +89,7 @@ void Class::loadFromStream(std::istream &f) {
     string student_id;
     getline(f, student_id);
     bool found = false;
-    for (auto st : Global::all_student) {
+    for (auto st : all_student) {
       if (st->student_id == student_id) {
         pStudents.push_back(st);
         found = true;

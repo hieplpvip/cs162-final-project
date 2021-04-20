@@ -8,14 +8,14 @@ App::App() {
   clearScreen();
   cout << "Starting...\n";
 
-  Global::current_user = nullptr;
-  Global::current_semester = nullptr;
-  Global::all_school_year.clear();
-  Global::all_semester.clear();
-  Global::all_course.clear();
-  Global::all_student.clear();
-  Global::all_class.clear();
-  Global::all_user.clear();
+  current_user = nullptr;
+  current_semester = nullptr;
+  all_school_year.clear();
+  all_semester.clear();
+  all_course.clear();
+  all_student.clear();
+  all_class.clear();
+  all_user.clear();
 
   milliSleep(500);
 }
@@ -25,22 +25,22 @@ App::~App() {
   cout << "Exiting...\n";
 
   // free memory
-  for (auto p : Global::all_school_year) {
+  for (auto p : all_school_year) {
     delete p;
   }
-  for (auto p : Global::all_semester) {
+  for (auto p : all_semester) {
     delete p;
   }
-  for (auto p : Global::all_course) {
+  for (auto p : all_course) {
     delete p;
   }
-  for (auto p : Global::all_student) {
+  for (auto p : all_student) {
     delete p;
   }
-  for (auto p : Global::all_class) {
+  for (auto p : all_class) {
     delete p;
   }
-  for (auto p : Global::all_user) {
+  for (auto p : all_user) {
     delete p;
   }
 
@@ -68,19 +68,19 @@ void App::loadData() {
     }
   };
 
-  loadIDs(Constants::CLASS_DIR, Global::all_class);
-  loadIDs(Constants::COURSE_DIR, Global::all_course);
-  loadIDs(Constants::SCHOOL_YEAR_DIR, Global::all_school_year);
-  loadIDs(Constants::SEMESTER_DIR, Global::all_semester);
-  loadIDs(Constants::STUDENT_DIR, Global::all_student);
-  loadIDs(Constants::USER_DIR, Global::all_user);
+  loadIDs(Constants::CLASS_DIR, all_class);
+  loadIDs(Constants::COURSE_DIR, all_course);
+  loadIDs(Constants::SCHOOL_YEAR_DIR, all_school_year);
+  loadIDs(Constants::SEMESTER_DIR, all_semester);
+  loadIDs(Constants::STUDENT_DIR, all_student);
+  loadIDs(Constants::USER_DIR, all_user);
 
-  loadContent(Constants::CLASS_DIR, Global::all_class);
-  loadContent(Constants::COURSE_DIR, Global::all_course);
-  loadContent(Constants::SCHOOL_YEAR_DIR, Global::all_school_year);
-  loadContent(Constants::SEMESTER_DIR, Global::all_semester);
-  loadContent(Constants::STUDENT_DIR, Global::all_student);
-  loadContent(Constants::USER_DIR, Global::all_user);
+  loadContent(Constants::CLASS_DIR, all_class);
+  loadContent(Constants::COURSE_DIR, all_course);
+  loadContent(Constants::SCHOOL_YEAR_DIR, all_school_year);
+  loadContent(Constants::SEMESTER_DIR, all_semester);
+  loadContent(Constants::STUDENT_DIR, all_student);
+  loadContent(Constants::USER_DIR, all_user);
 }
 
 void App::saveData() {
@@ -102,19 +102,19 @@ void App::saveData() {
     }
   };
 
-  saveIDs(Constants::CLASS_DIR, Global::all_class);
-  saveIDs(Constants::COURSE_DIR, Global::all_course);
-  saveIDs(Constants::SCHOOL_YEAR_DIR, Global::all_school_year);
-  saveIDs(Constants::SEMESTER_DIR, Global::all_semester);
-  saveIDs(Constants::STUDENT_DIR, Global::all_student);
-  saveIDs(Constants::USER_DIR, Global::all_user);
+  saveIDs(Constants::CLASS_DIR, all_class);
+  saveIDs(Constants::COURSE_DIR, all_course);
+  saveIDs(Constants::SCHOOL_YEAR_DIR, all_school_year);
+  saveIDs(Constants::SEMESTER_DIR, all_semester);
+  saveIDs(Constants::STUDENT_DIR, all_student);
+  saveIDs(Constants::USER_DIR, all_user);
 
-  saveContent(Constants::CLASS_DIR, Global::all_class);
-  saveContent(Constants::COURSE_DIR, Global::all_course);
-  saveContent(Constants::SCHOOL_YEAR_DIR, Global::all_school_year);
-  saveContent(Constants::SEMESTER_DIR, Global::all_semester);
-  saveContent(Constants::STUDENT_DIR, Global::all_student);
-  saveContent(Constants::USER_DIR, Global::all_user);
+  saveContent(Constants::CLASS_DIR, all_class);
+  saveContent(Constants::COURSE_DIR, all_course);
+  saveContent(Constants::SCHOOL_YEAR_DIR, all_school_year);
+  saveContent(Constants::SEMESTER_DIR, all_semester);
+  saveContent(Constants::STUDENT_DIR, all_student);
+  saveContent(Constants::USER_DIR, all_user);
 }
 
 bool App::authenticate() {
@@ -127,9 +127,9 @@ bool App::authenticate() {
     cout << "Enter password: ";
     cin >> password;
 
-    for (auto p : Global::all_user) {
+    for (auto p : all_user) {
       if (p->username == username && p->password == password) {
-        Global::current_user = p;
+        current_user = p;
         return true;
       }
     }
@@ -193,9 +193,9 @@ void App::run() {
     cout << "Could not authenticate!\n";
     return;
   }
-  assert(Global::current_user != nullptr);
+  assert(current_user != nullptr);
 
-  if (Global::current_user->role == User::UserRole::STAFF) {
+  if (current_user->role == User::UserRole::STAFF) {
     showMenu(STAFF_MENU, NUM_STAFF_MENU);
   } else {
     showMenu(STUDENT_MENU, NUM_STUDENT_MENU);

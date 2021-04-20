@@ -9,7 +9,7 @@ string User::getID() {
 
 string User::genUserID() {
   std::stringstream ss;
-  ss << std::setw(6) << std::setfill('0') << (Global::all_user.size() + 1);
+  ss << std::setw(6) << std::setfill('0') << (all_user.size() + 1);
   return ss.str();
 }
 
@@ -24,7 +24,7 @@ User *User::createStudentUser(const string &username, const string &password, St
   u->password = password;
   u->role = UserRole::STUDENT;
   u->pStudent = st;
-  Global::all_user.push_back(u);
+  all_user.push_back(u);
   return u;
 }
 
@@ -42,7 +42,7 @@ void User::loadFromStream(std::istream &f) {
     string student_id;
     getline(f, student_id);
     pStudent = nullptr;
-    for (auto st : Global::all_student) {
+    for (auto st : all_student) {
       if (st->student_id == student_id) {
         pStudent = st;
         break;

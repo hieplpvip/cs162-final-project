@@ -10,8 +10,8 @@ string Semester::getID() {
 
 void Semester::createSemester() {
   Semester *semester = new Semester();
-  semester->pSchoolYear = Global::all_school_year.back();
-  Global::all_semester.push_back(semester);
+  semester->pSchoolYear = all_school_year.back();
+  all_semester.push_back(semester);
 }
 
 void Semester::editSemester() {
@@ -23,10 +23,10 @@ void Semester::viewSemester() {
   cout << "Input school year:";
   cin >> schoolYear;
   int count = 1;
-  for (int i = 0; i < Global::all_semester.size(); i++) {
-    if (Global::all_semester[i]->pSchoolYear->name == schoolYear) {
+  for (int i = 0; i < all_semester.size(); i++) {
+    if (all_semester[i]->pSchoolYear->name == schoolYear) {
       cout << "Semester " << count++ << ":\n";
-      cout << "  Number of course:" << Global::all_semester[i]->pCourses.size() << '\n';
+      cout << "  Number of course:" << all_semester[i]->pCourses.size() << '\n';
     }
   }
 }
@@ -34,15 +34,15 @@ void Semester::viewSemester() {
 Semester *Semester::getSemester(string schYear, int sms) {
   int i = 0;
   SchoolYear *pSchYear;
-  for (i = 0; i < Global::all_school_year.size(); i++) {
-    if (Global::all_school_year[i]->name == schYear) {
-      pSchYear = Global::all_school_year[i];
+  for (i = 0; i < all_school_year.size(); i++) {
+    if (all_school_year[i]->name == schYear) {
+      pSchYear = all_school_year[i];
       break;
     }
   }
-  for (i = 0; i < Global::all_school_year[i]->numberOfSemester; i++) {
+  for (i = 0; i < all_school_year[i]->numberOfSemester; i++) {
     if (pSchYear->pSemesters[i]->ordinalOfSemester == sms) {
-      return Global::all_semester[i];
+      return all_semester[i];
     }
   }
   return nullptr;
@@ -56,7 +56,7 @@ void Semester::loadFromStream(std::istream &f) {
   string school_year_id;
   getline(f, school_year_id);
   pSchoolYear = nullptr;
-  for (auto sy : Global::all_school_year) {
+  for (auto sy : all_school_year) {
     if (sy->school_year_id == school_year_id) {
       pSchoolYear = sy;
       break;
@@ -71,7 +71,7 @@ void Semester::loadFromStream(std::istream &f) {
     string course_id;
     getline(f, course_id);
     bool found = false;
-    for (auto c : Global::all_course) {
+    for (auto c : all_course) {
       if (c->course_id == course_id) {
         pCourses.push_back(c);
         found = true;

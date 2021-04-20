@@ -36,7 +36,7 @@ void clearScreen() {
 }
 
 void printHeader() {
-  cout << "Logged in as " << Global::current_user->username << "\n";
+  cout << "Logged in as " << current_user->username << "\n";
   cout << "\n";
 }
 
