@@ -27,6 +27,9 @@ const FunctionRecord STAFF_MENU[] = {
     {"Edit Course", &Course::editCourse, false},
     {"View Course", &Course::viewCourse, false},
     {"Open/Close Course Registration", &Course::setCourseRegistration, false},
+
+    {"User", nullptr, true},
+    {"Create Staff User", &User::createStaffUser, false},
 };
 
 const FunctionRecord STUDENT_MENU[] = {

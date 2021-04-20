@@ -14,7 +14,18 @@ string User::genUserID() {
 }
 
 void User::createStaffUser() {
-  throw "Not implemented yet!";
+  clearScreen();
+
+  User *u = new User();
+  cout << "Username: ";
+  cin >> u->username;
+  cout << "Password: ";
+  cin >> u->password;
+  u->user_id = genUserID();
+  u->role = UserRole::STAFF;
+  u->pStudent = nullptr;
+
+  all_user.push_back(u);
 }
 
 User *User::createStudentUser(const string &username, const string &password, Student *st) {
