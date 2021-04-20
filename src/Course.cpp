@@ -38,7 +38,7 @@ void Course::createCourse() {
   cin >> crs->maxNumberOfStudents;
   cin.ignore();
   cout << "Schedule:\n";
-  cout << "  First session ";
+  cout << "  First session: ";
   getline(cin, crs->schedule[0]);
   cout << "  Second session: ";
   getline(cin, crs->schedule[1]);
@@ -55,20 +55,27 @@ void Course::editCourse() {
 }
 
 void Course::viewCourse() {
-  cout << "Here is a list of course:";
+  clearScreen();
+
+  cout << "Here is a list of courses:\n\n";
   for (int i = 0; i < all_course.size(); i++) {
-    cout << "Course #" << i << ": ";
-    cout << all_course[i]->course_id << " - ";
-    cout << all_course[i]->course_name << "- ";
+    cout << "Course #" << (i + 1) << ": ";
+    cout << all_course[i]->course_code << " - ";
+    cout << all_course[i]->course_name << " - ";
     cout << all_course[i]->pStudents.size() << "/";
     cout << all_course[i]->maxNumberOfStudents << " students\n";
-    cout << "Lecturer:" << all_course[i]->lecturer << '\n';
-    cout << "Start date:" << all_course[i]->start_date << '\n';
-    cout << "End date:" << all_course[i]->end_date << '\n';
-    cout << "Time:" << '\n';
-    cout << all_course[i]->schedule[0] << '\n';
-    cout << all_course[i]->schedule[1] << '\n';
+    cout << "Semester " << all_course[i]->pSemester->semester_ordinal << " - ";
+    cout << "School Year " << all_course[i]->pSemester->pSchoolYear->name << '\n';
+    cout << "Lecturer: " << all_course[i]->lecturer << '\n';
+    cout << "Start date: " << all_course[i]->start_date << '\n';
+    cout << "End date: " << all_course[i]->end_date << '\n';
+    cout << "Schedule:\n";
+    cout << "  First session: " << all_course[i]->schedule[0] << '\n';
+    cout << "  Second session: " << all_course[i]->schedule[1] << '\n';
+    cout << '\n';
   }
+
+  waitForEnter();
 }
 
 void Course::setCourseRegistration() {

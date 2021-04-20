@@ -27,9 +27,9 @@
 
 ### At any time, an academic staff member can:
 
-- [ ] View list of classes
+- [x] View list of classes
 - [ ] View list of students in a class
-- [ ] View list of courses
+- [x] View list of courses
 - [ ] View list of students in a course
 
 ### At the end of a semester, an academic staff member can:

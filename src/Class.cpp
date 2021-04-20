@@ -25,13 +25,16 @@ void Class::editClass() {
 }
 
 void Class::viewClass() {
-  cout << "Here is a list of class:\n";
+  clearScreen();
+
+  cout << "Here is a list of classes:\n\n";
   for (int i = 0; i < all_class.size(); i++) {
-    cout << (i + 1) << ": ";
-    cout << all_class[i]->class_id << " - ";
+    cout << "Class #" << (i + 1) << ": ";
     cout << all_class[i]->class_name << " - ";
     cout << all_class[i]->pStudents.size() << " students" << '\n';
   }
+
+  waitForEnter();
 }
 
 void Class::showScoreboard() {
