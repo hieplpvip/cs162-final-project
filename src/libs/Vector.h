@@ -27,6 +27,7 @@ public:
 
   T &operator[](size_t index);
   void erase(size_t index);
+  void erase(T value);
   void clear();
 
   T *begin();
@@ -160,6 +161,16 @@ void Vector<T>::erase(size_t index) {
   }
 
   --_size;
+}
+
+template <class T>
+void Vector<T>::erase(T value) {
+  for (size_t i = 0; i < _size; ++i) {
+    if (_elements[i] == value) {
+      erase(i);
+      return;
+    }
+  }
 }
 
 template <class T>

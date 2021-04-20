@@ -106,11 +106,11 @@ void Course::setCourseRegistration() {
 }
 
 void Course::viewEnrolledCourse() {
+  clearScreen();
+
   assert(current_user->role == User::UserRole::STUDENT);
   auto st = current_user->pStudent;
   auto &enrolledCourses = st->pEnrolledCourses;
-
-  clearScreen();
 
   if (enrolledCourses.empty()) {
     cout << "You haven't enrolled in any courses\n";
@@ -138,8 +138,7 @@ void Course::viewEnrolledCourse() {
 }
 
 void Course::enrollCourse() {
-  assert(current_user->role == User::UserRole::STUDENT);
-  auto st = current_user->pStudent;
+  clearScreen();
 
   if (!courseRegistrationOpen) {
     cout << "Course Registration is close\n";
@@ -147,7 +146,14 @@ void Course::enrollCourse() {
     return;
   }
 
-  clearScreen();
+  if (current_semester == nullptr) {
+    cout << "No current semester\n";
+    milliSleep(1000);
+    return;
+  }
+
+  assert(current_user->role == User::UserRole::STUDENT);
+  auto st = current_user->pStudent;
 
   for (int i = 0; i < current_semester->pCourses.size(); ++i) {
     auto crs = current_semester->pCourses[i];
@@ -189,7 +195,54 @@ void Course::enrollCourse() {
 }
 
 void Course::unEnrollCourse() {
-  throw "Not implemented yet!";
+  clearScreen();
+
+  if (!courseRegistrationOpen) {
+    cout << "Course Registration is close\n";
+    milliSleep(1000);
+    return;
+  }
+
+  if (current_semester == nullptr) {
+    cout << "No current semester\n";
+    milliSleep(1000);
+    return;
+  }
+
+  assert(current_user->role == User::UserRole::STUDENT);
+  auto st = current_user->pStudent;
+
+  Vector<Course *> enrolledCourses;
+  for (auto crs : st->pEnrolledCourses) {
+    if (crs->pSemester->semester_id == current_semester->semester_id) {
+      enrolledCourses.push_back(crs);
+    }
+  }
+
+  if (enrolledCourses.empty()) {
+    cout << "You haven't enrolled in any courses this semester\n";
+    milliSleep(1000);
+    return;
+  }
+
+  for (int i = 0; i < enrolledCourses.size(); ++i) {
+    auto crs = enrolledCourses[i];
+    cout << (i + 1) << ". " << crs->course_code << " - " << crs->course_name << '\n';
+  }
+
+  int ind;
+  cout << "\nPlease select a course: ";
+  cin >> ind;
+  if (ind < 1 || ind > enrolledCourses.size()) {
+    cout << "Invalid\n";
+    milliSleep(1000);
+    return;
+  }
+  --ind;
+
+  auto crs = enrolledCourses[ind];
+  st->pEnrolledCourses.erase(crs);
+  crs->pStudents.erase(st);
 }
 
 void Course::viewScore() {

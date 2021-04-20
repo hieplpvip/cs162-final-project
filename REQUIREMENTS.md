@@ -18,8 +18,8 @@
 ### When a course registration session is active, a student can:
 
 - [x] Enroll in a course. If that course conflicts with enrolled courses, he/she can not enroll in it. He/she can enroll in at most 5 courses in a semester.
-- [ ] Un-enroll from a course from
-- [ ] View enrolled courses
+- [x] Un-enroll from a course from
+- [x] View enrolled courses
 
 ### When a course registration session is close, a student still can:
 
