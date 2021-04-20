@@ -108,7 +108,7 @@ template <class T>
 void Vector<T>::push_back(const T &v) {
   if (_capacity == 0) {
     reserve(8);
-  } else if (_size = _capacity) {
+  } else if (_size == _capacity) {
     reserve(_capacity * 2);
   }
   _elements[_size++] = v;
