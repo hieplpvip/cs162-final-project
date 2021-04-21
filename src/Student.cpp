@@ -170,7 +170,7 @@ void Student::createStudentFromCSV() {
   cout << "Username: same as Student ID\n";
   cout << "Password: same as Date of Birth\n";
 
-  waitForEnter(false);
+  waitForEnter();
 }
 
 void Student::editStudent() {
