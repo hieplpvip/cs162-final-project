@@ -11,6 +11,25 @@ string Student::getID() {
 void Student::createStudent() {
   clearScreen();
 
+  int cmd;
+  cout << "1. Manually enter student information\n";
+  cout << "2. Import student information from CSV\n";
+  cin >> cmd;
+  switch (cmd) {
+    case 1:
+      createStudentFromScreen();
+      break;
+    case 2:
+      createStudentFromCSV();
+      break;
+    default:
+      cout << "Invalid choice\n";
+  }
+}
+
+void Student::createStudentFromScreen() {
+  clearScreen();
+
   Student *st = new Student();
 
   cout << "Student ID: ";
@@ -32,7 +51,6 @@ void Student::createStudent() {
   st->pClass = nullptr;
   for (auto cls : all_class) {
     if (cls->class_id == class_id) {
-      cls->pStudents.push_back(st);
       st->pClass = cls;
       break;
     }
@@ -44,6 +62,7 @@ void Student::createStudent() {
     return;
   }
 
+  st->pClass->pStudents.push_back(st);
   st->pUser = User::createStudentUser(st->student_id, st->dateOfBirth, st);
   all_student.push_back(st);
 
@@ -52,6 +71,74 @@ void Student::createStudent() {
   cout << "Password: " << st->pUser->password << '\n';
 
   waitForEnter();
+}
+
+void Student::createStudentFromCSV() {
+  clearScreen();
+
+  string csvPath;
+  cout << "Please enter CSV file path: ";
+  cin.ignore();
+  getline(cin, csvPath);
+
+  ifstream fCSV(csvPath);
+  if (!fCSV.is_open()) {
+    cout << "Could not open CSV file\n";
+    milliSleep(1000);
+    return;
+  }
+
+  string line;
+
+  // skip header
+  getline(fCSV, line);
+
+  // import each student
+  int success = 0, total = 0;
+  while (getline(fCSV, line)) {
+    ++total;
+
+    Student *st = new Student();
+    string class_id;
+    auto res = CSVParser::parseLineToArgs(line,
+                                          st->student_id,
+                                          st->firstName,
+                                          st->lastName,
+                                          st->dateOfBirth,
+                                          st->gender,
+                                          st->socialID,
+                                          class_id);
+    if (res != CSVParser::ParseError::Success) {
+      continue;
+    }
+
+    st->pClass = nullptr;
+    for (auto cls : all_class) {
+      if (cls->class_id == class_id) {
+        st->pClass = cls;
+        break;
+      }
+    }
+
+    if (st->pClass == nullptr) {
+      delete st;
+      continue;
+    }
+
+    st->pClass->pStudents.push_back(st);
+    st->pUser = User::createStudentUser(st->student_id, st->dateOfBirth, st);
+    all_student.push_back(st);
+    ++success;
+  }
+
+  fCSV.close();
+
+  cout << "Imported " << success << "/" << total << " students\n\n";
+  cout << "Default login credentials for new student:\n";
+  cout << "Username: same as Student ID\n";
+  cout << "Password: same as Date of Birth\n";
+
+  waitForEnter(false);
 }
 
 void Student::editStudent() {

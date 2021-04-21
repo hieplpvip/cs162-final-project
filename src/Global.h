@@ -12,6 +12,7 @@
 #include "Student.h"
 #include "User.h"
 #include "Utils.h"
+#include "libs/CSVParser.h"
 #include "libs/Vector.h"
 
 namespace Global {

@@ -38,6 +38,9 @@ public:
   string getID();
 
   static void createStudent();
+  static void createStudentFromScreen();
+  static void createStudentFromCSV();
+
   static void editStudent();
   static void viewStudent();
 

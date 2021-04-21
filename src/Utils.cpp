@@ -45,8 +45,10 @@ void printHeader() {
   cout << "\n";
 }
 
-void waitForEnter() {
-  cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+void waitForEnter(bool ignore) {
+  if (ignore) {
+    cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+  }
   cout << "Press Enter to continue...";
   cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
 }

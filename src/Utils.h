@@ -4,6 +4,6 @@
 void milliSleep(int seconds);
 void clearScreen();
 void printHeader();
-void waitForEnter();
+void waitForEnter(bool ignore = true);
 
 #endif
