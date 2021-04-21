@@ -9,6 +9,12 @@ cmake .
 make
 ```
 
+To run:
+
+```shell
+./crs
+```
+
 ## Code Format
 
 ClangFormat:
