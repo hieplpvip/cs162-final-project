@@ -160,9 +160,9 @@ bool App::authenticate() {
 
     string username, password;
     cout << "Enter username: ";
-    cin >> username;
+    getline(cin, username);
     cout << "Enter password: ";
-    cin >> password;
+    getline(cin, password);
 
     for (auto p : all_user) {
       if (p->username == username && p->password == password) {

@@ -17,10 +17,11 @@ void User::createStaffUser() {
   clearScreen();
 
   User *u = new User();
+  cin.ignore();
   cout << "Username: ";
-  cin >> u->username;
+  getline(cin, u->username);
   cout << "Password: ";
-  cin >> u->password;
+  getline(cin, u->password);
   u->user_id = genUserID();
   u->role = UserRole::STAFF;
   u->pStudent = nullptr;
