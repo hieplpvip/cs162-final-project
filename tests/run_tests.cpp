@@ -37,6 +37,12 @@ int main() {
     values.clear();
     assert(values.empty());
 
+    // copy constructor
+    Vector<int> A(1, 1), B = A;
+    B[0] = 2;
+    assert(A[0] == 1);
+    assert(B[0] == 2);
+
     cout << "Vector passed\n";
   }
 

@@ -25,6 +25,7 @@ public:
   void resize(size_t size, T val = T());
 
   T &operator[](size_t index);
+  T &operator[](size_t index) const;
   void erase(size_t index);
   void erase(T value);
   void clear();
@@ -149,6 +150,11 @@ void Vector<T>::resize(size_t new_size, T val) {
 
 template <class T>
 T &Vector<T>::operator[](size_t index) {
+  return _elements[index];
+}
+
+template <class T>
+T &Vector<T>::operator[](size_t index) const {
   return _elements[index];
 }
 
