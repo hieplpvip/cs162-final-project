@@ -8,6 +8,38 @@ string SchoolYear::getID() {
   return school_year_id;
 }
 
+SchoolYear *SchoolYear::selectSchoolYear(Vector<SchoolYear *> school_years) {
+  clearScreen();
+
+  if (school_years.empty()) {
+    cout << "No school year\n";
+    milliSleep(1000);
+    return nullptr;
+  }
+
+  while (true) {
+    for (int i = 0; i < school_years.size(); i++) {
+      cout << "School Year #" << (i + 1) << ": ";
+      cout << school_years[i]->name << " - ";
+      cout << school_years[i]->pSemesters.size() << " semesters\n";
+    }
+    cout << "\n0. Go Back\n";
+
+    int ind;
+    cout << "Please select one: ";
+    cin >> ind;
+
+    if (ind < 0 || ind > school_years.size()) {
+      cout << "Invalid choice\n";
+      milliSleep(1000);
+    } else if (ind == 0) {
+      return nullptr;
+    } else {
+      return school_years[ind - 1];
+    }
+  }
+}
+
 void SchoolYear::createSchoolYear() {
   clearScreen();
 

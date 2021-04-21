@@ -9,6 +9,8 @@ class Course;
 
 class Semester {
 public:
+  static const string ORD2STR[];
+
   string semester_id;
   int semester_ordinal;
   SchoolYear* pSchoolYear;
@@ -22,6 +24,8 @@ public:
   Semester(string id);
 
   string getID();
+
+  static Semester* selectSemester(Vector<Semester*> semesters);
 
   static Semester* getSemester(string schYear, int sms);
 

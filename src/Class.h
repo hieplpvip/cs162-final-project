@@ -20,6 +20,8 @@ public:
 
   string getID();
 
+  static Class* selectClass(Vector<Class*> classes);
+
   static void createClass();
   static void editClass();
   static void viewClass();

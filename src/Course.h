@@ -28,6 +28,8 @@ public:
 
   string getID();
 
+  static Course* selectCourse(Vector<Course*> courses);
+
   static void createCourse();
   static void editCourse();
   static void viewCourse();

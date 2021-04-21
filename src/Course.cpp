@@ -8,6 +8,38 @@ string Course::getID() {
   return course_id;
 }
 
+Course *Course::selectCourse(Vector<Course *> courses) {
+  clearScreen();
+
+  if (courses.empty()) {
+    cout << "No course\n";
+    milliSleep(1000);
+    return nullptr;
+  }
+
+  while (true) {
+    for (int i = 0; i < courses.size(); i++) {
+      cout << "Course #" << (i + 1) << ": ";
+      cout << courses[i]->course_code << " - ";
+      cout << courses[i]->course_name << '\n';
+    }
+    cout << "\n0. Go Back\n";
+
+    int ind;
+    cout << "Please select one: ";
+    cin >> ind;
+
+    if (ind < 0 || ind > courses.size()) {
+      cout << "Invalid choice\n";
+      milliSleep(1000);
+    } else if (ind == 0) {
+      return nullptr;
+    } else {
+      return courses[ind - 1];
+    }
+  }
+}
+
 void Course::createCourse() {
   clearScreen();
 

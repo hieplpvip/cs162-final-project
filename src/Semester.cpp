@@ -1,11 +1,50 @@
 #include "Global.h"
 using namespace std;
 
+const string Semester::ORD2STR[] = {
+    "",  // padding
+    "Fall",
+    "Spring",
+    "Summer",
+};
+
 Semester::Semester() {}
 Semester::Semester(string id) : semester_id(id) {}
 
 string Semester::getID() {
   return semester_id;
+}
+
+Semester *Semester::selectSemester(Vector<Semester *> semesters) {
+  clearScreen();
+
+  if (semesters.empty()) {
+    cout << "No semester\n";
+    milliSleep(1000);
+    return nullptr;
+  }
+
+  while (true) {
+    for (int i = 0; i < semesters.size(); i++) {
+      cout << "Semester #" << (i + 1) << ": ";
+      cout << ORD2STR[semesters[i]->semester_ordinal] << ' ';
+      cout << semesters[i]->pSchoolYear->name << '\n';
+    }
+    cout << "\n0. Go Back\n";
+
+    int ind;
+    cout << "Please select one: ";
+    cin >> ind;
+
+    if (ind < 0 || ind > semesters.size()) {
+      cout << "Invalid choice\n";
+      milliSleep(1000);
+    } else if (ind == 0) {
+      return nullptr;
+    } else {
+      return semesters[ind - 1];
+    }
+  }
 }
 
 void Semester::createSemester() {
@@ -33,7 +72,7 @@ void Semester::createSemester() {
   --ind;
 
   int ord;
-  cout << "\n1 (Fall), 2 (Summer), 3 (Autumn)\n";
+  cout << "\n1 (Fall), 2 (Spring), 3 (Summer)\n";
   cout << "Which semester is this: ";
   cin >> ord;
   if (ord < 1 || ord > 3) {

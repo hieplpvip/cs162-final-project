@@ -37,6 +37,8 @@ public:
 
   string getID();
 
+  static Student *selectStudent(Vector<Student *> students);
+
   static void createStudent();
   static void createStudentFromScreen();
   static void createStudentFromCSV();

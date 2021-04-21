@@ -8,6 +8,38 @@ string Student::getID() {
   return student_id;
 }
 
+Student *selectStudent(Vector<Student *> students) {
+  clearScreen();
+
+  if (students.empty()) {
+    cout << "No student\n";
+    milliSleep(1000);
+    return nullptr;
+  }
+
+  while (true) {
+    for (int i = 0; i < students.size(); i++) {
+      cout << "Student #" << (i + 1) << ": ";
+      cout << students[i]->student_id << " - ";
+      cout << students[i]->firstName << ' ' << students[i]->lastName << '\n';
+    }
+    cout << "\n0. Go Back\n";
+
+    int ind;
+    cout << "Please select one: ";
+    cin >> ind;
+
+    if (ind < 0 || ind > students.size()) {
+      cout << "Invalid choice\n";
+      milliSleep(1000);
+    } else if (ind == 0) {
+      return nullptr;
+    } else {
+      return students[ind - 1];
+    }
+  }
+}
+
 void Student::createStudent() {
   clearScreen();
 
