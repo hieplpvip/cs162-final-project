@@ -1,5 +1,4 @@
 #include "CSVParser.h"
-
 using namespace std;
 
 namespace CSVParser {
@@ -15,7 +14,7 @@ namespace CSVParser {
     };
   }
 
-  ParseError parseLine(string line, Vector<string> &values) {
+  ParseError parseLine(const string &line, Vector<string> &values) {
     string value = "";
     auto state = ParseState::Initial;
 
@@ -105,7 +104,7 @@ namespace CSVParser {
       }
 
       bool enclosed = false;
-      for (const char &c : value) {
+      for (char c : value) {
         if (c == COMMA || c == QUOTE) {
           enclosed = true;
         }
@@ -116,7 +115,7 @@ namespace CSVParser {
       } else {
         string escaped = "";
         escaped += QUOTE;
-        for (const char &c : value) {
+        for (char c : value) {
           if (c == QUOTE) {
             escaped += QUOTE;
             escaped += QUOTE;

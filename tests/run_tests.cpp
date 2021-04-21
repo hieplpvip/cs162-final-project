@@ -56,6 +56,29 @@ int main() {
     string line2 = CSVParser::writeLine(values);
     assert(line2 == line);
 
+    string fields[6];
+    assert(CSVParser::parseLineToArgs(line,
+                                      fields[0],
+                                      fields[1],
+                                      fields[2],
+                                      fields[3],
+                                      fields[4],
+                                      fields[5]) == CSVParser::ParseError::Success);
+    assert(fields[0] == "Joan \"the bone\", Anne");
+    assert(fields[1] == "Jet");
+    assert(fields[2] == "9th, at Terrace plc");
+    assert(fields[3] == "Desert City");
+    assert(fields[4] == "CO");
+    assert(fields[5] == "00123");
+
+    string line3 = CSVParser::writeArgsToLine(fields[0],
+                                              fields[1],
+                                              fields[2],
+                                              fields[3],
+                                              fields[4],
+                                              fields[5]);
+    assert(line3 == line);
+
     cout << "CSVParser passed\n";
   }
 

@@ -3,7 +3,6 @@
 
 #include <stddef.h>
 
-// TODO: unit test
 template <class T>
 class Vector {
 public:
