@@ -72,6 +72,8 @@ void Course::createCourse() {
   getline(cin, crs->end_date);
   cout << "Max number of students: ";
   cin >> crs->maxNumberOfStudents;
+  cout << "Number of credits: ";
+  cin >> crs->numberOfCredits;
   cin.ignore();
   cout << "Schedule:\n";
   cout << "  First session: ";
@@ -108,6 +110,7 @@ void Course::viewCourse() {
           cout << crs->pSemester->pSchoolYear->name << '\n';
           cout << "Lecturer: " << crs->lecturer << '\n';
           cout << "Number of students: " << crs->pStudents.size() << "/" << crs->maxNumberOfStudents << " students\n";
+          cout << "Number of credits: " << crs->numberOfCredits << '\n';
           cout << "Start date: " << crs->start_date << '\n';
           cout << "End date: " << crs->end_date << '\n';
           cout << "Schedule:\n";
@@ -234,6 +237,7 @@ void Course::editCourse() {
     cout << pSemester->pSchoolYear->name << '\n';
     cout << "Lecturer: " << lecturer << '\n';
     cout << "Number of students: " << pStudents.size() << "/" << maxNumberOfStudents << " students\n";
+    cout << "Number of credits: " << numberOfCredits << '\n';
     cout << "Start date: " << start_date << '\n';
     cout << "End date: " << end_date << '\n';
     cout << "Schedule:\n";
@@ -244,8 +248,9 @@ void Course::editCourse() {
     int cmd;
     cout << "1. Edit course name\n";
     cout << "2. Edit lecturer\n";
-    cout << "3. Edit start date\n";
-    cout << "4. Edit end date\n";
+    cout << "3. Edit number of credits\n";
+    cout << "4. Edit start date\n";
+    cout << "5. Edit end date\n";
     cout << "0. Go Back\n";
     cout << "Please choose one: ";
     cin >> cmd;
@@ -266,11 +271,17 @@ void Course::editCourse() {
         break;
       case 3:
         clearScreen();
+        cout << "Please enter new number of credits: ";
+        cin >> numberOfCredits;
+        cin.ignore();
+        break;
+      case 4:
+        clearScreen();
         cout << "Please enter new start date: ";
         cin.ignore();
         getline(cin, start_date);
         break;
-      case 4:
+      case 5:
         clearScreen();
         cout << "Please enter new end date: ";
         cin.ignore();
@@ -297,7 +308,12 @@ bool Course::deleteCourse(Course *crs) {
 
   if (cmd == "yes") {
     for (auto st : crs->pStudents) {
-      st->pEnrolledCourses.erase(crs);
+      for (int i = 0; i < st->pEnrolledCourses.size(); ++i) {
+        if (st->pEnrolledCourses[i] == crs) {
+          st->pEnrolledCourses.erase(i);
+          st->pCourseScores.erase(i);
+        }
+      }
     }
     crs->pSemester->pCourses.erase(crs);
     all_course.erase(crs);
@@ -352,7 +368,7 @@ void Course::loadFromStream(std::istream &f) {
   }
 
   f >> maxNumberOfStudents;
-  f >> credits;
+  f >> numberOfCredits;
   f.ignore();
 
   getline(f, schedule[0]);
@@ -372,7 +388,7 @@ void Course::writeToStream(std::ostream &f) {
     f << st->student_id << '\n';
   }
   f << maxNumberOfStudents << '\n';
-  f << credits << '\n';
+  f << numberOfCredits << '\n';
   f << schedule[0] << '\n';
   f << schedule[1] << '\n';
 }

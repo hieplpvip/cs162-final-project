@@ -21,7 +21,7 @@ public:
   Semester* pSemester;
   Vector<Student*> pStudents;
   int maxNumberOfStudents;
-  int credits;
+  int numberOfCredits;
   string schedule[2];
 
   Course();

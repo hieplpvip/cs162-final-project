@@ -213,6 +213,7 @@ void Student::viewEnrolledCourse() {
     cout << "Semester " << enrolledCourses[i]->pSemester->semester_ordinal << " - ";
     cout << "School Year " << enrolledCourses[i]->pSemester->pSchoolYear->name << '\n';
     cout << "Lecturer: " << enrolledCourses[i]->lecturer << '\n';
+    cout << "Number of credits: " << enrolledCourses[i]->numberOfCredits << '\n';
     cout << "Start date: " << enrolledCourses[i]->start_date << '\n';
     cout << "End date: " << enrolledCourses[i]->end_date << '\n';
     cout << "Schedule:\n";
