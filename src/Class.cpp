@@ -65,6 +65,7 @@ void Class::viewClass() {
 
       int cmd;
       cout << "1. View students\n";
+      cout << "2. View scoreboard\n";
       cout << "0. Go Back\n";
       cout << "Please select one: ";
       cin >> cmd;
@@ -74,6 +75,9 @@ void Class::viewClass() {
         case 1:
           Student::selectStudent(cls->pStudents, true);
           break;
+        case 2:
+          cls->viewScoreboard();
+          break;
         default:
           cout << "Invalid choice\n";
           break;
@@ -82,7 +86,7 @@ void Class::viewClass() {
   }
 }
 
-void Class::showScoreboard() {
+void Class::viewScoreboard() {
   throw("Not implemented yet");
 }
 

@@ -219,14 +219,24 @@ void Course::exportScoreboard() {
   fCSV << CSVParser::writeArgsToLine("Student ID",
                                      "Full Name",
                                      "Gender",
-                                     "Class ID")
+                                     "Class ID",
+                                     "Midterm Mark",
+                                     "Final Mark",
+                                     "Other Mark",
+                                     "Total Mark")
        << '\n';
 
   for (auto st : pStudents) {
+    int i = st->pEnrolledCourses.find(this);
+    auto score = st->pCourseScores[i];
     fCSV << CSVParser::writeArgsToLine(st->student_id,
                                        st->firstName + " " + st->lastName,
                                        st->gender,
-                                       st->pClass->class_id)
+                                       st->pClass->class_id,
+                                       score.midtermMark,
+                                       score.finalMark,
+                                       score.otherMark,
+                                       score.totalMark)
          << '\n';
   }
 

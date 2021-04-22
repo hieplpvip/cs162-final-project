@@ -25,7 +25,7 @@ public:
   static void createClass();
   static void viewClass();
 
-  static void showScoreboard();
+  void viewScoreboard();
 
   void loadFromStream(std::istream& f);
   void writeToStream(std::ostream& f);

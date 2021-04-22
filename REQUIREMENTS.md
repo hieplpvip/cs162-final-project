@@ -36,7 +36,7 @@
 
 - [x] Export list of students in a course to a CSV file
 - [ ] Import the scoreboard of a course. A scoreboard must have the following columns: Student ID, Full Name, Midterm Mark, Final Mark, Other Mark, Total Mark. An academic staff member will export the list of students in a course, send the CSV file to the teacher, the teacher will enter student results in this file, send it back to the staff, and the staff will import the scoreboard to the system.
-- [ ] View the scoreboard of a course
+- [x] View the scoreboard of a course
 - [ ] Update a student's score
 - [ ] View the scoreboard of a class, (including final marks of all courses in the semester, GPA in this semester, and the overall GPA)
 
