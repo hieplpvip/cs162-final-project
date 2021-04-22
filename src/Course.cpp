@@ -120,11 +120,13 @@ void Course::viewCourse() {
           cout << "2. View scoreboard\n";
           cout << "3. Export scoreboard\n";
           cout << "4. Import scoreboard\n";
+          cout << "5. Edit course information\n";
+          cout << "6. Delete course\n";
           cout << "0. Go Back\n";
           cout << "Please select one: ";
           cin >> cmd;
 
-          if (cmd == 0) break;
+          if (cmd == 0 || (cmd == 6 && deleteCourse(crs))) break;
           switch (cmd) {
             case 1:
               Student::selectStudent(crs->pStudents, true);
@@ -137,6 +139,9 @@ void Course::viewCourse() {
               break;
             case 4:
               crs->importScoreboard();
+              break;
+            case 5:
+              crs->editCourse();
               break;
             default:
               cout << "Invalid choice\n";
@@ -252,13 +257,37 @@ void Course::importScoreboard() {
   throw("Not implemented yet");
 }
 
-Course *Course::findCourse(Semester *sms, string crsID) {
-  for (int i = 0; i < sms->pCourses.size(); i++) {
-    if (crsID == sms->pCourses[i]->course_id) {
-      return sms->pCourses[i];
+void Course::editCourse() {
+  throw("Not implemented yet");
+}
+
+bool Course::deleteCourse(Course *crs) {
+  clearScreen();
+
+  cout << "Type 'yes' to confirm deleteing course ";
+  cout << crs->course_code << " - ";
+  cout << Semester::ORD2STR[crs->pSemester->semester_ordinal] << ' ';
+  cout << crs->pSemester->pSchoolYear->name << '\n';
+
+  string cmd;
+  cin.ignore();
+  getline(cin, cmd);
+
+  if (cmd == "yes") {
+    for (auto st : crs->pStudents) {
+      st->pEnrolledCourses.erase(crs);
     }
+    crs->pSemester->pCourses.erase(crs);
+    all_course.erase(crs);
+    delete crs;
+    cout << "Course deleted\n";
+    waitForEnter();
+    return true;
+  } else {
+    cout << "This course will not be deleted\n";
+    milliSleep(1000);
+    return false;
   }
-  return nullptr;
 }
 
 void Course::loadFromStream(std::istream &f) {

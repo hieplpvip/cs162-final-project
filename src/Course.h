@@ -39,11 +39,11 @@ public:
   void exportScoreboard();
   void importScoreboard();
 
+  void editCourse();
+  static bool deleteCourse(Course* crs);
+
   void loadFromStream(std::istream& f);
   void writeToStream(std::ostream& f);
-
-private:
-  static Course* findCourse(Semester* sms, string crsID);
 };
 
 #endif
