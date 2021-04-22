@@ -308,12 +308,9 @@ bool Course::deleteCourse(Course *crs) {
 
   if (cmd == "yes") {
     for (auto st : crs->pStudents) {
-      for (int i = 0; i < st->pEnrolledCourses.size(); ++i) {
-        if (st->pEnrolledCourses[i] == crs) {
-          st->pEnrolledCourses.erase(i);
-          st->pCourseScores.erase(i);
-        }
-      }
+      int i = st->pEnrolledCourses.find(crs);
+      st->pEnrolledCourses.erase(i);
+      st->pCourseScores.erase(i);
     }
     crs->pSemester->pCourses.erase(crs);
     all_course.erase(crs);

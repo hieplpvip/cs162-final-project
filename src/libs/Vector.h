@@ -30,6 +30,8 @@ public:
   void erase(T value);
   void clear();
 
+  size_t find(const T &value);
+
   T *begin();
   T *end();
   T *begin() const;
@@ -183,6 +185,16 @@ void Vector<T>::erase(T value) {
 template <class T>
 void Vector<T>::clear() {
   _size = 0;
+}
+
+template <class T>
+size_t Vector<T>::find(const T &value) {
+  for (size_t i = 0; i < _size; ++i) {
+    if (_elements[i] == value) {
+      return i;
+    }
+  }
+  return _size;
 }
 
 template <class T>
