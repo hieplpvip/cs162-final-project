@@ -25,7 +25,7 @@ public:
 
   string getID();
 
-  static Semester* selectSemester(Vector<Semester*> semesters);
+  static Semester* selectSemester(const Vector<Semester*>& semesters);
 
   static Semester* getSemester(string schYear, int sms);
 

@@ -20,7 +20,7 @@ public:
 
   string getID();
 
-  static Class* selectClass(Vector<Class*> classes);
+  static Class* selectClass(const Vector<Class*>& classes);
 
   static void createClass();
   static void editClass();

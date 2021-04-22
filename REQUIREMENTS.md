@@ -28,7 +28,7 @@
 ### At any time, an academic staff member can:
 
 - [x] View list of classes
-- [ ] View list of students in a class
+- [x] View list of students in a class
 - [x] View list of courses
 - [ ] View list of students in a course
 

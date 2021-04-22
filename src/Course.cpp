@@ -8,7 +8,7 @@ string Course::getID() {
   return course_id;
 }
 
-Course *Course::selectCourse(Vector<Course *> courses) {
+Course *Course::selectCourse(const Vector<Course *> &courses) {
   clearScreen();
 
   if (courses.empty()) {

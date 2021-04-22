@@ -15,7 +15,7 @@ string Semester::getID() {
   return semester_id;
 }
 
-Semester *Semester::selectSemester(Vector<Semester *> semesters) {
+Semester *Semester::selectSemester(const Vector<Semester *> &semesters) {
   clearScreen();
 
   if (semesters.empty()) {

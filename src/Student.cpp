@@ -8,7 +8,7 @@ string Student::getID() {
   return student_id;
 }
 
-Student *selectStudent(Vector<Student *> students) {
+Student *Student::selectStudent(const Vector<Student *> &students, bool showonly) {
   clearScreen();
 
   if (students.empty()) {
@@ -19,11 +19,15 @@ Student *selectStudent(Vector<Student *> students) {
 
   while (true) {
     for (int i = 0; i < students.size(); i++) {
-      cout << "Student #" << (i + 1) << ": ";
+      cout << (i + 1) << ". ";
       cout << students[i]->student_id << " - ";
       cout << students[i]->firstName << ' ' << students[i]->lastName << '\n';
     }
-    cout << "\n0. Go Back\n";
+    if (showonly) {
+      waitForEnter();
+      return nullptr;
+    }
+    cout << "0. Go Back\n";
 
     int ind;
     cout << "Please select one: ";

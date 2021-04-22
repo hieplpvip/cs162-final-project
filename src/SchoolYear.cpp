@@ -8,7 +8,7 @@ string SchoolYear::getID() {
   return school_year_id;
 }
 
-SchoolYear *SchoolYear::selectSchoolYear(Vector<SchoolYear *> school_years) {
+SchoolYear *SchoolYear::selectSchoolYear(const Vector<SchoolYear *> &school_years) {
   clearScreen();
 
   if (school_years.empty()) {

@@ -8,7 +8,7 @@ string Class::getID() {
   return class_id;
 }
 
-Class *Class::selectClass(Vector<Class *> classes) {
+Class *Class::selectClass(const Vector<Class *> &classes) {
   clearScreen();
 
   if (classes.empty()) {
@@ -19,11 +19,11 @@ Class *Class::selectClass(Vector<Class *> classes) {
 
   while (true) {
     for (int i = 0; i < classes.size(); i++) {
-      cout << "Class #" << (i + 1) << ": ";
+      cout << (i + 1) << ". ";
       cout << classes[i]->class_name << " - ";
       cout << classes[i]->pStudents.size() << " students" << '\n';
     }
-    cout << "\n0. Go Back\n";
+    cout << "0. Go Back\n";
 
     int ind;
     cout << "Please select one: ";
@@ -57,16 +57,38 @@ void Class::editClass() {
 }
 
 void Class::viewClass() {
-  clearScreen();
+  while (true) {
+    clearScreen();
 
-  cout << "Here is a list of classes:\n\n";
-  for (int i = 0; i < all_class.size(); i++) {
-    cout << "Class #" << (i + 1) << ": ";
-    cout << all_class[i]->class_name << " - ";
-    cout << all_class[i]->pStudents.size() << " students" << '\n';
+    auto cls = selectClass(all_class);
+    if (cls == nullptr) {
+      return;
+    }
+
+    while (true) {
+      clearScreen();
+
+      cout << "Class " << cls->class_name << " - ";
+      cout << cls->pStudents.size() << " students\n\n";
+
+      int cmd;
+      cout << "1. View students\n";
+      cout << "0. Go Back\n";
+      cout << "Please select one: ";
+      cin >> cmd;
+
+      if (cmd == 0) break;
+
+      switch (cmd) {
+        case 1:
+          Student::selectStudent(cls->pStudents, true);
+          break;
+        default:
+          cout << "Invalid choice\n";
+          break;
+      }
+    }
   }
-
-  waitForEnter();
 }
 
 void Class::showScoreboard() {

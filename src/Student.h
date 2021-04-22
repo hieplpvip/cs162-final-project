@@ -37,7 +37,7 @@ public:
 
   string getID();
 
-  static Student *selectStudent(Vector<Student *> students);
+  static Student *selectStudent(const Vector<Student *> &students, bool showonly = false);
 
   static void createStudent();
   static void createStudentFromScreen();
