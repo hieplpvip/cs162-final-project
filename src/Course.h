@@ -36,13 +36,9 @@ public:
 
   static void setCourseRegistration();
 
-  static void viewEnrolledCourse();
-  static void enrollCourse();
-  static void unEnrollCourse();
-  static void viewScore();
-
-  static void viewScoreboard();
-  static void viewStudentInCourse();
+  void viewScoreboard();
+  void exportScoreboard();
+  void importScoreboard();
 
   void loadFromStream(std::istream& f);
   void writeToStream(std::ostream& f);

@@ -121,6 +121,9 @@ void Course::viewCourse() {
 
           int cmd;
           cout << "1. View students\n";
+          cout << "2. View scoreboard\n";
+          cout << "3. Export scoreboard\n";
+          cout << "4. Import scoreboard\n";
           cout << "0. Go Back\n";
           cout << "Please select one: ";
           cin >> cmd;
@@ -129,6 +132,15 @@ void Course::viewCourse() {
           switch (cmd) {
             case 1:
               Student::selectStudent(crs->pStudents, true);
+              break;
+            case 2:
+              crs->viewScoreboard();
+              break;
+            case 3:
+              crs->exportScoreboard();
+              break;
+            case 4:
+              crs->importScoreboard();
               break;
             default:
               cout << "Invalid choice\n";
@@ -165,150 +177,6 @@ void Course::setCourseRegistration() {
     }
     milliSleep(1000);
   }
-}
-
-void Course::viewEnrolledCourse() {
-  clearScreen();
-
-  assert(current_user->role == User::UserRole::STUDENT);
-  auto st = current_user->pStudent;
-  auto &enrolledCourses = st->pEnrolledCourses;
-
-  if (enrolledCourses.empty()) {
-    cout << "You haven't enrolled in any courses\n";
-    milliSleep(1000);
-    return;
-  }
-
-  cout << "Here is a list of courses you have enrolled:\n\n";
-  for (int i = 0; i < enrolledCourses.size(); i++) {
-    cout << "Course #" << (i + 1) << ": ";
-    cout << enrolledCourses[i]->course_code << " - ";
-    cout << enrolledCourses[i]->course_name << " - ";
-    cout << "Semester " << enrolledCourses[i]->pSemester->semester_ordinal << " - ";
-    cout << "School Year " << enrolledCourses[i]->pSemester->pSchoolYear->name << '\n';
-    cout << "Lecturer: " << enrolledCourses[i]->lecturer << '\n';
-    cout << "Start date: " << enrolledCourses[i]->start_date << '\n';
-    cout << "End date: " << enrolledCourses[i]->end_date << '\n';
-    cout << "Schedule:\n";
-    cout << "  First session: " << enrolledCourses[i]->schedule[0] << '\n';
-    cout << "  Second session: " << enrolledCourses[i]->schedule[1] << '\n';
-    cout << '\n';
-  }
-
-  waitForEnter();
-}
-
-void Course::enrollCourse() {
-  clearScreen();
-
-  if (!courseRegistrationOpen) {
-    cout << "Course Registration is close\n";
-    milliSleep(1000);
-    return;
-  }
-
-  if (current_semester == nullptr) {
-    cout << "No current semester\n";
-    milliSleep(1000);
-    return;
-  }
-
-  assert(current_user->role == User::UserRole::STUDENT);
-  auto st = current_user->pStudent;
-
-  for (int i = 0; i < current_semester->pCourses.size(); ++i) {
-    auto crs = current_semester->pCourses[i];
-    cout << (i + 1) << ". " << crs->course_code << " - " << crs->course_name << '\n';
-  }
-
-  int ind;
-  cout << "\nPlease select a course: ";
-  cin >> ind;
-  if (ind < 1 || ind > current_semester->pCourses.size()) {
-    cout << "Invalid\n";
-    milliSleep(1000);
-    return;
-  }
-  --ind;
-
-  auto crs = current_semester->pCourses[ind];
-  for (auto enrolled_crs : st->pEnrolledCourses) {
-    if (enrolled_crs->course_id == crs->course_id) {
-      cout << "You have already enrolled in this course\n";
-      milliSleep(1000);
-      return;
-    }
-
-    for (int i = 0; i < 2; ++i) {
-      for (int j = 0; j < 2; ++j) {
-        if (enrolled_crs->schedule[i] == crs->schedule[j]) {
-          cout << "This course conflicts with course ";
-          cout << enrolled_crs->course_code << " - " << enrolled_crs->course_name << '\n';
-          milliSleep(1000);
-          return;
-        }
-      }
-    }
-  }
-
-  st->pEnrolledCourses.push_back(crs);
-  crs->pStudents.push_back(st);
-}
-
-void Course::unEnrollCourse() {
-  clearScreen();
-
-  if (!courseRegistrationOpen) {
-    cout << "Course Registration is close\n";
-    milliSleep(1000);
-    return;
-  }
-
-  if (current_semester == nullptr) {
-    cout << "No current semester\n";
-    milliSleep(1000);
-    return;
-  }
-
-  assert(current_user->role == User::UserRole::STUDENT);
-  auto st = current_user->pStudent;
-
-  Vector<Course *> enrolledCourses;
-  for (auto crs : st->pEnrolledCourses) {
-    if (crs->pSemester->semester_id == current_semester->semester_id) {
-      enrolledCourses.push_back(crs);
-    }
-  }
-
-  if (enrolledCourses.empty()) {
-    cout << "You haven't enrolled in any courses this semester\n";
-    milliSleep(1000);
-    return;
-  }
-
-  for (int i = 0; i < enrolledCourses.size(); ++i) {
-    auto crs = enrolledCourses[i];
-    cout << (i + 1) << ". " << crs->course_code << " - " << crs->course_name << '\n';
-  }
-
-  int ind;
-  cout << "\nPlease select a course: ";
-  cin >> ind;
-  if (ind < 1 || ind > enrolledCourses.size()) {
-    cout << "Invalid\n";
-    milliSleep(1000);
-    return;
-  }
-  --ind;
-
-  auto crs = enrolledCourses[ind];
-  st->pEnrolledCourses.erase(crs);
-  crs->pStudents.erase(st);
-}
-
-void Course::viewScore() {
-  throw "Not implemented yet!";
 }
 
 void Course::viewScoreboard() {
@@ -348,29 +216,44 @@ void Course::viewScoreboard() {
   }
 }
 
-void Course::viewStudentInCourse() {
-  cout << "Input course ID:";
-  string crsID;
-  cin >> crsID;
-  cout << "Input school year:";
-  string schYear;
-  cin >> schYear;
-  cout << "Input semester:";
-  int sms;
-  cin >> sms;
-  Course *course = findCourse(Semester::getSemester(schYear, sms), crsID);
-  cout << "Here is the list of student in class:\n";
-  cout << setw(12) << left << "ID";
-  cout << setw(60) << left << "Name";
-  cout << endl;
-  cout << setfill('-');
-  cout << setw(72) << "-" << endl;
-  cout << setw(' ');
-  for (int i = 0; i < course->pStudents.size(); i++) {
-    cout << setw(12) << left << course->pStudents[i]->student_id;
-    cout << setw(60) << left << course->pStudents[i]->firstName << " " << course->pStudents[i]->lastName;
-    cout << endl;
+void Course::exportScoreboard() {
+  clearScreen();
+
+  string csvPath;
+  cout << "Please enter CSV file path: ";
+  cin.ignore();
+  getline(cin, csvPath);
+
+  ofstream fCSV(csvPath);
+  if (!fCSV.is_open()) {
+    cout << "Could not open CSV file\n";
+    milliSleep(1000);
+    return;
   }
+
+  // write header
+  fCSV << CSVParser::writeArgsToLine("Student ID",
+                                     "Full Name",
+                                     "Gender",
+                                     "Class ID")
+       << '\n';
+
+  for (auto st : pStudents) {
+    fCSV << CSVParser::writeArgsToLine(st->student_id,
+                                       st->firstName + " " + st->lastName,
+                                       st->gender,
+                                       st->pClass->class_id)
+         << '\n';
+  }
+
+  fCSV.close();
+
+  cout << "Course scoreboard has been exported to " << csvPath << '\n';
+  waitForEnter();
+}
+
+void Course::importScoreboard() {
+  throw("Not implemented yet");
 }
 
 Course *Course::findCourse(Semester *sms, string crsID) {

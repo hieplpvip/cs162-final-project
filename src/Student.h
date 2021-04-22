@@ -45,6 +45,11 @@ public:
 
   static void editStudent();
   static void viewStudent();
+  static void viewScore();
+
+  static void viewEnrolledCourse();
+  static void enrollCourse();
+  static void unEnrollCourse();
 
   void loadFromStream(std::istream &f);
   void writeToStream(std::ostream &f);
