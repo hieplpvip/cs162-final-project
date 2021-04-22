@@ -181,40 +181,7 @@ void Course::setCourseRegistration() {
 }
 
 void Course::viewScoreboard() {
-  cout << "Input the school year:";
-  string schoolYear;
-  cin >> schoolYear;
-  cout << "Input semester:";
-  int sms;
-  cin >> sms;
-  cout << "Input course ID:";
-  string courseID;
-  cin >> courseID;
-  Course *course;
-  for (int i = 0; i < all_course.size(); i++) {
-    if (all_course[i]->pSemester->pSchoolYear->name == schoolYear && all_course[i]->pSemester->semester_ordinal) {
-      course = all_course[i];
-      break;
-    }
-  }
-  cout << "List of student in course scoreboard:\n";
-  cout << setw(10) << left << "ID";
-  cout << setw(60) << left << "Name";
-  cout << setw(5) << right << "GPA";
-  cout << endl;
-  cout << setfill('-');
-  cout << setw(75) << '-' << endl;
-  cout << setfill(' ');
-  for (int i = 0; i < course->pStudents.size(); i++) {
-    cout << setw(10) << left << course->pStudents[i]->student_id;
-    cout << setw(60) << left << course->pStudents[i]->firstName + ' ' + course->pStudents[i]->lastName;
-    for (int j = 0; j < course->pStudents[i]->gpa_courses.size(); j++) {
-      if (course->pStudents[i]->gpa_courses[j]->crs == course) {
-        cout << setw(5) << right << course->pStudents[i]->gpa_courses[j]->overallMark << endl;
-        break;
-      }
-    }
-  }
+  throw("Not implemented yet");
 }
 
 void Course::exportScoreboard() {
@@ -385,6 +352,7 @@ void Course::loadFromStream(std::istream &f) {
   }
 
   f >> maxNumberOfStudents;
+  f >> credits;
   f.ignore();
 
   getline(f, schedule[0]);
@@ -404,6 +372,7 @@ void Course::writeToStream(std::ostream &f) {
     f << st->student_id << '\n';
   }
   f << maxNumberOfStudents << '\n';
+  f << credits << '\n';
   f << schedule[0] << '\n';
   f << schedule[1] << '\n';
 }

@@ -29,9 +29,6 @@ public:
 
   void loadFromStream(std::istream& f);
   void writeToStream(std::ostream& f);
-
-private:
-  static Class* findClass(string classID);
 };
 
 #endif

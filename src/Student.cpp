@@ -381,6 +381,14 @@ void Student::loadFromStream(std::istream &f) {
     }
     assert(found);
   }
+  for (int i = 0; i < sz; ++i) {
+    double midtermMark, finalMark, otherMark, totalMark;
+    f >> midtermMark;
+    f >> finalMark;
+    f >> otherMark;
+    f >> totalMark;
+    pCourseScores.push_back({midtermMark, finalMark, otherMark, totalMark});
+  }
 }
 
 void Student::writeToStream(std::ostream &f) {
@@ -395,5 +403,11 @@ void Student::writeToStream(std::ostream &f) {
   f << pEnrolledCourses.size() << '\n';
   for (auto crs : pEnrolledCourses) {
     f << crs->course_id << '\n';
+  }
+  for (auto score : pCourseScores) {
+    f << score.midtermMark << ' ';
+    f << score.finalMark << ' ';
+    f << score.otherMark << ' ';
+    f << score.totalMark << '\n';
   }
 }

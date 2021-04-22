@@ -11,14 +11,8 @@ class Class;
 class Course;
 class Semester;
 
-struct scorePerCourse {
-  Course *crs;
-  float midtermGMark, finalMark, otherMark, overallMark;
-};
-
-struct scorePerSemester {
-  Semester *sms;
-  float gpa;
+struct CourseScore {
+  double midtermMark, finalMark, otherMark, totalMark;
 };
 
 class Student {
@@ -27,10 +21,7 @@ public:
   User *pUser;
   Class *pClass;
   Vector<Course *> pEnrolledCourses;
-
-  float overallGPA;
-  Vector<scorePerCourse *> gpa_courses;
-  Vector<scorePerSemester *> sms_courses;
+  Vector<CourseScore> pCourseScores;
 
   Student();
   Student(string id);

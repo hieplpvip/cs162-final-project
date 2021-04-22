@@ -83,44 +83,7 @@ void Class::viewClass() {
 }
 
 void Class::showScoreboard() {
-  cout << "Input class ID:";
-  string classID;
-  cin >> classID;
-  Class *cls = Class::findClass(classID);
-  cout << "Here is the score board of the class:\n";
-  cout << setfill('*');
-  cout << setw(117) << '*' << endl;
-  for (int i = 0; i < cls->pStudents.size(); i++) {
-    cout << "No." << i << endl;
-    cout << "ID:" << cls->pStudents[i]->student_id << endl;
-    cout << setw(12) << left << "Course ID:";
-    cout << setw(100) << left << "Course name";
-    cout << setw(5) << left << "GPA:";
-    cout << endl;
-    for (int j = 0; j < cls->pStudents[i]->pEnrolledCourses.size(); j++) {
-      cout << setw(12) << left << cls->pStudents[i]->gpa_courses[j]->crs->course_id;
-      cout << setw(100) << left << cls->pStudents[i]->gpa_courses[j]->crs->course_name;
-      cout << setw(5) << left << cls->pStudents[i]->gpa_courses[j]->overallMark;
-      cout << endl;
-    }
-    cout << setw(12) << left << "Semester";
-    cout << setw(5) << left << "GPA";
-    for (int j = 0; j < cls->pStudents[i]->gpa_courses.size(); i++) {
-      cout << setw(12) << left << cls->pStudents[i]->sms_courses[j]->sms->semester_ordinal;
-      cout << setw(5) << left << cls->pStudents[i]->sms_courses[j]->gpa;
-      cout << endl;
-    }
-    cout << endl;
-  }
-}
-
-Class *Class::findClass(string classID) {
-  for (auto cls : all_class) {
-    if (cls->class_id == classID) {
-      return cls;
-    }
-  }
-  return nullptr;
+  throw("Not implemented yet");
 }
 
 void Class::loadFromStream(std::istream &f) {
