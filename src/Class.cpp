@@ -52,10 +52,6 @@ void Class::createClass() {
   all_class.push_back(cls);
 }
 
-void Class::editClass() {
-  throw "Not implemented yet!";
-}
-
 void Class::viewClass() {
   while (true) {
     auto cls = selectClass(all_class);

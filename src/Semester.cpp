@@ -100,10 +100,6 @@ void Semester::createSemester() {
   current_semester = sem;
 }
 
-void Semester::editSemester() {
-  throw "Not implemented yet!";
-}
-
 void Semester::viewSemester() {
   string schoolYear;
   cout << "Input school year:";

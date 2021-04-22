@@ -177,10 +177,6 @@ void Student::createStudentFromCSV() {
   waitForEnter();
 }
 
-void Student::editStudent() {
-  throw "Not implemented yet!";
-}
-
 void Student::viewStudent() {
   for (int i = 0; i < all_student.size(); i++) {
     cout << "Student ID:  " << all_student[i]->student_id << endl;

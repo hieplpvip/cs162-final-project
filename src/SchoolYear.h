@@ -25,7 +25,6 @@ public:
   static SchoolYear* selectSchoolYear(const Vector<SchoolYear*>& school_years);
 
   static void createSchoolYear();
-  static void editSchoolYear();
   static void viewSchoolYear();
 
   void loadFromStream(std::istream& f);

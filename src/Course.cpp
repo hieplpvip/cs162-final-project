@@ -86,10 +86,6 @@ void Course::createCourse() {
   all_course.push_back(crs);
 }
 
-void Course::editCourse() {
-  throw "Not implemented yet!";
-}
-
 void Course::viewCourse() {
   while (true) {
     auto sy = SchoolYear::selectSchoolYear(all_school_year);

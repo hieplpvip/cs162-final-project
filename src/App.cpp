@@ -187,6 +187,7 @@ void App::showMenu(const FunctionRecord menu[], int num) {
 
     for (int i = 0; i < num; ++i) {
       if (menu[i].is_section_header) {
+        if (i != 0) cout << '\n';
         cout << "--- " << menu[i].title << " ---\n";
       } else {
         cout << ++cnt_options << ". " << menu[i].title << '\n';

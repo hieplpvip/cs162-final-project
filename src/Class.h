@@ -23,7 +23,6 @@ public:
   static Class* selectClass(const Vector<Class*>& classes);
 
   static void createClass();
-  static void editClass();
   static void viewClass();
 
   static void showScoreboard();

@@ -43,7 +43,6 @@ public:
   static void createStudentFromScreen();
   static void createStudentFromCSV();
 
-  static void editStudent();
   static void viewStudent();
   static void viewScore();
 

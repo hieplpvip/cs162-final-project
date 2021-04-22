@@ -17,7 +17,6 @@ public:
   Vector<Course*> pCourses;
 
   static void createSemester();
-  static void editSemester();
   static void viewSemester();
 
   Semester();

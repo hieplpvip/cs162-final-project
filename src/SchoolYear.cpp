@@ -62,10 +62,6 @@ void SchoolYear::createSchoolYear() {
   all_school_year.push_back(schYear);
 }
 
-void SchoolYear::editSchoolYear() {
-  throw "Not implemented yet!";
-}
-
 void SchoolYear::viewSchoolYear() {
   cout << "List of school year:\n";
   for (int i = 0; i < all_school_year.size(); i++) {
