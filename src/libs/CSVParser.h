@@ -45,7 +45,7 @@ namespace CSVParser {
   }
 
   template <class... Ts>
-  string writeArgsToLine(Ts &...args) {
+  string writeArgsToLine(Ts... args) {
     Vector<string> values;
 
     auto lambda = [&](auto &v) {
