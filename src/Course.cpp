@@ -258,7 +258,62 @@ void Course::importScoreboard() {
 }
 
 void Course::editCourse() {
-  throw("Not implemented yet");
+  while (true) {
+    clearScreen();
+
+    cout << "Course " << course_code << " - ";
+    cout << course_name << " - ";
+    cout << Semester::ORD2STR[pSemester->semester_ordinal] << ' ';
+    cout << pSemester->pSchoolYear->name << '\n';
+    cout << "Lecturer: " << lecturer << '\n';
+    cout << "Number of students: " << pStudents.size() << "/" << maxNumberOfStudents << " students\n";
+    cout << "Start date: " << start_date << '\n';
+    cout << "End date: " << end_date << '\n';
+    cout << "Schedule:\n";
+    cout << "  First session: " << schedule[0] << '\n';
+    cout << "  Second session: " << schedule[1] << '\n';
+    cout << '\n';
+
+    int cmd;
+    cout << "1. Edit course name\n";
+    cout << "2. Edit lecturer\n";
+    cout << "3. Edit start date\n";
+    cout << "4. Edit end date\n";
+    cout << "0. Go Back\n";
+    cout << "Please choose one: ";
+    cin >> cmd;
+
+    if (cmd == 0) break;
+    switch (cmd) {
+      case 1:
+        clearScreen();
+        cout << "Please enter new course name: ";
+        cin.ignore();
+        getline(cin, course_name);
+        break;
+      case 2:
+        clearScreen();
+        cout << "Please enter new lecturer: ";
+        cin.ignore();
+        getline(cin, lecturer);
+        break;
+      case 3:
+        clearScreen();
+        cout << "Please enter new start date: ";
+        cin.ignore();
+        getline(cin, start_date);
+        break;
+      case 4:
+        clearScreen();
+        cout << "Please enter new end date: ";
+        cin.ignore();
+        getline(cin, end_date);
+        break;
+      default:
+        cout << "Invalid choice\n";
+        break;
+    }
+  }
 }
 
 bool Course::deleteCourse(Course *crs) {

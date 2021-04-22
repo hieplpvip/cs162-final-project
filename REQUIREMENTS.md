@@ -12,7 +12,7 @@
 - [x] Create a new semester. There are 3 semesters in a school year: 1 (Fall), 2 (Spring), 3 (Summer). The newly-created semester will be the default semester for all actions below.
 - [x] Create a course registration session
 - [x] Add a course: course id, course name, teacher name, number of credits, maximum number of students in that course (default 50), sessions (MON / TUE / WED / THU / FRI / SAT, S1 (07:30), S2 (09:30), S3(13:30), S4 (15:30))
-- [ ] Update course information
+- [x] Update course information
 - [x] Delete a course
 
 ### When a course registration session is active, a student can:
