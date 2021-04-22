@@ -184,7 +184,20 @@ void Course::setCourseRegistration() {
 }
 
 void Course::viewScoreboard() {
-  throw("Not implemented yet");
+  clearScreen();
+
+  for (auto st : pStudents) {
+    cout << st->firstName << ' ';
+    cout << st->lastName << ' ';
+    int i = st->pEnrolledCourses.find(this);
+    auto score = st->pCourseScores[i];
+    cout << score.midtermMark << ' ';
+    cout << score.finalMark << ' ';
+    cout << score.otherMark << ' ';
+    cout << score.totalMark << '\n';
+  }
+
+  waitForEnter();
 }
 
 void Course::exportScoreboard() {
