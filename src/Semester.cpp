@@ -26,11 +26,11 @@ Semester *Semester::selectSemester(const Vector<Semester *> &semesters) {
 
   while (true) {
     for (int i = 0; i < semesters.size(); i++) {
-      cout << "Semester #" << (i + 1) << ": ";
+      cout << (i + 1) << ". ";
       cout << ORD2STR[semesters[i]->semester_ordinal] << ' ';
       cout << semesters[i]->pSchoolYear->name << '\n';
     }
-    cout << "\n0. Go Back\n";
+    cout << "0. Go Back\n";
 
     int ind;
     cout << "Please select one: ";

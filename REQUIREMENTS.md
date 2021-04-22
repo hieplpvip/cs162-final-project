@@ -30,7 +30,7 @@
 - [x] View list of classes
 - [x] View list of students in a class
 - [x] View list of courses
-- [ ] View list of students in a course
+- [x] View list of students in a course
 
 ### At the end of a semester, an academic staff member can:
 

@@ -8,7 +8,7 @@ string Course::getID() {
   return course_id;
 }
 
-Course *Course::selectCourse(const Vector<Course *> &courses) {
+Course *Course::selectCourse(const Vector<Course *> &courses, bool showonly) {
   clearScreen();
 
   if (courses.empty()) {
@@ -19,11 +19,15 @@ Course *Course::selectCourse(const Vector<Course *> &courses) {
 
   while (true) {
     for (int i = 0; i < courses.size(); i++) {
-      cout << "Course #" << (i + 1) << ": ";
+      cout << (i + 1) << ". ";
       cout << courses[i]->course_code << " - ";
       cout << courses[i]->course_name << '\n';
     }
-    cout << "\n0. Go Back\n";
+    if (showonly) {
+      waitForEnter();
+      return nullptr;
+    }
+    cout << "0. Go Back\n";
 
     int ind;
     cout << "Please select one: ";
@@ -87,27 +91,53 @@ void Course::editCourse() {
 }
 
 void Course::viewCourse() {
-  clearScreen();
+  while (true) {
+    auto sy = SchoolYear::selectSchoolYear(all_school_year);
+    if (!sy) break;
 
-  cout << "Here is a list of courses:\n\n";
-  for (int i = 0; i < all_course.size(); i++) {
-    cout << "Course #" << (i + 1) << ": ";
-    cout << all_course[i]->course_code << " - ";
-    cout << all_course[i]->course_name << " - ";
-    cout << all_course[i]->pStudents.size() << "/";
-    cout << all_course[i]->maxNumberOfStudents << " students\n";
-    cout << "Semester " << all_course[i]->pSemester->semester_ordinal << " - ";
-    cout << "School Year " << all_course[i]->pSemester->pSchoolYear->name << '\n';
-    cout << "Lecturer: " << all_course[i]->lecturer << '\n';
-    cout << "Start date: " << all_course[i]->start_date << '\n';
-    cout << "End date: " << all_course[i]->end_date << '\n';
-    cout << "Schedule:\n";
-    cout << "  First session: " << all_course[i]->schedule[0] << '\n';
-    cout << "  Second session: " << all_course[i]->schedule[1] << '\n';
-    cout << '\n';
+    while (true) {
+      auto sem = Semester::selectSemester(sy->pSemesters);
+      if (!sem) break;
+
+      while (true) {
+        auto crs = selectCourse(sem->pCourses);
+        if (!crs) break;
+
+        while (true) {
+          clearScreen();
+
+          cout << "Course " << crs->course_code << " - ";
+          cout << crs->course_name << " - ";
+          cout << Semester::ORD2STR[crs->pSemester->semester_ordinal] << ' ';
+          cout << crs->pSemester->pSchoolYear->name << '\n';
+          cout << "Lecturer: " << crs->lecturer << '\n';
+          cout << "Number of students: " << crs->pStudents.size() << "/" << crs->maxNumberOfStudents << " students\n";
+          cout << "Start date: " << crs->start_date << '\n';
+          cout << "End date: " << crs->end_date << '\n';
+          cout << "Schedule:\n";
+          cout << "  First session: " << crs->schedule[0] << '\n';
+          cout << "  Second session: " << crs->schedule[1] << '\n';
+          cout << '\n';
+
+          int cmd;
+          cout << "1. View students\n";
+          cout << "0. Go Back\n";
+          cout << "Please select one: ";
+          cin >> cmd;
+
+          if (cmd == 0) break;
+          switch (cmd) {
+            case 1:
+              Student::selectStudent(crs->pStudents, true);
+              break;
+            default:
+              cout << "Invalid choice\n";
+              break;
+          }
+        }
+      }
+    }
   }
-
-  waitForEnter();
 }
 
 void Course::setCourseRegistration() {

@@ -58,12 +58,8 @@ void Class::editClass() {
 
 void Class::viewClass() {
   while (true) {
-    clearScreen();
-
     auto cls = selectClass(all_class);
-    if (cls == nullptr) {
-      return;
-    }
+    if (!cls) break;
 
     while (true) {
       clearScreen();
@@ -78,7 +74,6 @@ void Class::viewClass() {
       cin >> cmd;
 
       if (cmd == 0) break;
-
       switch (cmd) {
         case 1:
           Student::selectStudent(cls->pStudents, true);

@@ -19,11 +19,11 @@ SchoolYear *SchoolYear::selectSchoolYear(const Vector<SchoolYear *> &school_year
 
   while (true) {
     for (int i = 0; i < school_years.size(); i++) {
-      cout << "School Year #" << (i + 1) << ": ";
-      cout << school_years[i]->name << " - ";
-      cout << school_years[i]->pSemesters.size() << " semesters\n";
+      cout << (i + 1) << ". ";
+      cout << school_years[i]->name << " (";
+      cout << school_years[i]->pSemesters.size() << " semesters)\n";
     }
-    cout << "\n0. Go Back\n";
+    cout << "0. Go Back\n";
 
     int ind;
     cout << "Please select one: ";

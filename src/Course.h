@@ -28,7 +28,7 @@ public:
 
   string getID();
 
-  static Course* selectCourse(const Vector<Course*>& courses);
+  static Course* selectCourse(const Vector<Course*>& courses, bool showonly = false);
 
   static void createCourse();
   static void editCourse();
