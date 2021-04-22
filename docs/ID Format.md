@@ -37,3 +37,9 @@ Example: `20CTT1`
 ```
 
 Example: `20125005`
+
+### User
+
+Six-digit number starting from 1
+
+Example: `000001`
