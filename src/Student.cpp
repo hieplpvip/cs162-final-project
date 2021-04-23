@@ -9,8 +9,6 @@ string Student::getID() {
 }
 
 Student *Student::selectStudent(const Vector<Student *> &students, bool showonly) {
-  clearScreen();
-
   if (students.empty()) {
     cout << "No student\n";
     milliSleep(1000);
@@ -18,6 +16,8 @@ Student *Student::selectStudent(const Vector<Student *> &students, bool showonly
   }
 
   while (true) {
+    clearScreen();
+
     for (int i = 0; i < students.size(); i++) {
       cout << (i + 1) << ". ";
       cout << students[i]->student_id << " - ";

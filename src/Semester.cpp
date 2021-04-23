@@ -16,8 +16,6 @@ string Semester::getID() {
 }
 
 Semester *Semester::selectSemester(const Vector<Semester *> &semesters) {
-  clearScreen();
-
   if (semesters.empty()) {
     cout << "No semester\n";
     milliSleep(1000);
@@ -25,6 +23,8 @@ Semester *Semester::selectSemester(const Vector<Semester *> &semesters) {
   }
 
   while (true) {
+    clearScreen();
+
     for (int i = 0; i < semesters.size(); i++) {
       cout << (i + 1) << ". ";
       cout << ORD2STR[semesters[i]->semester_ordinal] << ' ';

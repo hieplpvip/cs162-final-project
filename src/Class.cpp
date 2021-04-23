@@ -9,8 +9,6 @@ string Class::getID() {
 }
 
 Class *Class::selectClass(const Vector<Class *> &classes) {
-  clearScreen();
-
   if (classes.empty()) {
     cout << "No class\n";
     milliSleep(1000);
@@ -18,6 +16,8 @@ Class *Class::selectClass(const Vector<Class *> &classes) {
   }
 
   while (true) {
+    clearScreen();
+
     for (int i = 0; i < classes.size(); i++) {
       cout << (i + 1) << ". ";
       cout << classes[i]->class_name << " - ";

@@ -9,8 +9,6 @@ string Course::getID() {
 }
 
 Course *Course::selectCourse(const Vector<Course *> &courses, bool showonly) {
-  clearScreen();
-
   if (courses.empty()) {
     cout << "No course\n";
     milliSleep(1000);
@@ -18,6 +16,8 @@ Course *Course::selectCourse(const Vector<Course *> &courses, bool showonly) {
   }
 
   while (true) {
+    clearScreen();
+
     for (int i = 0; i < courses.size(); i++) {
       cout << (i + 1) << ". ";
       cout << courses[i]->course_code << " - ";

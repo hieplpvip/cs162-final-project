@@ -9,8 +9,6 @@ string SchoolYear::getID() {
 }
 
 SchoolYear *SchoolYear::selectSchoolYear(const Vector<SchoolYear *> &school_years) {
-  clearScreen();
-
   if (school_years.empty()) {
     cout << "No school year\n";
     milliSleep(1000);
@@ -18,6 +16,8 @@ SchoolYear *SchoolYear::selectSchoolYear(const Vector<SchoolYear *> &school_year
   }
 
   while (true) {
+    clearScreen();
+
     for (int i = 0; i < school_years.size(); i++) {
       cout << (i + 1) << ". ";
       cout << school_years[i]->name << " (";
