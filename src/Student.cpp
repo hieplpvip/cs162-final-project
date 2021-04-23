@@ -30,7 +30,7 @@ Student *Student::selectStudent(const Vector<Student *> &students, bool showonly
     cout << "0. Go Back\n";
 
     int ind;
-    cout << "Please select one: ";
+    cout << "Please choose one: ";
     cin >> ind;
 
     if (ind < 0 || ind > students.size()) {
@@ -45,21 +45,27 @@ Student *Student::selectStudent(const Vector<Student *> &students, bool showonly
 }
 
 void Student::createStudent() {
-  clearScreen();
+  while (true) {
+    clearScreen();
 
-  int cmd;
-  cout << "1. Manually enter student information\n";
-  cout << "2. Import student information from CSV\n";
-  cin >> cmd;
-  switch (cmd) {
-    case 1:
-      createStudentFromScreen();
-      break;
-    case 2:
-      createStudentFromCSV();
-      break;
-    default:
-      cout << "Invalid choice\n";
+    int cmd;
+    cout << "1. Manually enter student information\n";
+    cout << "2. Import student information from CSV\n";
+    cout << "0. Go Back\n";
+    cout << "Please choose one: ";
+    cin >> cmd;
+
+    if (cmd == 0) break;
+    switch (cmd) {
+      case 1:
+        createStudentFromScreen();
+        break;
+      case 2:
+        createStudentFromCSV();
+        break;
+      default:
+        cout << "Invalid choice\n";
+    }
   }
 }
 
@@ -92,7 +98,7 @@ void Student::createStudentFromScreen() {
     }
   }
 
-  if (st->pClass == nullptr) {
+  if (!st->pClass) {
     cout << "Could not find class with ID " << class_id << '\n';
     delete st;
     return;
@@ -156,7 +162,7 @@ void Student::createStudentFromCSV() {
       }
     }
 
-    if (st->pClass == nullptr) {
+    if (!st->pClass) {
       delete st;
       continue;
     }
@@ -333,6 +339,7 @@ void Student::viewGPA() {
   }
 
   cout << "Overall GPA: " << calculateTotalGPA() << '\n';
+
   waitForEnter();
 }
 
@@ -345,7 +352,7 @@ void Student::enrollCourse() {
     return;
   }
 
-  if (current_semester == nullptr) {
+  if (!current_semester) {
     cout << "No current semester\n";
     milliSleep(1000);
     return;
@@ -354,43 +361,49 @@ void Student::enrollCourse() {
   assert(current_user->role == User::UserRole::STUDENT);
   auto st = current_user->pStudent;
 
-  for (int i = 0; i < current_semester->pCourses.size(); ++i) {
-    auto crs = current_semester->pCourses[i];
-    cout << (i + 1) << ". " << crs->course_code << " - " << crs->course_name << '\n';
+  Vector<Course *> courses;
+  for (auto crs : current_semester->pCourses) {
+    if (crs->pStudents.find(st) == crs->pStudents.size()) {
+      courses.push_back(crs);
+    }
   }
 
-  int ind;
-  cout << "\nPlease select a course: ";
-  cin >> ind;
-  if (ind < 1 || ind > current_semester->pCourses.size()) {
-    cout << "Invalid\n";
-    milliSleep(1000);
-    return;
-  }
-  --ind;
+  while (true) {
+    clearScreen();
 
-  auto crs = current_semester->pCourses[ind];
-  for (auto enrolled_crs : st->pEnrolledCourses) {
-    if (enrolled_crs->course_id == crs->course_id) {
-      cout << "You have already enrolled in this course\n";
+    if (courses.empty()) {
+      cout << "You have enrolled in all courses this semester\n";
       milliSleep(1000);
       return;
     }
 
-    for (int i = 0; i < 2; ++i) {
-      for (int j = 0; j < 2; ++j) {
-        if (enrolled_crs->schedule[i] == crs->schedule[j]) {
-          cout << "This course conflicts with course ";
-          cout << enrolled_crs->course_code << " - " << enrolled_crs->course_name << '\n';
-          milliSleep(1000);
-          return;
+    auto crs = Course::selectCourse(courses);
+    if (!crs) break;
+
+    for (auto enrolled_crs : st->pEnrolledCourses) {
+      for (int i = 0; i < 2; ++i) {
+        for (int j = 0; j < 2; ++j) {
+          if (enrolled_crs->schedule[i] == crs->schedule[j]) {
+            cout << "This course conflicts with course ";
+            cout << enrolled_crs->course_code << " - " << enrolled_crs->course_name << '\n';
+            milliSleep(1000);
+            goto conflict;
+          }
         }
       }
     }
-  }
 
-  st->pEnrolledCourses.push_back(crs);
-  crs->pStudents.push_back(st);
+    st->pEnrolledCourses.push_back(crs);
+    crs->pStudents.push_back(st);
+    courses.erase(crs);
+
+    cout << "You have enrolled in course " << crs->course_code << " - " << crs->course_name << '\n';
+    milliSleep(1000);
+
+  conflict:
+    // do nothing
+    continue;
+  }
 }
 
 void Student::unEnrollCourse() {
@@ -402,7 +415,7 @@ void Student::unEnrollCourse() {
     return;
   }
 
-  if (current_semester == nullptr) {
+  if (!current_semester) {
     cout << "No current semester\n";
     milliSleep(1000);
     return;
@@ -411,37 +424,32 @@ void Student::unEnrollCourse() {
   assert(current_user->role == User::UserRole::STUDENT);
   auto st = current_user->pStudent;
 
-  Vector<Course *> enrolledCourses;
+  Vector<Course *> courses;
   for (auto crs : st->pEnrolledCourses) {
-    if (crs->pSemester->semester_id == current_semester->semester_id) {
-      enrolledCourses.push_back(crs);
+    if (crs->pSemester == current_semester) {
+      courses.push_back(crs);
     }
   }
 
-  if (enrolledCourses.empty()) {
-    cout << "You haven't enrolled in any courses this semester\n";
+  while (true) {
+    clearScreen();
+
+    if (courses.empty()) {
+      cout << "You haven't enrolled in any courses this semester\n";
+      milliSleep(1000);
+      return;
+    }
+
+    auto crs = Course::selectCourse(courses);
+    if (!crs) break;
+
+    st->pEnrolledCourses.erase(crs);
+    crs->pStudents.erase(st);
+    courses.erase(crs);
+
+    cout << "You have unenrolled from course " << crs->course_code << " - " << crs->course_name << '\n';
     milliSleep(1000);
-    return;
   }
-
-  for (int i = 0; i < enrolledCourses.size(); ++i) {
-    auto crs = enrolledCourses[i];
-    cout << (i + 1) << ". " << crs->course_code << " - " << crs->course_name << '\n';
-  }
-
-  int ind;
-  cout << "\nPlease select a course: ";
-  cin >> ind;
-  if (ind < 1 || ind > enrolledCourses.size()) {
-    cout << "Invalid\n";
-    milliSleep(1000);
-    return;
-  }
-  --ind;
-
-  auto crs = enrolledCourses[ind];
-  st->pEnrolledCourses.erase(crs);
-  crs->pStudents.erase(st);
 }
 
 double Student::calculateSemesterGPA(Semester *sem) {

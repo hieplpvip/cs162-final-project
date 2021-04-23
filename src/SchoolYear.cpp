@@ -26,7 +26,7 @@ SchoolYear *SchoolYear::selectSchoolYear(const Vector<SchoolYear *> &school_year
     cout << "0. Go Back\n";
 
     int ind;
-    cout << "Please select one: ";
+    cout << "Please choose one: ";
     cin >> ind;
 
     if (ind < 0 || ind > school_years.size()) {

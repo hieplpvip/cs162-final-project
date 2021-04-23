@@ -30,7 +30,7 @@ Course *Course::selectCourse(const Vector<Course *> &courses, bool showonly) {
     cout << "0. Go Back\n";
 
     int ind;
-    cout << "Please select one: ";
+    cout << "Please choose one: ";
     cin >> ind;
 
     if (ind < 0 || ind > courses.size()) {
@@ -47,7 +47,7 @@ Course *Course::selectCourse(const Vector<Course *> &courses, bool showonly) {
 void Course::createCourse() {
   clearScreen();
 
-  if (current_semester == nullptr) {
+  if (!current_semester) {
     cout << "Please create a semester first\n";
     milliSleep(1000);
     return;
@@ -127,7 +127,7 @@ void Course::viewCourse() {
           cout << "6. Edit course information\n";
           cout << "7. Delete course\n";
           cout << "0. Go Back\n";
-          cout << "Please select one: ";
+          cout << "Please choose one: ";
           cin >> cmd;
 
           if (cmd == 0 || (cmd == 7 && deleteCourse(crs))) break;
@@ -165,7 +165,8 @@ void Course::setCourseRegistration() {
   if (courseRegistrationOpen) {
     string cmd;
     cout << "Course Registration is open. Type 'close' to close it.\n";
-    cin >> cmd;
+    cin.ignore();
+    getline(cin, cmd);
     if (cmd == "close") {
       courseRegistrationOpen = false;
       cout << "Course Registration is close\n";
@@ -176,7 +177,8 @@ void Course::setCourseRegistration() {
   } else {
     string cmd;
     cout << "Course Registration is close. Type 'open' to open it.\n";
-    cin >> cmd;
+    cin.ignore();
+    getline(cin, cmd);
     if (cmd == "open") {
       courseRegistrationOpen = true;
       cout << "Course Registration is open\n";
@@ -276,6 +278,7 @@ void Course::exportScoreboard() {
   fCSV.close();
 
   cout << "Course scoreboard has been exported to " << csvPath << '\n';
+
   waitForEnter();
 }
 
@@ -430,7 +433,7 @@ bool Course::deleteCourse(Course *crs) {
     all_course.erase(crs);
     delete crs;
     cout << "Course deleted\n";
-    waitForEnter();
+    milliSleep(1000);
     return true;
   } else {
     cout << "This course will not be deleted\n";

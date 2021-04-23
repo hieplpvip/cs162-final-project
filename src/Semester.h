@@ -26,8 +26,6 @@ public:
 
   static Semester* selectSemester(const Vector<Semester*>& semesters);
 
-  static Semester* getSemester(string schYear, int sms);
-
   void loadFromStream(std::istream& f);
   void writeToStream(std::ostream& f);
 };

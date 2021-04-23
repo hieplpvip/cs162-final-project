@@ -39,8 +39,8 @@ void printHeader() {
   cout << "Logged in as " << current_user->username << "\n";
   if (current_semester != nullptr) {
     cout << "Current semester: ";
-    cout << "Semester " << current_semester->semester_ordinal << " - ";
-    cout << "School Year " << current_semester->pSchoolYear->name << '\n';
+    cout << Semester::ORD2STR[current_semester->semester_ordinal] << ' ';
+    cout << current_semester->pSchoolYear->name << '\n';
   }
   cout << "\n";
 }

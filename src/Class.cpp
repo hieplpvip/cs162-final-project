@@ -26,7 +26,7 @@ Class *Class::selectClass(const Vector<Class *> &classes) {
     cout << "0. Go Back\n";
 
     int ind;
-    cout << "Please select one: ";
+    cout << "Please choose one: ";
     cin >> ind;
 
     if (ind < 0 || ind > classes.size()) {
@@ -67,7 +67,7 @@ void Class::viewClass() {
       cout << "1. View students\n";
       cout << "2. View scoreboard\n";
       cout << "0. Go Back\n";
-      cout << "Please select one: ";
+      cout << "Please choose one: ";
       cin >> cmd;
 
       if (cmd == 0) break;

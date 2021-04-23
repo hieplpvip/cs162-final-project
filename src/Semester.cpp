@@ -33,7 +33,7 @@ Semester *Semester::selectSemester(const Vector<Semester *> &semesters) {
     cout << "0. Go Back\n";
 
     int ind;
-    cout << "Please select one: ";
+    cout << "Please choose one: ";
     cin >> ind;
 
     if (ind < 0 || ind > semesters.size()) {
@@ -65,7 +65,7 @@ void Semester::createSemester() {
   cout << "\nPlease select school year of new semester: ";
   cin >> ind;
   if (ind < 1 || ind > all_school_year.size()) {
-    cout << "Invalid\n";
+    cout << "Invalid choice\n";
     milliSleep(1000);
     return;
   }
@@ -76,7 +76,7 @@ void Semester::createSemester() {
   cout << "Which semester is this: ";
   cin >> ord;
   if (ord < 1 || ord > 3) {
-    cout << "Invalid\n";
+    cout << "Invalid choice\n";
     milliSleep(1000);
     return;
   }
@@ -98,6 +98,12 @@ void Semester::createSemester() {
   sy->pSemesters.push_back(sem);
   all_semester.push_back(sem);
   current_semester = sem;
+
+  cout << "Successfully created semester ";
+  cout << Semester::ORD2STR[current_semester->semester_ordinal] << ' ';
+  cout << current_semester->pSchoolYear->name << '\n';
+  cout << "This will be set as the current semester\n";
+  milliSleep(1000);
 }
 
 void Semester::viewSemester() {
@@ -111,23 +117,6 @@ void Semester::viewSemester() {
       cout << "  Number of course:" << all_semester[i]->pCourses.size() << '\n';
     }
   }
-}
-
-Semester *Semester::getSemester(string schYear, int sms) {
-  int i = 0;
-  SchoolYear *pSchYear;
-  for (i = 0; i < all_school_year.size(); i++) {
-    if (all_school_year[i]->name == schYear) {
-      pSchYear = all_school_year[i];
-      break;
-    }
-  }
-  for (i = 0; i < all_school_year[i]->numberOfSemester; i++) {
-    if (pSchYear->pSemesters[i]->semester_ordinal == sms) {
-      return all_semester[i];
-    }
-  }
-  return nullptr;
 }
 
 void Semester::loadFromStream(std::istream &f) {
