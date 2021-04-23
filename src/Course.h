@@ -37,6 +37,7 @@ public:
   static void setCourseRegistration();
 
   void viewScoreboard();
+  void editScoreboard();
   void exportScoreboard();
   void importScoreboard();
 

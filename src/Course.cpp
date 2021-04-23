@@ -121,15 +121,16 @@ void Course::viewCourse() {
           int cmd;
           cout << "1. View students\n";
           cout << "2. View scoreboard\n";
-          cout << "3. Export scoreboard\n";
-          cout << "4. Import scoreboard\n";
-          cout << "5. Edit course information\n";
-          cout << "6. Delete course\n";
+          cout << "3. Edit student score\n";
+          cout << "4. Export scoreboard to CSV\n";
+          cout << "5. Import scoreboard from CSV\n";
+          cout << "6. Edit course information\n";
+          cout << "7. Delete course\n";
           cout << "0. Go Back\n";
           cout << "Please select one: ";
           cin >> cmd;
 
-          if (cmd == 0 || (cmd == 6 && deleteCourse(crs))) break;
+          if (cmd == 0 || (cmd == 7 && deleteCourse(crs))) break;
           switch (cmd) {
             case 1:
               Student::selectStudent(crs->pStudents, true);
@@ -138,12 +139,15 @@ void Course::viewCourse() {
               crs->viewScoreboard();
               break;
             case 3:
-              crs->exportScoreboard();
+              crs->editScoreboard();
               break;
             case 4:
-              crs->importScoreboard();
+              crs->exportScoreboard();
               break;
             case 5:
+              crs->importScoreboard();
+              break;
+            case 6:
               crs->editCourse();
               break;
             default:
@@ -198,6 +202,35 @@ void Course::viewScoreboard() {
   }
 
   waitForEnter();
+}
+
+void Course::editScoreboard() {
+  while (true) {
+    auto st = Student::selectStudent(pStudents);
+    if (!st) break;
+
+    clearScreen();
+
+    int i = st->pEnrolledCourses.find(this);
+    auto &score = st->pCourseScores[i];
+
+    cout << "Current score:\n";
+    cout << "  Midterm Mark: " << score.midtermMark << '\n';
+    cout << "  Final Mark: " << score.finalMark << '\n';
+    cout << "  Other Mark: " << score.otherMark << '\n';
+    cout << "  Total Mark: " << score.totalMark << '\n';
+    cout << '\n';
+
+    cout << "Please enter new score\n";
+    cout << "  Midterm Mark: ";
+    cin >> score.midtermMark;
+    cout << "  Final Mark: ";
+    cin >> score.finalMark;
+    cout << "  Other Mark: ";
+    cin >> score.otherMark;
+    cout << "  Total Mark: ";
+    cin >> score.totalMark;
+  }
 }
 
 void Course::exportScoreboard() {
