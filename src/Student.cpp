@@ -364,6 +364,36 @@ void Student::unEnrollCourse() {
   crs->pStudents.erase(st);
 }
 
+double Student::calculateSemesterGPA(const string semester_id) {
+  double weightedSum = 0;
+  int totalCredits = 0;
+  for (int i = 0; i < pEnrolledCourses.size(); ++i) {
+    if (pEnrolledCourses[i]->pSemester->semester_id == semester_id) {
+      weightedSum += (double)pEnrolledCourses[i]->numberOfCredits * (double)pCourseScores[i].totalMark;
+      totalCredits += pEnrolledCourses[i]->numberOfCredits;
+    }
+  }
+  if (totalCredits == 0) {
+    return -1;
+  } else {
+    return weightedSum / (double)totalCredits;
+  }
+}
+
+double Student::calculateTotalGPA() {
+  double weightedSum = 0;
+  int totalCredits = 0;
+  for (int i = 0; i < pEnrolledCourses.size(); ++i) {
+    weightedSum += (double)pEnrolledCourses[i]->numberOfCredits * (double)pCourseScores[i].totalMark;
+    totalCredits += pEnrolledCourses[i]->numberOfCredits;
+  }
+  if (totalCredits == 0) {
+    return -1;
+  } else {
+    return weightedSum / (double)totalCredits;
+  }
+}
+
 void Student::loadFromStream(std::istream &f) {
   string _student_id;
   getline(f, _student_id);

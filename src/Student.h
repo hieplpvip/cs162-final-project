@@ -42,6 +42,9 @@ public:
   static void unEnrollCourse();
   static void viewSchedule();
 
+  double calculateSemesterGPA(const string semester_id);
+  double calculateTotalGPA();
+
   void loadFromStream(std::istream &f);
   void writeToStream(std::ostream &f);
 };
