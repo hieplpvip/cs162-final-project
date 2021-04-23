@@ -225,6 +225,37 @@ void Student::viewEnrolledCourse() {
   waitForEnter();
 }
 
+void Student::viewSchedule() {
+  clearScreen();
+
+  assert(current_user->role == User::UserRole::STUDENT);
+  auto st = current_user->pStudent;
+
+  Vector<Course *> courses;
+  for (auto crs : st->pEnrolledCourses) {
+    if (crs->pSemester == current_semester) {
+      courses.push_back(crs);
+    }
+  }
+
+  if (courses.empty()) {
+    cout << "You haven't enrolled in any courses this semester\n";
+    milliSleep(1000);
+    return;
+  }
+
+  for (int i = 0; i < courses.size(); i++) {
+    cout << "Course #" << (i + 1) << ": ";
+    cout << courses[i]->course_code << " - ";
+    cout << courses[i]->course_name << '\n';
+    cout << "  First session: " << courses[i]->schedule[0] << '\n';
+    cout << "  Second session: " << courses[i]->schedule[1] << '\n';
+    cout << '\n';
+  }
+
+  waitForEnter();
+}
+
 void Student::enrollCourse() {
   clearScreen();
 

@@ -31,6 +31,7 @@ const FunctionRecord STUDENT_MENU[] = {
     {"View enrolled courses", &Student::viewEnrolledCourse, false},
     {"Enroll in a course", &Student::enrollCourse, false},
     {"Un-enroll from a course", &Student::unEnrollCourse, false},
+    {"View schedule", &Student::viewSchedule, false},
     {"View score", &Student::viewScore, false},
 };
 

@@ -40,6 +40,7 @@ public:
   static void viewEnrolledCourse();
   static void enrollCourse();
   static void unEnrollCourse();
+  static void viewSchedule();
 
   void loadFromStream(std::istream &f);
   void writeToStream(std::ostream &f);

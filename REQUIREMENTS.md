@@ -23,7 +23,7 @@
 
 ### When a course registration session is close, a student still can:
 
-- [ ] View list of his/her courses. He/she will study these courses in this semester.
+- [x] View list of his/her courses. He/she will study these courses in this semester.
 
 ### At any time, an academic staff member can:
 
