@@ -22,7 +22,7 @@ public:
 
   string getID();
 
-  static SchoolYear* selectSchoolYear(const Vector<SchoolYear*>& school_years);
+  static SchoolYear* selectSchoolYear(const Vector<SchoolYear*>& school_years, bool showonly = false);
 
   static void createSchoolYear();
   static void viewSchoolYear();

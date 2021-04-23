@@ -24,7 +24,7 @@ public:
 
   string getID();
 
-  static Semester* selectSemester(const Vector<Semester*>& semesters);
+  static Semester* selectSemester(const Vector<Semester*>& semesters, bool showonly = false);
 
   void loadFromStream(std::istream& f);
   void writeToStream(std::ostream& f);

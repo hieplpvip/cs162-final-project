@@ -8,7 +8,7 @@ string SchoolYear::getID() {
   return school_year_id;
 }
 
-SchoolYear *SchoolYear::selectSchoolYear(const Vector<SchoolYear *> &school_years) {
+SchoolYear *SchoolYear::selectSchoolYear(const Vector<SchoolYear *> &school_years, bool showonly) {
   if (school_years.empty()) {
     cout << "No school year\n";
     milliSleep(1000);
@@ -22,6 +22,10 @@ SchoolYear *SchoolYear::selectSchoolYear(const Vector<SchoolYear *> &school_year
       cout << (i + 1) << ". ";
       cout << school_years[i]->name << " (";
       cout << school_years[i]->pSemesters.size() << " semesters)\n";
+    }
+    if (showonly) {
+      waitForEnter();
+      return nullptr;
     }
     cout << "0. Go Back\n";
 
@@ -63,10 +67,7 @@ void SchoolYear::createSchoolYear() {
 }
 
 void SchoolYear::viewSchoolYear() {
-  cout << "List of school year:\n";
-  for (int i = 0; i < all_school_year.size(); i++) {
-    cout << all_school_year[i]->name << '\n';
-  }
+  selectSchoolYear(all_school_year, true);
 }
 
 void SchoolYear::loadFromStream(std::istream &f) {

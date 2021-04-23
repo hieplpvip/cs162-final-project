@@ -4,7 +4,7 @@
 const FunctionRecord STAFF_MENU[] = {
     {"School Year", nullptr, true},
     {"New School Year", &SchoolYear::createSchoolYear, false},
-    {"View/Edit School Year", &SchoolYear::viewSchoolYear, false},
+    {"View School Year", &SchoolYear::viewSchoolYear, false},
 
     {"Class", nullptr, true},
     {"New Class", &Class::createClass, false},
@@ -12,7 +12,7 @@ const FunctionRecord STAFF_MENU[] = {
 
     {"Semester", nullptr, true},
     {"New Semester", &Semester::createSemester, false},
-    {"View/Edit Semester", &Semester::viewSemester, false},
+    {"View Semester", &Semester::viewSemester, false},
 
     {"Student", nullptr, true},
     {"New Student", &Student::createStudent, false},

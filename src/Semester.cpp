@@ -15,7 +15,7 @@ string Semester::getID() {
   return semester_id;
 }
 
-Semester *Semester::selectSemester(const Vector<Semester *> &semesters) {
+Semester *Semester::selectSemester(const Vector<Semester *> &semesters, bool showonly) {
   if (semesters.empty()) {
     cout << "No semester\n";
     milliSleep(1000);
@@ -28,7 +28,12 @@ Semester *Semester::selectSemester(const Vector<Semester *> &semesters) {
     for (int i = 0; i < semesters.size(); i++) {
       cout << (i + 1) << ". ";
       cout << ORD2STR[semesters[i]->semester_ordinal] << ' ';
-      cout << semesters[i]->pSchoolYear->name << '\n';
+      cout << semesters[i]->pSchoolYear->name << " (";
+      cout << semesters[i]->pCourses.size() << " courses)\n";
+    }
+    if (showonly) {
+      waitForEnter();
+      return nullptr;
     }
     cout << "0. Go Back\n";
 
@@ -107,16 +112,7 @@ void Semester::createSemester() {
 }
 
 void Semester::viewSemester() {
-  string schoolYear;
-  cout << "Input school year:";
-  cin >> schoolYear;
-  int count = 1;
-  for (int i = 0; i < all_semester.size(); i++) {
-    if (all_semester[i]->pSchoolYear->name == schoolYear) {
-      cout << "Semester " << count++ << ":\n";
-      cout << "  Number of course:" << all_semester[i]->pCourses.size() << '\n';
-    }
-  }
+  selectSemester(all_semester, true);
 }
 
 void Semester::loadFromStream(std::istream &f) {
