@@ -76,8 +76,10 @@ void Semester::createSemester() {
   }
   --ind;
 
+  clearScreen();
+
   int ord;
-  cout << "\n1 (Fall), 2 (Spring), 3 (Summer)\n";
+  cout << "1 (Fall), 2 (Spring), 3 (Summer)\n";
   cout << "Which semester is this: ";
   cin >> ord;
   if (ord < 1 || ord > 3) {
@@ -108,7 +110,7 @@ void Semester::createSemester() {
   cout << Semester::ORD2STR[current_semester->semester_ordinal] << ' ';
   cout << current_semester->pSchoolYear->name << '\n';
   cout << "This will be set as the current semester\n";
-  milliSleep(1000);
+  waitForEnter();
 }
 
 void Semester::viewSemester() {
