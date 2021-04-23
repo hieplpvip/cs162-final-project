@@ -188,8 +188,33 @@ void Student::viewStudent() {
   }
 }
 
-void Student::viewScore() {
-  throw "Not implemented yet!";
+void Student::viewScoreboard() {
+  assert(current_user->role == User::UserRole::STUDENT);
+  auto st = current_user->pStudent;
+
+  while (true) {
+    clearScreen();
+
+    int cmd;
+    cout << "1. View course score\n";
+    cout << "2. View GPA\n";
+    cout << "0. Go Back\n";
+    cout << "Please choose one: ";
+    cin >> cmd;
+
+    if (cmd == 0) break;
+    switch (cmd) {
+      case 1:
+        st->viewCourseScore();
+        break;
+      case 2:
+        st->viewGPA();
+        break;
+      default:
+        cout << "Invalid choice\n";
+        break;
+    }
+  }
 }
 
 void Student::viewEnrolledCourse() {
@@ -253,6 +278,61 @@ void Student::viewSchedule() {
     cout << '\n';
   }
 
+  waitForEnter();
+}
+
+void Student::viewCourseScore() {
+  while (true) {
+    auto crs = Course::selectCourse(pEnrolledCourses);
+    if (!crs) break;
+
+    clearScreen();
+
+    int i = pEnrolledCourses.find(crs);
+    auto score = pCourseScores[i];
+    cout << pEnrolledCourses[i]->course_code << " - ";
+    cout << pEnrolledCourses[i]->course_name << '\n';
+    cout << "Midterm Mark: " << score.midtermMark << '\n';
+    cout << "Final Mark: " << score.finalMark << '\n';
+    cout << "Other Mark: " << score.otherMark << '\n';
+    cout << "Total Mark: " << score.totalMark << '\n';
+
+    waitForEnter();
+  }
+}
+
+void Student::viewGPA() {
+  clearScreen();
+
+  for (auto sy : all_school_year) {
+    bool ok = false;
+    for (auto sem : sy->pSemesters) {
+      if (calculateSemesterGPA(sem) > 0) {
+        ok = true;
+      }
+    }
+
+    if (!ok) continue;
+
+    cout << "School Year " << sy->name << ":\n";
+    for (auto sem : sy->pSemesters) {
+      double sem_gpa = calculateSemesterGPA(sem);
+      if (sem_gpa > 0) {
+        cout << "  " << Semester::ORD2STR[sem->semester_ordinal] << " Semester:\n";
+        for (int i = 0; i < pEnrolledCourses.size(); ++i) {
+          if (pEnrolledCourses[i]->pSemester == sem) {
+            cout << "    ";
+            cout << pEnrolledCourses[i]->course_code << " - ";
+            cout << pEnrolledCourses[i]->course_name << ": ";
+            cout << pCourseScores[i].totalMark << '\n';
+          }
+        }
+        cout << "    Semester GPA: " << sem_gpa << '\n';
+      }
+    }
+  }
+
+  cout << "Overall GPA: " << calculateTotalGPA() << '\n';
   waitForEnter();
 }
 
@@ -364,11 +444,11 @@ void Student::unEnrollCourse() {
   crs->pStudents.erase(st);
 }
 
-double Student::calculateSemesterGPA(const string semester_id) {
+double Student::calculateSemesterGPA(Semester *sem) {
   double weightedSum = 0;
   int totalCredits = 0;
   for (int i = 0; i < pEnrolledCourses.size(); ++i) {
-    if (pEnrolledCourses[i]->pSemester->semester_id == semester_id) {
+    if (pEnrolledCourses[i]->pSemester == sem) {
       weightedSum += (double)pEnrolledCourses[i]->numberOfCredits * (double)pCourseScores[i].totalMark;
       totalCredits += pEnrolledCourses[i]->numberOfCredits;
     }

@@ -35,14 +35,17 @@ public:
   static void createStudentFromCSV();
 
   static void viewStudent();
-  static void viewScore();
+  static void viewScoreboard();
 
   static void viewEnrolledCourse();
   static void enrollCourse();
   static void unEnrollCourse();
   static void viewSchedule();
 
-  double calculateSemesterGPA(const string semester_id);
+  void viewCourseScore();
+  void viewGPA();
+
+  double calculateSemesterGPA(Semester *sem);
   double calculateTotalGPA();
 
   void loadFromStream(std::istream &f);

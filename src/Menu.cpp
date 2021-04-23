@@ -32,7 +32,7 @@ const FunctionRecord STUDENT_MENU[] = {
     {"Enroll in a course", &Student::enrollCourse, false},
     {"Un-enroll from a course", &Student::unEnrollCourse, false},
     {"View schedule", &Student::viewSchedule, false},
-    {"View score", &Student::viewScore, false},
+    {"View scoreboard", &Student::viewScoreboard, false},
 };
 
 const int NUM_STAFF_MENU = (int)(sizeof(STAFF_MENU) / sizeof(FunctionRecord));

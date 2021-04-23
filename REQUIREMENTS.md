@@ -42,7 +42,7 @@
 
 ### When the scoreboard has been published by a staff member, a student can:
 
-- [ ] View his/her scoreboard
+- [x] View his/her scoreboard
 
 ## Technical requirements
 
