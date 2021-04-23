@@ -247,7 +247,65 @@ void Course::exportScoreboard() {
 }
 
 void Course::importScoreboard() {
-  throw("Not implemented yet");
+  clearScreen();
+
+  string csvPath;
+  cout << "Please enter CSV file path: ";
+  cin.ignore();
+  getline(cin, csvPath);
+
+  ifstream fCSV(csvPath);
+  if (!fCSV.is_open()) {
+    cout << "Could not open CSV file\n";
+    milliSleep(1000);
+    return;
+  }
+
+  string line;
+
+  // skip header
+  getline(fCSV, line);
+
+  // import each student
+  int success = 0, total = 0;
+  while (getline(fCSV, line)) {
+    ++total;
+
+    string student_id, fullname, gender, class_id;
+    double midtermMark, finalMark, otherMark, totalMark;
+
+    auto res = CSVParser::parseLineToArgs(line,
+                                          student_id,
+                                          fullname,
+                                          gender,
+                                          class_id,
+                                          midtermMark,
+                                          finalMark,
+                                          otherMark,
+                                          totalMark);
+    if (res != CSVParser::ParseError::Success) {
+      continue;
+    }
+
+    for (auto st : pStudents) {
+      if (st->student_id == student_id) {
+        int i = st->pEnrolledCourses.find(this);
+        auto &score = st->pCourseScores[i];
+        score.midtermMark = midtermMark;
+        score.finalMark = finalMark;
+        score.otherMark = otherMark;
+        score.totalMark = totalMark;
+        ++success;
+        break;
+      }
+    }
+  }
+
+  fCSV.close();
+
+  cout << "Imported scores for " << success << "/" << total << " students\n\n";
+
+  waitForEnter();
 }
 
 void Course::editCourse() {
