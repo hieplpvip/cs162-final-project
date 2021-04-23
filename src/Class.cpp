@@ -87,7 +87,65 @@ void Class::viewClass() {
 }
 
 void Class::viewScoreboard() {
-  throw("Not implemented yet");
+  clearScreen();
+
+  if (pStudents.empty()) {
+    cout << "This class has no students\n";
+    milliSleep(1000);
+    return;
+  }
+
+  if (!current_semester) {
+    cout << "No current semester\n";
+    milliSleep(1000);
+    return;
+  }
+
+  Vector<Course *> courses;
+  for (auto crs : current_semester->pCourses) {
+    bool found = false;
+    for (auto st : pStudents) {
+      if (st->pEnrolledCourses.find(crs) < st->pEnrolledCourses.size()) {
+        found = true;
+        break;
+      }
+    }
+    if (found) {
+      courses.push_back(crs);
+    }
+  }
+
+  cout << "Student ID\t";
+  cout << "Full Name\t";
+  for (auto crs : courses) {
+    cout << crs->course_code << '\t';
+  }
+  cout << "Semester GPA\t";
+  cout << "Overall GPA\n";
+
+  for (auto st : pStudents) {
+    cout << st->student_id << '\t';
+    cout << st->firstName + ' ' + st->lastName << '\t';
+    for (auto crs : courses) {
+      int i = st->pEnrolledCourses.find(crs);
+      if (i < st->pEnrolledCourses.size()) {
+        cout << st->pCourseScores[i].totalMark << '\t';
+      } else {
+        cout << "NOT STUDIED\t";
+      }
+    }
+
+    double sem_gpa = st->calculateSemesterGPA(current_semester);
+    if (sem_gpa < 0) {
+      cout << "NOT STUDIED\t";
+    } else {
+      cout << sem_gpa << '\t';
+    }
+
+    cout << st->calculateTotalGPA() << '\n';
+  }
+
+  waitForEnter();
 }
 
 void Class::loadFromStream(std::istream &f) {
