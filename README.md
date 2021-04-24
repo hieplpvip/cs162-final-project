@@ -9,9 +9,7 @@
 
 ## Build Instruction
 
-This project uses C++17 and has only been tested on Linux.
-
-You need CMake to build it:
+This project uses C++17. You need CMake to build it:
 
 ```shell
 cmake .
@@ -22,4 +20,11 @@ To run it:
 
 ```shell
 ./crs
+```
+
+Default user:
+
+```
+Username: admin
+Password: 123456
 ```
