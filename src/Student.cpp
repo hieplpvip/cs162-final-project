@@ -166,6 +166,16 @@ void Student::createStudentFromCSV() {
       continue;
     }
 
+    bool existed = false;
+    for (auto st2 : all_student) {
+      if (st2->student_id == st->student_id) {
+        existed = true;
+        delete st;
+        break;
+      }
+    }
+    if (existed) continue;
+
     st->pClass = nullptr;
     for (auto cls : all_class) {
       if (cls->class_id == class_id) {
