@@ -43,11 +43,23 @@ Class *Class::selectClass(const Vector<Class *> &classes) {
 void Class::createClass() {
   clearScreen();
 
-  Class *cls = new Class();
+  string class_id;
   cout << "Class ID: ";
-  cin >> cls->class_id;
+  cin.ignore();
+  getline(cin, class_id);
+
+  for (auto cls : all_class) {
+    if (cls->class_id == class_id) {
+      cout << "Class " << class_id << " already exists\n";
+      milliSleep(1000);
+      return;
+    }
+  }
+
+  Class *cls = new Class();
+  cls->class_id = class_id;
   cout << "Class Name: ";
-  cin >> cls->class_name;
+  getline(cin, cls->class_name);
 
   all_class.push_back(cls);
 }

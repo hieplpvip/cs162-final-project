@@ -16,10 +16,21 @@ string User::genUserID() {
 void User::createStaffUser() {
   clearScreen();
 
-  User *u = new User();
-  cin.ignore();
+  string username;
   cout << "Username: ";
-  getline(cin, u->username);
+  cin.ignore();
+  getline(cin, username);
+
+  for (auto u : all_user) {
+    if (u->username == username) {
+      cout << "User " << username << " already exists\n";
+      milliSleep(1000);
+      return;
+    }
+  }
+
+  User *u = new User();
+  u->username = username;
   cout << "Password: ";
   getline(cin, u->password);
   u->user_id = genUserID();
@@ -27,6 +38,8 @@ void User::createStaffUser() {
   u->pStudent = nullptr;
 
   all_user.push_back(u);
+
+  waitForEnter();
 }
 
 User *User::createStudentUser(const string &username, const string &password, Student *st) {

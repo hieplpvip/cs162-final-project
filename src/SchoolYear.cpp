@@ -47,23 +47,29 @@ SchoolYear *SchoolYear::selectSchoolYear(const Vector<SchoolYear *> &school_year
 void SchoolYear::createSchoolYear() {
   clearScreen();
 
-  SchoolYear *schYear = nullptr;
   string name;
-  while (true) {
-    cout << "School year (e.g. 2020-2021): ";
-    cin >> name;
-    if (name.length() != 9 || name[4] != '-' || stoi(name.substr(0, 4)) + 1 != stoi(name.substr(5, 4))) {
-      cout << "Invalid!\n";
-      milliSleep(1000);
-      continue;
-    }
-    schYear = new SchoolYear();
-    schYear->name = name;
-    schYear->school_year_id = name;
-    schYear->school_year_id[4] = '_';
-    break;
+  cout << "School year (e.g. 2020-2021): ";
+  cin >> name;
+
+  if (name.length() != 9 || name[4] != '-' || stoi(name.substr(0, 4)) + 1 != stoi(name.substr(5, 4))) {
+    cout << "Invalid!\n";
+    milliSleep(1000);
+    return;
   }
-  all_school_year.push_back(schYear);
+
+  for (auto sy : all_school_year) {
+    if (sy->name == name) {
+      cout << "School year " << name << " already exists\n";
+      milliSleep(1000);
+      return;
+    }
+  }
+
+  SchoolYear *sy = new SchoolYear();
+  sy->name = name;
+  sy->school_year_id = name;
+  sy->school_year_id[4] = '_';
+  all_school_year.push_back(sy);
 }
 
 void SchoolYear::viewSchoolYear() {

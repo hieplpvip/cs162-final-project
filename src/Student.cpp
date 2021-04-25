@@ -72,24 +72,36 @@ void Student::createStudent() {
 void Student::createStudentFromScreen() {
   clearScreen();
 
+  string student_id;
+  cout << "Student ID: ";
+  cin.ignore();
+  getline(cin, student_id);
+
+  for (auto st : all_student) {
+    if (st->student_id == student_id) {
+      cout << "Student with ID " << student_id << " already exists\n";
+      milliSleep(1000);
+      return;
+    }
+  }
+
   Student *st = new Student();
 
-  cout << "Student ID: ";
-  cin >> st->student_id;
+  st->student_id = student_id;
   cout << "First Name: ";
-  cin >> st->firstName;
+  getline(cin, st->firstName);
   cout << "Last Name: ";
-  cin >> st->lastName;
+  getline(cin, st->lastName);
   cout << "Date of Birth: ";
-  cin >> st->dateOfBirth;
+  getline(cin, st->dateOfBirth);
   cout << "Gender (MALE/FEMALE): ";
-  cin >> st->gender;
+  getline(cin, st->gender);
   cout << "Social ID: ";
-  cin >> st->socialID;
+  getline(cin, st->socialID);
 
-  cout << "Class ID: ";
   string class_id;
-  cin >> class_id;
+  cout << "Class ID: ";
+  getline(cin, class_id);
   st->pClass = nullptr;
   for (auto cls : all_class) {
     if (cls->class_id == class_id) {

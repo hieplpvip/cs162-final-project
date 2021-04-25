@@ -54,14 +54,24 @@ void Course::createCourse() {
   }
 
   cout << "This new course will be taught in ";
-  cout << "Semester " << current_semester->semester_ordinal << " - ";
-  cout << "School Year " << current_semester->pSchoolYear->name << "\n\n";
+  cout << Semester::ORD2STR[current_semester->semester_ordinal] << ' ';
+  cout << current_semester->pSchoolYear->name << '\n';
+
+  string course_code;
+  cout << "Course Code: ";
+  cin.ignore();
+  getline(cin, course_code);
+
+  for (auto crs : current_semester->pCourses) {
+    if (crs->course_code == course_code) {
+      cout << "Current semester already has course " << course_code << '\n';
+      milliSleep(1000);
+      return;
+    }
+  }
 
   Course *crs = new Course();
-
-  cin.ignore();
-  cout << "Course Code: ";
-  getline(cin, crs->course_code);
+  crs->course_code = course_code;
   cout << "Course Name: ";
   getline(cin, crs->course_name);
   cout << "Lecturer: ";

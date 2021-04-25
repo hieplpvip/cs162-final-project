@@ -16,15 +16,15 @@ public:
   SchoolYear* pSchoolYear;
   Vector<Course*> pCourses;
 
-  static void createSemester();
-  static void viewSemester();
-
   Semester();
   Semester(string id);
 
   string getID();
 
   static Semester* selectSemester(const Vector<Semester*>& semesters, bool showonly = false);
+
+  static void createSemester();
+  static void viewSemester();
 
   void loadFromStream(std::istream& f);
   void writeToStream(std::ostream& f);
