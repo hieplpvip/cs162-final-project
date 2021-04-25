@@ -216,6 +216,8 @@ void App::showMenu(const FunctionRecord menu[], int num) {
       }
       if (--option == 0) {
         menu[i].function();
+        saveData();
+        break;
       }
     }
   }
