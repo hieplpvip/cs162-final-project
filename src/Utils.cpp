@@ -47,9 +47,12 @@ void printHeader() {
 
 void waitForEnter() {
   // https://www.daniweb.com/programming/software-development/threads/90228/flushing-the-input-stream
+#pragma push_macro("max")
+#undef max
   if (cin.rdbuf()->sungetc() != std::char_traits<char>::eof() && cin.get() != '\n') {
     cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
   }
   cout << "Press Enter to continue...";
   cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+#pragma pop_macro("max")
 }

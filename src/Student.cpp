@@ -416,6 +416,7 @@ void Student::enrollCourse() {
     }
 
     st->pEnrolledCourses.push_back(crs);
+    st->pCourseScores.push_back({0, 0, 0, 0});
     crs->pStudents.push_back(st);
     courses.erase(crs);
 
@@ -465,7 +466,10 @@ void Student::unEnrollCourse() {
     auto crs = Course::selectCourse(courses);
     if (!crs) break;
 
-    st->pEnrolledCourses.erase(crs);
+    int i = st->pEnrolledCourses.find(crs);
+    st->pEnrolledCourses.erase(i);
+    st->pCourseScores.erase(i);
+
     crs->pStudents.erase(st);
     courses.erase(crs);
 
