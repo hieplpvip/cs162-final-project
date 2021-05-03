@@ -1,11 +1,9 @@
-cmake_minimum_required(VERSION 3.0.0)
-project(crs VERSION 0.1.0)
+cmake_minimum_required(VERSION 3.9)
+project(crs)
 
-include(CTest)
-enable_testing()
+set (CMAKE_CXX_STANDARD 17)
 
-add_executable(crs main.cpp)
+include_directories( ./src )
 
-set(CPACK_PROJECT_NAME ${PROJECT_NAME})
-set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-include(CPack)
+file(GLOB cpp_files src/*.cpp src/libs/*.cpp)
+add_executable( crs ${cpp_files} )
