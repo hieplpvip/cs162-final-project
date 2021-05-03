@@ -1,7 +1,10 @@
+.vs
 .vscode
-test.cpp
 *.exe
 crs
+crs.ilk
+crs.pdb
+out
 run_tests
 
 # CMake

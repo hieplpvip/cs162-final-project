@@ -9,7 +9,9 @@
 
 ## Build Instruction
 
-This project uses C++17. You need CMake to build it:
+This project uses C++20. You need CMake to build it:
+
+### On Linux
 
 ```shell
 cmake .
@@ -22,7 +24,11 @@ To run it:
 ./crs
 ```
 
-Default user:
+### On Windows
+
+Open this directory with Visual Studio.
+
+## Default user
 
 ```
 Username: admin
