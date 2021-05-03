@@ -9,7 +9,7 @@
 
 ## Build Instruction
 
-This project uses C++20. You need CMake to build it:
+This project uses C++20. You need CMake to build it.
 
 ### On Linux
 
@@ -26,7 +26,9 @@ To run it:
 
 ### On Windows
 
-Open this directory with Visual Studio.
+Open this directory with Visual Studio. It will automatically generate CMake cache.
+
+On the menu bar, choose **Build** -> **Build All**.
 
 ## Default user
 
