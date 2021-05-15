@@ -206,14 +206,19 @@ void Student::createStudentFromCSV() {
 }
 
 void Student::viewStudent() {
+  clearScreen();
+
   for (int i = 0; i < all_student.size(); i++) {
-    cout << "Student ID:  " << all_student[i]->student_id << endl;
-    cout << "First name:  " << all_student[i]->firstName << endl;
-    cout << "Last name:  " << all_student[i]->lastName << endl;
-    cout << "Gender:  " << all_student[i]->gender << endl;
-    cout << "Date of birth:  " << all_student[i]->dateOfBirth << endl;
-    cout << "SocialID:  " << all_student[i]->socialID << endl;
+    cout << "Student ID: " << all_student[i]->student_id << '\n';
+    cout << "First name: " << all_student[i]->firstName << '\n';
+    cout << "Last name: " << all_student[i]->lastName << '\n';
+    cout << "Gender: " << all_student[i]->gender << '\n';
+    cout << "Date of birth: " << all_student[i]->dateOfBirth << '\n';
+    cout << "SocialID: " << all_student[i]->socialID << '\n';
+    cout << '\n';
   }
+
+  waitForEnter();
 }
 
 void Student::viewScoreboard() {
